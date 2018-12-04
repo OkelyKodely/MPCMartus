@@ -1603,6 +1603,212 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
     }
+    else if(choice == 'lsh') {
+        //hdc2 = GetDC(hwnd);
+        hdcMems = CreateCompatibleDC(hdc2);
+
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+        DeleteDC(hdcMems); DeleteObject(hBitmap);
+
+        if(lsh.dir == 0) {
+            lsh.dir = 1;
+            lsh.x0 += 20* 1;
+            lsh.y0 += 20* 1;
+            lsh.x1 += 20* 1;
+            lsh.y1 -= 20* 1;
+            lsh.x2 += 20* 0;
+            lsh.y2 += 20* 0;
+            lsh.x3 += 20* 0;
+            lsh.y3 -= 20* 2;
+        }
+        else if(lsh.dir == 1) {
+            lsh.dir = 2;
+            lsh.x0 -= 20* 1;
+            lsh.y0 += 20* 1;
+            lsh.x1 += 20* 1;
+            lsh.y1 += 20* 1;
+            lsh.x2 -= 20* 0;
+            lsh.y2 += 20* 0;
+            lsh.x3 += 20* 2;
+            lsh.y3 -= 20* 0;
+        }
+        else if(lsh.dir == 2) {
+            lsh.dir = 3;
+            lsh.x0 -= 20* 1;
+            lsh.y0 -= 20* 1;
+            lsh.x1 -= 20* 1;
+            lsh.y1 += 20* 1;
+            lsh.x2 -= 20* 0;
+            lsh.y2 -= 20* 0;
+            lsh.x3 -= 20* 0;
+            lsh.y3 += 20* 2;
+        }
+        else if(lsh.dir == 3) {
+            lsh.dir = 0;
+            lsh.x0 += 20* 1;
+            lsh.y0 -= 20* 1;
+            lsh.x1 -= 20* 1;
+            lsh.y1 -= 20* 1;
+            lsh.x2 += 20* 0;
+            lsh.y2 -= 20* 0;
+            lsh.x3 -= 20* 2;
+            lsh.y3 += 20* 0;
+        }
+
+        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+        RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
+        FillRect(hdc2, &rrect3, brush);
+        DeleteObject(brush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+        Rectangle(hdc2, lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20);
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
+        
+        brush = CreateSolidBrush(RGB(255, 255, 255));
+        RECT rrect4 = {lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20};
+        FillRect(hdc2, &rrect4, brush);
+        DeleteObject(brush);
+
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+        Rectangle(hdc2, lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20);
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
+
+        brush = CreateSolidBrush(RGB(255, 255, 255));
+        RECT rrect5 = {lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20};
+        FillRect(hdc2, &rrect5, brush);
+        DeleteObject(brush);
+
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+        Rectangle(hdc2, lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20);
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
+
+        brush = CreateSolidBrush(RGB(255, 255, 255));
+        RECT rrect6 = {lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20};
+        FillRect(hdc2, &rrect6, brush);
+        DeleteObject(brush);
+
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+        Rectangle(hdc2, lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20);
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
+    }
+    else if(choice == 'rsh') {
+        //hdc2 = GetDC(hwnd);
+        hdcMems = CreateCompatibleDC(hdc2);
+
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+        DeleteDC(hdcMems); DeleteObject(hBitmap);
+
+        if(rsh.dir == 0) {
+            rsh.dir = 1;
+            rsh.x0 += 20* 1;
+            rsh.y0 += 20* 1;
+            rsh.x1 += 20* 0;
+            rsh.y1 += 20* 0;
+            rsh.x2 -= 20* 1;
+            rsh.y2 += 20* 1;
+            rsh.x3 -= 20* 2;
+            rsh.y3 += 20* 0;
+        }
+        else if(rsh.dir == 1) {
+            rsh.dir = 2;
+            rsh.x0 -= 20* 1;
+            rsh.y0 += 20* 1;
+            rsh.x1 += 20* 0;
+            rsh.y1 += 20* 0;
+            rsh.x2 -= 20* 1;
+            rsh.y2 -= 20* 1;
+            rsh.x3 -= 20* 0;
+            rsh.y3 -= 20* 2;
+        }
+        else if(rsh.dir == 2) {
+            rsh.dir = 3;
+            rsh.x0 -= 20* 1;
+            rsh.y0 -= 20* 1;
+            rsh.x1 -= 20* 0;
+            rsh.y1 -= 20* 0;
+            rsh.x2 += 20* 1;
+            rsh.y2 -= 20* 1;
+            rsh.x3 += 20* 2;
+            rsh.y3 -= 20* 0;
+        }
+        else if(rsh.dir == 3) {
+            rsh.dir = 0;
+            rsh.x0 += 20* 1;
+            rsh.y0 -= 20* 1;
+            rsh.x1 += 20* 0;
+            rsh.y1 -= 20* 0;
+            rsh.x2 += 20* 1;
+            rsh.y2 += 20* 1;
+            rsh.x3 += 20* 0;
+            rsh.y3 += 20* 2;
+        }
+
+        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+        RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
+        FillRect(hdc2, &rrect3, brush);
+        DeleteObject(brush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+        Rectangle(hdc2, rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20);
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
+        
+        brush = CreateSolidBrush(RGB(255, 255, 255));
+        RECT rrect4 = {rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20};
+        FillRect(hdc2, &rrect4, brush);
+        DeleteObject(brush);
+
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+        Rectangle(hdc2, rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20);
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
+
+        brush = CreateSolidBrush(RGB(255, 255, 255));
+        RECT rrect5 = {rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20};
+        FillRect(hdc2, &rrect5, brush);
+        DeleteObject(brush);
+
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+        Rectangle(hdc2, rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20);
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
+
+        brush = CreateSolidBrush(RGB(255, 255, 255));
+        RECT rrect6 = {rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20};
+        FillRect(hdc2, &rrect6, brush);
+        DeleteObject(brush);
+
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+        Rectangle(hdc2, rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20);
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
+    }
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -4054,7 +4260,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
                 SelectObject(hdc2, font);
                 SetBkColor((HDC)wParam,RGB(100,100,255));
-                TextOut(hdc2, 20, 8, "Tetris           ", 6);
+                TextOut(hdc2, 20, 8, "Tetris (fix levels)", 19);
                 DeleteObject(font);
 
                 //EndPaint(hwnd, &ps);
