@@ -80,6 +80,30 @@ struct line {
   int dir;
 } lne;
 
+struct lsho {
+  int x0;
+  int y0;
+  int x1;
+  int y1;
+  int x2;
+  int y2;
+  int x3;
+  int y3;
+  int dir;
+} lsh;
+
+struct rsho {
+  int x0;
+  int y0;
+  int x1;
+  int y1;
+  int x2;
+  int y2;
+  int x3;
+  int y3;
+  int dir;
+} rsh;
+
 struct larm {
   int x0;
   int y0;
@@ -140,8 +164,7 @@ DWORD WINAPI downs(void *data) {
                 ++ count;
             }
         }
-        if(count > 0)
-        {
+        if(count > 0) {
             int cnt;
             cnt = 0;
             for(;cnt < count; cnt++) {
@@ -775,13 +798,257 @@ DWORD WINAPI downs(void *data) {
                 }
             }
         }
+        else if(choice == 'lsh') {
+            //hdc2 = GetDC(hwnd);
+            hdcMems = CreateCompatibleDC(hdc2);
+
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+            oldBitmap = SelectObject(hdcMems, hBitmap);
+
+            GetObject(hBitmap, sizeof(bitmap), &bitmap);
+            BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+            SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+            DeleteDC(hdcMems); DeleteObject(hBitmap);
+
+            lsh.y0 += 20;
+            lsh.y1 += 20;
+            lsh.y2 += 20;
+            lsh.y3 += 20;
+        
+            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+            RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
+            FillRect(hdc2, &rrect3, brush);
+            DeleteObject(brush);
+
+            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+            Rectangle(hdc2, lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+
+            brush = CreateSolidBrush(RGB(255, 255, 255));
+            RECT rrect4 = {lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20};
+            FillRect(hdc2, &rrect4, brush);
+            DeleteObject(brush);
+
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+            Rectangle(hdc2, lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+
+            brush = CreateSolidBrush(RGB(255, 255, 255));
+            RECT rrect5 = {lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20};
+            FillRect(hdc2, &rrect5, brush);
+            DeleteObject(brush);
+
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+            Rectangle(hdc2, lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+
+            brush = CreateSolidBrush(RGB(255, 255, 255));
+            RECT rrect6 = {lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            DeleteObject(brush);
+
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+            Rectangle(hdc2, lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+
+            if(b[lsh.x0][lsh.y0] == 1) {
+                for(int i=0; i<600; i++) {
+                    for(int j=0; j<700; j++) {
+                        b[i][j] = 0;
+                    }
+                }
+            }
+
+            if(lsh.y0 > 650 || lsh.y1 > 650 || lsh.y2 > 650 || lsh.y3 > 650) {
+                b[lsh.x0][lsh.y0] = 1;
+                b[lsh.x1][lsh.y1] = 1;
+                b[lsh.x2][lsh.y2] = 1;
+                b[lsh.x3][lsh.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+
+            BOOLEAN flag = FALSE;
+            if(b[lsh.x0][lsh.y0+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[lsh.x1][lsh.y1+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[lsh.x2][lsh.y2+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[lsh.x3][lsh.y3+20] == 1) {
+                flag = TRUE;
+            }
+            if(flag) {
+                b[lsh.x0][lsh.y0] = 1;
+                b[lsh.x1][lsh.y1] = 1;
+                b[lsh.x2][lsh.y2] = 1;
+                b[lsh.x3][lsh.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+                blocks = 0;
+                lines = 0;
+                points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
+            }
+
+            for(int i=0; i<700; i++) {
+                for(int j=0; j<700; j++) {
+                    if(b[i][j] == 1) {
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 250, 0));
+                        RECT rrect6 = {i, j, i + 20, j + 20};
+                        FillRect(hdc2, &rrect6, brush);
+                        DeleteObject(brush);
+
+                        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+                        Rectangle(hdc2, i, j, i + 20, j + 20);
+                        DeleteObject(SelectObject(hdc2, hOldPen));
+                        SelectObject(hdc2, hOldBsh);
+                    }
+                }
+            }
+        }
+        else if(choice == 'rsh') {
+            //hdc2 = GetDC(hwnd);
+            hdcMems = CreateCompatibleDC(hdc2);
+
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+            oldBitmap = SelectObject(hdcMems, hBitmap);
+
+            GetObject(hBitmap, sizeof(bitmap), &bitmap);
+            BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+            SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+            DeleteDC(hdcMems); DeleteObject(hBitmap);
+
+            rsh.y0 += 20;
+            rsh.y1 += 20;
+            rsh.y2 += 20;
+            rsh.y3 += 20;
+        
+            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+            RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
+            FillRect(hdc2, &rrect3, brush);
+            DeleteObject(brush);
+
+            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+            Rectangle(hdc2, rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+
+            brush = CreateSolidBrush(RGB(255, 255, 255));
+            RECT rrect4 = {rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20};
+            FillRect(hdc2, &rrect4, brush);
+            DeleteObject(brush);
+
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+            Rectangle(hdc2, rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+
+            brush = CreateSolidBrush(RGB(255, 255, 255));
+            RECT rrect5 = {rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20};
+            FillRect(hdc2, &rrect5, brush);
+            DeleteObject(brush);
+
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+            Rectangle(hdc2, rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+
+            brush = CreateSolidBrush(RGB(255, 255, 255));
+            RECT rrect6 = {rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            DeleteObject(brush);
+
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+            Rectangle(hdc2, rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+
+            if(b[rsh.x0][rsh.y0] == 1) {
+                for(int i=0; i<600; i++) {
+                    for(int j=0; j<700; j++) {
+                        b[i][j] = 0;
+                    }
+                }
+            }
+
+            if(rsh.y0 > 650 || rsh.y1 > 650 || rsh.y2 > 650 || rsh.y3 > 650) {
+                b[rsh.x0][rsh.y0] = 1;
+                b[rsh.x1][rsh.y1] = 1;
+                b[rsh.x2][rsh.y2] = 1;
+                b[rsh.x3][rsh.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+
+            BOOLEAN flag = FALSE;
+            if(b[rsh.x0][rsh.y0+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[rsh.x1][rsh.y1+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[rsh.x2][rsh.y2+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[rsh.x3][rsh.y3+20] == 1) {
+                flag = TRUE;
+            }
+            if(flag) {
+                b[rsh.x0][rsh.y0] = 1;
+                b[rsh.x1][rsh.y1] = 1;
+                b[rsh.x2][rsh.y2] = 1;
+                b[rsh.x3][rsh.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+                blocks = 0;
+                lines = 0;
+                points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
+            }
+
+            for(int i=0; i<700; i++) {
+                for(int j=0; j<700; j++) {
+                    if(b[i][j] == 1) {
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 250, 0));
+                        RECT rrect6 = {i, j, i + 20, j + 20};
+                        FillRect(hdc2, &rrect6, brush);
+                        DeleteObject(brush);
+
+                        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+                        Rectangle(hdc2, i, j, i + 20, j + 20);
+                        DeleteObject(SelectObject(hdc2, hOldPen));
+                        SelectObject(hdc2, hOldBsh);
+                    }
+                }
+            }
+        }
     }
     return 0;
 }
 
 void prep() {
     fist = FALSE;
-    int r = rand() % 5;
+    int r = rand() % 7;
     if(r == 1)
       choice = 'sq';
     else if(r == 2)
@@ -790,8 +1057,30 @@ void prep() {
       choice = 'sq';
     else if(r == 4)
       choice = 'larm';
-    else
+    else if(r == 5)
       choice = 'rarm';
+    else if(r == 6)
+      choice = 'lsh';
+    else
+      choice = 'rsh';
+    lsh.x0 = 300;
+    lsh.y0 = 50;
+    lsh.x1 = 280;
+    lsh.y1 = 70;
+    lsh.x2 = 300;
+    lsh.y2 = 70;
+    lsh.x3 = 280;
+    lsh.y3 = 90;
+    lsh.dir = 0;
+    rsh.x0 = 300;
+    rsh.y0 = 50;
+    rsh.x1 = 300;
+    rsh.y1 = 70;
+    rsh.x2 = 320;
+    rsh.y2 = 70;
+    rsh.x3 = 320;
+    rsh.y3 = 90;
+    rsh.dir = 0;
     larm.x0 = 300;
     larm.y0 = 50;
     larm.x1 = 300;
@@ -1851,6 +2140,250 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x1][rarm.y1] = 1;
                             b[rarm.x2][rarm.y2] = 1;
                             b[rarm.x3][rarm.y3] = 1;
+                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            prep();
+                            blocks = 0;
+                            lines = 0;
+                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
+                        }
+
+                        for(int i=0; i<700; i++) {
+                            for(int j=0; j<700; j++) {
+                                if(b[i][j] == 1) {
+                                    HBRUSH brush = CreateSolidBrush(RGB(0, 250, 0));
+                                    RECT rrect6 = {i, j, i + 20, j + 20};
+                                    FillRect(hdc2, &rrect6, brush);
+                                    DeleteObject(brush);
+
+                                    HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+                                    Rectangle(hdc2, i, j, i + 20, j + 20);
+                                    DeleteObject(SelectObject(hdc2, hOldPen));
+                                    SelectObject(hdc2, hOldBsh);
+                                }
+                            }
+                        }
+                    }
+                    else if(choice == 'lsh' && (lsh.y0 <= 610 || lsh.y1 <= 610 || lsh.y2 <= 610 || lsh.y3 <= 610)) {
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
+
+                        lsh.y0 += 20;
+                        lsh.y1 += 20;
+                        lsh.y2 += 20;
+                        lsh.y3 += 20;
+
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
+                        FillRect(hdc2, &rrect3, brush);
+                        DeleteObject(brush);
+
+                        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+                        Rectangle(hdc2, lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20);
+                        DeleteObject(SelectObject(hdc2, hOldPen));
+                        SelectObject(hdc2, hOldBsh);
+
+                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        RECT rrect4 = {lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20};
+                        FillRect(hdc2, &rrect4, brush);
+                        DeleteObject(brush);
+
+                        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+                        Rectangle(hdc2, lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20);
+                        DeleteObject(SelectObject(hdc2, hOldPen));
+                        SelectObject(hdc2, hOldBsh);
+
+                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        RECT rrect5 = {lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20};
+                        FillRect(hdc2, &rrect5, brush);
+                        DeleteObject(brush);
+
+                        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+                        Rectangle(hdc2, lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20);
+                        DeleteObject(SelectObject(hdc2, hOldPen));
+                        SelectObject(hdc2, hOldBsh);
+
+                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        RECT rrect6 = {lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20};
+                        FillRect(hdc2, &rrect6, brush);
+                        DeleteObject(brush);
+
+                        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+                        Rectangle(hdc2, lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20);
+                        DeleteObject(SelectObject(hdc2, hOldPen));
+                        SelectObject(hdc2, hOldBsh);
+
+                        if(b[lsh.x0][lsh.y0] == 1) {
+                            for(int i=0; i<600; i++) {
+                                for(int j=0; j<700; j++) {
+                                    b[i][j] = 0;
+                                }
+                            }
+                        }
+
+                        if(lsh.y0 > 650 || lsh.y1 > 650 || lsh.y2 > 650 || lsh.y3 > 650) {
+                            b[lsh.x0][lsh.y0] = 1;
+                            b[lsh.x1][lsh.y1] = 1;
+                            b[lsh.x2][lsh.y2] = 1;
+                            b[lsh.x3][lsh.y3] = 1;
+                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            prep();
+                        }
+
+                        BOOLEAN flag = FALSE;
+                        if(b[lsh.x0][lsh.y0+20] == 1) {
+                            flag = TRUE;
+                        }
+                        else if(b[lsh.x1][lsh.y1+20] == 1) {
+                            flag = TRUE;
+                        }
+                        else if(b[lsh.x2][lsh.y2+20] == 1) {
+                            flag = TRUE;
+                        }
+                        else if(b[lsh.x3][lsh.y3+20] == 1) {
+                            flag = TRUE;
+                        }
+                        if(flag) {
+                            b[lsh.x0][lsh.y0] = 1;
+                            b[lsh.x1][lsh.y1] = 1;
+                            b[lsh.x2][lsh.y2] = 1;
+                            b[lsh.x3][lsh.y3] = 1;
+                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            prep();
+                            blocks = 0;
+                            lines = 0;
+                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
+                        }
+
+                        for(int i=0; i<700; i++) {
+                            for(int j=0; j<700; j++) {
+                                if(b[i][j] == 1) {
+                                    HBRUSH brush = CreateSolidBrush(RGB(0, 250, 0));
+                                    RECT rrect6 = {i, j, i + 20, j + 20};
+                                    FillRect(hdc2, &rrect6, brush);
+                                    DeleteObject(brush);
+
+                                    HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+                                    Rectangle(hdc2, i, j, i + 20, j + 20);
+                                    DeleteObject(SelectObject(hdc2, hOldPen));
+                                    SelectObject(hdc2, hOldBsh);
+                                }
+                            }
+                        }
+                    }
+                    else if(choice == 'rsh' && (rsh.y0 <= 610 || rsh.y1 <= 610 || rsh.y2 <= 610 || rsh.y3 <= 610)) {
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
+
+                        rsh.y0 += 20;
+                        rsh.y1 += 20;
+                        rsh.y2 += 20;
+                        rsh.y3 += 20;
+
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
+                        FillRect(hdc2, &rrect3, brush);
+                        DeleteObject(brush);
+
+                        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+                        Rectangle(hdc2, rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20);
+                        DeleteObject(SelectObject(hdc2, hOldPen));
+                        SelectObject(hdc2, hOldBsh);
+
+                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        RECT rrect4 = {rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20};
+                        FillRect(hdc2, &rrect4, brush);
+                        DeleteObject(brush);
+
+                        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+                        Rectangle(hdc2, rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20);
+                        DeleteObject(SelectObject(hdc2, hOldPen));
+                        SelectObject(hdc2, hOldBsh);
+
+                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        RECT rrect5 = {rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20};
+                        FillRect(hdc2, &rrect5, brush);
+                        DeleteObject(brush);
+
+                        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+                        Rectangle(hdc2, rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20);
+                        DeleteObject(SelectObject(hdc2, hOldPen));
+                        SelectObject(hdc2, hOldBsh);
+
+                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        RECT rrect6 = {rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20};
+                        FillRect(hdc2, &rrect6, brush);
+                        DeleteObject(brush);
+
+                        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(200,40,0)));
+                        Rectangle(hdc2, rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20);
+                        DeleteObject(SelectObject(hdc2, hOldPen));
+                        SelectObject(hdc2, hOldBsh);
+
+                        if(b[rsh.x0][rsh.y0] == 1) {
+                            for(int i=0; i<600; i++) {
+                                for(int j=0; j<700; j++) {
+                                    b[i][j] = 0;
+                                }
+                            }
+                        }
+
+                        if(rsh.y0 > 650 || rsh.y1 > 650 || rsh.y2 > 650 || rsh.y3 > 650) {
+                            b[rsh.x0][rsh.y0] = 1;
+                            b[rsh.x1][rsh.y1] = 1;
+                            b[rsh.x2][rsh.y2] = 1;
+                            b[rsh.x3][rsh.y3] = 1;
+                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            prep();
+                        }
+
+                        BOOLEAN flag = FALSE;
+                        if(b[rsh.x0][rsh.y0+20] == 1) {
+                            flag = TRUE;
+                        }
+                        else if(b[rsh.x1][rsh.y1+20] == 1) {
+                            flag = TRUE;
+                        }
+                        else if(b[rsh.x2][rsh.y2+20] == 1) {
+                            flag = TRUE;
+                        }
+                        else if(b[rsh.x3][rsh.y3+20] == 1) {
+                            flag = TRUE;
+                        }
+                        if(flag) {
+                            b[rsh.x0][rsh.y0] = 1;
+                            b[rsh.x1][rsh.y1] = 1;
+                            b[rsh.x2][rsh.y2] = 1;
+                            b[rsh.x3][rsh.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                             blocks = 0;
