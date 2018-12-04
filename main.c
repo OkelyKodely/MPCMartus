@@ -27,7 +27,7 @@ int lines=0;
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
-const char g_szClassName[] = "Martris";
+const char g_szClassName[] = "Tetris";
 
 WNDCLASSEX wc;
 HWND hwnd, hwnd_title, hwnd_lines, hwnd_points, hwnd_blocks, hwnd_level;
@@ -162,16 +162,25 @@ DWORD WINAPI downs(void *data) {
             }
         }
         if(choice == 'sq') {
-            HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-            RECT rrect2 = {219, 20, 420, 690};
-            FillRect(hdc2, &rrect2, brush);
-            DeleteObject(brush);
+            //hdc2 = GetDC(hwnd);
+            hdcMems = CreateCompatibleDC(hdc2);
+
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+            oldBitmap = SelectObject(hdcMems, hBitmap);
+
+            GetObject(hBitmap, sizeof(bitmap), &bitmap);
+            BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+            SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+            DeleteDC(hdcMems); DeleteObject(hBitmap);
+
             sq.y0 += 20;
             sq.y1 += 20;
             sq.y2 += 20;
             sq.y3 += 20;
         
-            brush = CreateSolidBrush(RGB(0, 0, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
             RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
@@ -257,7 +266,7 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        brush = CreateSolidBrush(RGB(0, 250, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 250, 0));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -272,17 +281,25 @@ DWORD WINAPI downs(void *data) {
             }
         }
         else if(choice == 'lne') {
-            HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-            RECT rrect2 = {219, 20, 420, 690};
-            FillRect(hdc2, &rrect2, brush);
-            DeleteObject(brush);
+            //hdc2 = GetDC(hwnd);
+            hdcMems = CreateCompatibleDC(hdc2);
+
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+            oldBitmap = SelectObject(hdcMems, hBitmap);
+
+            GetObject(hBitmap, sizeof(bitmap), &bitmap);
+            BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+            SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+            DeleteDC(hdcMems); DeleteObject(hBitmap);
 
             lne.y0 += 20;
             lne.y1 += 20;
             lne.y2 += 20;
             lne.y3 += 20;
 
-            brush = CreateSolidBrush(RGB(0, 0, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
             RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
@@ -368,7 +385,7 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        brush = CreateSolidBrush(RGB(0, 250, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 250, 0));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -383,17 +400,25 @@ DWORD WINAPI downs(void *data) {
             }
         }
         else if(choice == 'ht') {
-            HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-            RECT rrect2 = {219, 20, 420, 690};
-            FillRect(hdc2, &rrect2, brush);
-            DeleteObject(brush);
+            //hdc2 = GetDC(hwnd);
+            hdcMems = CreateCompatibleDC(hdc2);
+
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+            oldBitmap = SelectObject(hdcMems, hBitmap);
+
+            GetObject(hBitmap, sizeof(bitmap), &bitmap);
+            BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+            SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+            DeleteDC(hdcMems); DeleteObject(hBitmap);
 
             ht.y0 += 20;
             ht.y1 += 20;
             ht.y2 += 20;
             ht.y3 += 20;
         
-            brush = CreateSolidBrush(RGB(0, 0, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
             RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
@@ -479,7 +504,7 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        brush = CreateSolidBrush(RGB(0, 250, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 250, 0));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -494,17 +519,25 @@ DWORD WINAPI downs(void *data) {
             }
         }
         else if(choice == 'larm') {
-            HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-            RECT rrect2 = {219, 20, 420, 690};
-            FillRect(hdc2, &rrect2, brush);
-            DeleteObject(brush);
+            //hdc2 = GetDC(hwnd);
+            hdcMems = CreateCompatibleDC(hdc2);
+
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+            oldBitmap = SelectObject(hdcMems, hBitmap);
+
+            GetObject(hBitmap, sizeof(bitmap), &bitmap);
+            BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+            SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+            DeleteDC(hdcMems); DeleteObject(hBitmap);
 
             larm.y0 += 20;
             larm.y1 += 20;
             larm.y2 += 20;
             larm.y3 += 20;
         
-            brush = CreateSolidBrush(RGB(0, 0, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
             RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
@@ -590,7 +623,7 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        brush = CreateSolidBrush(RGB(0, 250, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 250, 0));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -605,17 +638,25 @@ DWORD WINAPI downs(void *data) {
             }
         }
         else if(choice == 'rarm') {
-            HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-            RECT rrect2 = {219, 20, 420, 690};
-            FillRect(hdc2, &rrect2, brush);
-            DeleteObject(brush);
+            //hdc2 = GetDC(hwnd);
+            hdcMems = CreateCompatibleDC(hdc2);
+
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+            oldBitmap = SelectObject(hdcMems, hBitmap);
+
+            GetObject(hBitmap, sizeof(bitmap), &bitmap);
+            BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+            SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+            DeleteDC(hdcMems); DeleteObject(hBitmap);
 
             rarm.y0 += 20;
             rarm.y1 += 20;
             rarm.y2 += 20;
             rarm.y3 += 20;
         
-            brush = CreateSolidBrush(RGB(0, 0, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
             RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
@@ -701,7 +742,7 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        brush = CreateSolidBrush(RGB(0, 250, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 250, 0));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -780,17 +821,25 @@ void prep() {
 
 void rotate() {
     if(choice == 'sq') {
-        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-        RECT rrect2 = {219, 20, 420, 690};
-        FillRect(hdc2, &rrect2, brush);
-        DeleteObject(brush);
+        //hdc2 = GetDC(hwnd);
+        hdcMems = CreateCompatibleDC(hdc2);
+
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+        DeleteDC(hdcMems); DeleteObject(hBitmap);
 
         sq.y0 += 0;
         sq.y1 += 0;
         sq.y2 += 0;
         sq.y3 += 0;
 
-        brush = CreateSolidBrush(RGB(0, 0, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
@@ -835,10 +884,18 @@ void rotate() {
         SelectObject(hdc2, hOldBsh);
     }
     else if(choice == 'lne') {
-        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-        RECT rrect2 = {219, 20, 420, 690};
-        FillRect(hdc2, &rrect2, brush);
-        DeleteObject(brush);
+        //hdc2 = GetDC(hwnd);
+        hdcMems = CreateCompatibleDC(hdc2);
+
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+        DeleteDC(hdcMems); DeleteObject(hBitmap);
 
         if(lne.dir == 0) {
             lne.dir = 1;
@@ -885,7 +942,7 @@ void rotate() {
             lne.y3 -= 20* 0;
         }
 
-        brush = CreateSolidBrush(RGB(0, 0, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
@@ -930,10 +987,18 @@ void rotate() {
         SelectObject(hdc2, hOldBsh);
     }
     else if(choice == 'ht') {
-        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-        RECT rrect2 = {219, 20, 420, 690};
-        FillRect(hdc2, &rrect2, brush);
-        DeleteObject(brush);
+        //hdc2 = GetDC(hwnd);
+        hdcMems = CreateCompatibleDC(hdc2);
+
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+        DeleteDC(hdcMems); DeleteObject(hBitmap);
 
         if(ht.dir == 0) {
             ht.dir = 1;
@@ -980,7 +1045,7 @@ void rotate() {
             ht.y3 += 20* 2;
         }
 
-        brush = CreateSolidBrush(RGB(0, 0, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
@@ -1025,10 +1090,18 @@ void rotate() {
         SelectObject(hdc2, hOldBsh);
     }
     else if(choice == 'larm') {
-        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-        RECT rrect2 = {219, 20, 420, 690};
-        FillRect(hdc2, &rrect2, brush);
-        DeleteObject(brush);
+        //hdc2 = GetDC(hwnd);
+        hdcMems = CreateCompatibleDC(hdc2);
+
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+        DeleteDC(hdcMems); DeleteObject(hBitmap);
 
         if(larm.dir == 0) {
             larm.dir = 1;
@@ -1075,7 +1148,7 @@ void rotate() {
             larm.y3 -= 20* 1;
         }
 
-        brush = CreateSolidBrush(RGB(0, 0, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
@@ -1120,10 +1193,18 @@ void rotate() {
         SelectObject(hdc2, hOldBsh);
     }
     else if(choice == 'rarm') {
-        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-        RECT rrect2 = {219, 20, 420, 690};
-        FillRect(hdc2, &rrect2, brush);
-        DeleteObject(brush);
+        //hdc2 = GetDC(hwnd);
+        hdcMems = CreateCompatibleDC(hdc2);
+
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+        DeleteDC(hdcMems); DeleteObject(hBitmap);
 
         if(rarm.dir == 0) {
             rarm.dir = 1;
@@ -1170,7 +1251,7 @@ void rotate() {
             rarm.y3 += 20* 1;
         }
 
-        brush = CreateSolidBrush(RGB(0, 0, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
@@ -1247,16 +1328,24 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 case 'k':  {
                         //your code here    
                     if(choice == 'sq' && (sq.y0 <= 610 || sq.y1 <= 610 || sq.y2 <= 610 || sq.y3 <= 610)) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-                        RECT rrect2 = {219, 20, 420, 690};
-                        FillRect(hdc2, &rrect2, brush);
-                        DeleteObject(brush);
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+                        
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
                         sq.y0 += 20;
                         sq.y1 += 20;
                         sq.y2 += 20;
                         sq.y3 += 20;
 
-                        brush = CreateSolidBrush(RGB(0, 0, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
                         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -1331,16 +1420,24 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         }
                     }
                     else if(choice == 'lne' && (lne.y0 <= 580 || lne.y1 <= 580 || lne.y2 <= 580 || lne.y3 <= 580)) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-                        RECT rrect2 = {219, 20, 420, 690};
-                        FillRect(hdc2, &rrect2, brush);
-                        DeleteObject(brush);
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
                         lne.y0 += 20;
                         lne.y1 += 20;
                         lne.y2 += 20;
                         lne.y3 += 20;
 
-                        brush = CreateSolidBrush(RGB(0, 0, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
                         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -1415,16 +1512,24 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         }
                     }
                     else if(choice == 'ht' && (ht.y0 <= 610 || ht.y1 <= 610 || ht.y2 <= 610 || ht.y3 <= 610)) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-                        RECT rrect2 = {219, 20, 420, 690};
-                        FillRect(hdc2, &rrect2, brush);
-                        DeleteObject(brush);
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
                         ht.y0 += 20;
                         ht.y1 += 20;
                         ht.y2 += 20;
                         ht.y3 += 20;
 
-                        brush = CreateSolidBrush(RGB(0, 0, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
                         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -1499,17 +1604,25 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         }
                     }
                     else if(choice == 'larm' && (larm.y0 <= 610 || larm.y1 <= 610 || larm.y2 <= 610 || larm.y3 <= 610)) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-                        RECT rrect2 = {219, 20, 420, 690};
-                        FillRect(hdc2, &rrect2, brush);
-                        DeleteObject(brush);
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
 
                         larm.y0 += 20;
                         larm.y1 += 20;
                         larm.y2 += 20;
                         larm.y3 += 20;
 
-                        brush = CreateSolidBrush(RGB(0, 0, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
                         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -1595,7 +1708,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
-                                    brush = CreateSolidBrush(RGB(50, 50, 50));
+                                    HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
                                     RECT rrect6 = {i, j, i + 20, j + 20};
                                     FillRect(hdc2, &rrect6, brush);
                                     DeleteObject(brush);
@@ -1610,17 +1723,25 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         }
                     }
                     else if(choice == 'rarm' && (rarm.y0 <= 610 || rarm.y1 <= 610 || rarm.y2 <= 610 || rarm.y3 <= 610)) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-                        RECT rrect2 = {219, 20, 420, 690};
-                        FillRect(hdc2, &rrect2, brush);
-                        DeleteObject(brush);
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
 
                         rarm.y0 += 20;
                         rarm.y1 += 20;
                         rarm.y2 += 20;
                         rarm.y3 += 20;
 
-                        brush = CreateSolidBrush(RGB(0, 0, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
                         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -1706,7 +1827,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
-                                    brush = CreateSolidBrush(RGB(0, 250, 0));
+                                    HBRUSH brush = CreateSolidBrush(RGB(0, 250, 0));
                                     RECT rrect6 = {i, j, i + 20, j + 20};
                                     FillRect(hdc2, &rrect6, brush);
                                     DeleteObject(brush);
@@ -1741,10 +1862,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 case 'j':  {
                       //your code here    
                     if(choice == 'sq' && (sq.y0 <= 650 || sq.y1 <= 650 || sq.y2 <= 650 || sq.y3 <= 650)) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-                        RECT rrect2 = {219, 20, 420, 690};
-                        FillRect(hdc2, &rrect2, brush);
-                        DeleteObject(brush);
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
                         
                         if(sq.x0 > 220 &&
                            sq.x1 > 220 &&
@@ -1761,7 +1890,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
 
-                        brush = CreateSolidBrush(RGB(0, 0, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
                         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -1806,10 +1935,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         SelectObject(hdc2, hOldBsh);
                     }
                     if(choice == 'lne' && (lne.y0 <= 650 || lne.y1 <= 650 || lne.y2 <= 650 || lne.y3 <= 650)) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-                        RECT rrect2 = {219, 20, 420, 690};
-                        FillRect(hdc2, &rrect2, brush);
-                        DeleteObject(brush);
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
                         if(lne.x0 > 220 &&
                            lne.x1 > 220 &&
                            lne.x2 > 220 &&
@@ -1825,7 +1962,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
 
-                        brush = CreateSolidBrush(RGB(0, 0, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
                         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -1870,10 +2007,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         SelectObject(hdc2, hOldBsh);
                     }
                     else if(choice == 'ht' && (ht.y0 <= 610 || ht.y1 <= 610 || ht.y2 <= 610 || ht.y3 <= 610)) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-                        RECT rrect2 = {219, 20, 420, 690};
-                        FillRect(hdc2, &rrect2, brush);
-                        DeleteObject(brush);
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
                         if(ht.x0 > 220 &&
                            ht.x1 > 220 &&
                            ht.x2 > 220 &&
@@ -1889,7 +2034,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
 
-                        brush = CreateSolidBrush(RGB(0, 0, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
                         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -1956,10 +2101,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         }
                     }
                     else if(choice == 'larm' && (larm.y0 <= 610 || larm.y1 <= 610 || larm.y2 <= 610 || larm.y3 <= 610)) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-                        RECT rrect2 = {219, 20, 420, 690};
-                        FillRect(hdc2, &rrect2, brush);
-                        DeleteObject(brush);
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
 
                         if(larm.x0 > 220 &&
                            larm.x1 > 220 &&
@@ -1976,7 +2129,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                         
-                        brush = CreateSolidBrush(RGB(0, 0, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
                         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2062,7 +2215,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
-                                    brush = CreateSolidBrush(RGB(0, 250, 0));
+                                    HBRUSH brush = CreateSolidBrush(RGB(0, 250, 0));
                                     RECT rrect6 = {i, j, i + 20, j + 20};
                                     FillRect(hdc2, &rrect6, brush);
                                     DeleteObject(brush);
@@ -2077,10 +2230,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         }
                     }
                     else if(choice == 'rarm' && (rarm.y0 <= 610 || rarm.y1 <= 610 || rarm.y2 <= 610 || rarm.y3 <= 610)) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-                        RECT rrect2 = {219, 20, 420, 690};
-                        FillRect(hdc2, &rrect2, brush);
-                        DeleteObject(brush);
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
 
                         if(rarm.x0 > 220 &&
                            rarm.x1 > 220 &&
@@ -2097,7 +2258,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
 
-                        brush = CreateSolidBrush(RGB(0, 0, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
                         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2183,7 +2344,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
-                                    brush = CreateSolidBrush(RGB(0, 250, 0));
+                                    HBRUSH brush = CreateSolidBrush(RGB(0, 250, 0));
                                     RECT rrect6 = {i, j, i + 20, j + 20};
                                     FillRect(hdc2, &rrect6, brush);
                                     DeleteObject(brush);
@@ -2218,10 +2379,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 case 'l':  {
                         //your code here    
                     if(choice == 'sq' && (sq.y0 <= 650 || sq.y1 <= 650 || sq.y2 <= 650 || sq.y3 <= 650)) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-                        RECT rrect2 = {219, 20, 420, 690};
-                        FillRect(hdc2, &rrect2, brush);
-                        DeleteObject(brush);
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
                         if(b[sq.x0+20][sq.y0] == 0 &&
                            b[sq.x1+20][sq.y1] == 0 &&
                            b[sq.x2+20][sq.y2] == 0 &&
@@ -2238,7 +2407,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             sq.x3 += 20;
                         }
 
-                        brush = CreateSolidBrush(RGB(0, 0, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
                         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2283,10 +2452,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         SelectObject(hdc2, hOldBsh);
                     }
                     else if(choice == 'lne' && (lne.y0 <= 650 || lne.y1 <= 650 || lne.y2 <= 650 || lne.y3 <= 650)) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-                        RECT rrect2 = {219, 20, 420, 690};
-                        FillRect(hdc2, &rrect2, brush);
-                        DeleteObject(brush);
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
                         if(b[lne.x0+20][lne.y0] == 0 &&
                            b[lne.x1+20][lne.y1] == 0 &&
                            b[lne.x2+20][lne.y2] == 0 &&
@@ -2303,7 +2480,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             lne.x3 += 20;
                         }
                         
-                        brush = CreateSolidBrush(RGB(0, 0, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
                         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2348,10 +2525,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         SelectObject(hdc2, hOldBsh);
                     }
                     else if(choice == 'ht' && (ht.y0 <= 610 || ht.y1 <= 610 || ht.y2 <= 610 || ht.y3 <= 610)) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-                        RECT rrect2 = {219, 20, 420, 690};
-                        FillRect(hdc2, &rrect2, brush);
-                        DeleteObject(brush);
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
                         if(b[ht.x0+20][ht.y0] == 0 &&
                            b[ht.x1+20][ht.y1] == 0 &&
                            b[ht.x2+20][ht.y2] == 0 &&
@@ -2368,7 +2553,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             ht.x3 += 20;
                         }
 
-                        brush = CreateSolidBrush(RGB(0, 0, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
                         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2435,10 +2620,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         }
                     }
                     else if(choice == 'larm' && (larm.y0 <= 610 || larm.y1 <= 610 || larm.y2 <= 610 || larm.y3 <= 610)) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-                        RECT rrect2 = {219, 20, 420, 690};
-                        FillRect(hdc2, &rrect2, brush);
-                        DeleteObject(brush);
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
 
                         if(b[larm.x0+20][larm.y0] == 0 &&
                            b[larm.x1+20][larm.y1] == 0 &&
@@ -2456,7 +2649,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             larm.x3 += 20;
                         }
 
-                        brush = CreateSolidBrush(RGB(0, 0, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
                         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2542,7 +2735,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
-                                    brush = CreateSolidBrush(RGB(0, 250, 0));
+                                    HBRUSH brush = CreateSolidBrush(RGB(0, 250, 0));
                                     RECT rrect6 = {i, j, i + 20, j + 20};
                                     FillRect(hdc2, &rrect6, brush);
                                     DeleteObject(brush);
@@ -2557,10 +2750,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         }
                     }
                     else if(choice == 'rarm' && (rarm.y0 <= 610 || rarm.y1 <= 610 || rarm.y2 <= 610 || rarm.y3 <= 610)) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
-                        RECT rrect2 = {219, 20, 420, 690};
-                        FillRect(hdc2, &rrect2, brush);
-                        DeleteObject(brush);
+                        //hdc2 = GetDC(hwnd);
+                        hdcMems = CreateCompatibleDC(hdc2);
+
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+                        oldBitmap = SelectObject(hdcMems, hBitmap);
+
+                        GetObject(hBitmap, sizeof(bitmap), &bitmap);
+                        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+
+                        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+                        DeleteDC(hdcMems); DeleteObject(hBitmap);
 
                         if(b[rarm.x0+20][rarm.y0] == 0 &&
                            b[rarm.x1+20][rarm.y1] == 0 &&
@@ -2578,7 +2779,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             rarm.x3 += 20;
                         }
                         
-                        brush = CreateSolidBrush(RGB(0, 0, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
                         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2664,7 +2865,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
-                                    brush = CreateSolidBrush(RGB(50, 50, 50));
+                                    HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
                                     RECT rrect6 = {i, j, i + 20, j + 20};
                                     FillRect(hdc2, &rrect6, brush);
                                     DeleteObject(brush);
