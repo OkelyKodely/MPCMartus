@@ -1,2 +1,1 @@
-# martris
-Martris is a C tetris clone.  Quite fun, actually.
+TetrisC is a C tetris clone for Windows.  It is Quite fun, actually.
