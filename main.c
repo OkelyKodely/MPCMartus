@@ -13,6 +13,8 @@
 #include <string.h>
 #include <math.h>
 
+char * choicepre = "sq";
+
 HINSTANCE hInst;
 BITMAP bitmap;
 HDC hdcMem;
@@ -29,10 +31,10 @@ int lines=0;
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
-const char g_szClassName[] = "Tetris";
+const char g_szClassName[] = "TetrisC";
 
 WNDCLASSEX wc;
-HWND hwnd, hwnd_title, hwnd_lines, hwnd_points, hwnd_blocks, hwnd_level;
+HWND hwnd, hwnd_title, hwnd_next, hwnd_lines, hwnd_points, hwnd_blocks, hwnd_level;
 MSG Msg;
 
 HDC hdc;
@@ -136,10 +138,101 @@ BOOLEAN fist = TRUE;
 
 char* choice;
 
-int sleeptime = 750;
+int sleeptime = 800;
+
+int linenext = 4;
 
 DWORD WINAPI downs(void *data) {
     while (1) {
+        printf(choicepre);
+        HBRUSH brush = CreateSolidBrush(RGB(254, 254, 254));
+        RECT rrect5 = {60, 80, 190, 200};
+        FillRect(hdc2, &rrect5, brush);
+        DeleteObject(brush);
+        if(choicepre == "sq") {
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+            RECT rrect5 = {100, 100, 100 + 20, 100 + 20};
+            FillRect(hdc2, &rrect5, brush);
+            RECT rrect6 = {120, 100, 120 + 20, 100 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            RECT rrect7 = {100, 120, 100 + 20, 120 + 20};
+            FillRect(hdc2, &rrect7, brush);
+            RECT rrect8 = {120, 120, 120 + 20, 120 + 20};
+            FillRect(hdc2, &rrect8, brush);
+            DeleteObject(brush);
+        }
+        else if(choicepre == "lne") {
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+            RECT rrect5 = {100, 100, 100 + 20, 100 + 20};
+            FillRect(hdc2, &rrect5, brush);
+            RECT rrect6 = {100, 120, 100 + 20, 120 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            RECT rrect7 = {100, 140, 100 + 20, 140 + 20};
+            FillRect(hdc2, &rrect7, brush);
+            RECT rrect8 = {100, 160, 100 + 20, 160 + 20};
+            FillRect(hdc2, &rrect8, brush);
+            DeleteObject(brush);
+        }
+        else if(choicepre == "ht") {
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+            RECT rrect5 = {120, 100, 120 + 20, 100 + 20};
+            FillRect(hdc2, &rrect5, brush);
+            RECT rrect6 = {100, 120, 100 + 20, 120 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            RECT rrect7 = {120, 120, 120 + 20, 120 + 20};
+            FillRect(hdc2, &rrect7, brush);
+            RECT rrect8 = {140, 120, 140 + 20, 120 + 20};
+            FillRect(hdc2, &rrect8, brush);
+            DeleteObject(brush);
+        }
+        else if(choicepre == "larm") {
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+            RECT rrect5 = {120, 100, 120 + 20, 100 + 20};
+            FillRect(hdc2, &rrect5, brush);
+            RECT rrect6 = {120, 120, 120 + 20, 120 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            RECT rrect7 = {120, 140, 120 + 20, 140 + 20};
+            FillRect(hdc2, &rrect7, brush);
+            RECT rrect8 = {100, 140, 100 + 20, 140 + 20};
+            FillRect(hdc2, &rrect8, brush);
+            DeleteObject(brush);
+        }
+        else if(choicepre == "rarm") {
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+            RECT rrect5 = {120, 100, 120 + 20, 100 + 20};
+            FillRect(hdc2, &rrect5, brush);
+            RECT rrect6 = {120, 120, 120 + 20, 120 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            RECT rrect7 = {120, 140, 120 + 20, 140 + 20};
+            FillRect(hdc2, &rrect7, brush);
+            RECT rrect8 = {140, 140, 140 + 20, 140 + 20};
+            FillRect(hdc2, &rrect8, brush);
+            DeleteObject(brush);
+        }
+        else if(choicepre == "lsh") {
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+            RECT rrect5 = {120, 100, 120 + 20, 100 + 20};
+            FillRect(hdc2, &rrect5, brush);
+            RECT rrect6 = {120, 120, 120 + 20, 120 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            RECT rrect7 = {100, 120, 100 + 20, 120 + 20};
+            FillRect(hdc2, &rrect7, brush);
+            RECT rrect8 = {100, 140, 100 + 20, 140 + 20};
+            FillRect(hdc2, &rrect8, brush);
+            DeleteObject(brush);
+        }
+        else if(choicepre == "rsh") {
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+            RECT rrect5 = {100, 100, 100 + 20, 100 + 20};
+            FillRect(hdc2, &rrect5, brush);
+            RECT rrect6 = {100, 120, 100 + 20, 120 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            RECT rrect7 = {120, 120, 120 + 20, 120 + 20};
+            FillRect(hdc2, &rrect7, brush);
+            RECT rrect8 = {120, 140, 120 + 20, 140 + 20};
+            FillRect(hdc2, &rrect8, brush);
+            DeleteObject(brush);
+        }
         hdc2 = GetDC (hwnd);
         Sleep(sleeptime);
         int count =0;
@@ -159,7 +252,7 @@ DWORD WINAPI downs(void *data) {
             if(clearThisLine >= 10) {
                 points += 10;
                 lines += 1;
-                char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 clearBlocks[count] = j;
                 ++ count;
             }
@@ -188,7 +281,11 @@ DWORD WINAPI downs(void *data) {
                 }
             }
         }
-        if(choice == 'sq') {
+        printf("asdfsdfaABC:");
+        printf(choice);
+        printf("\n");
+        if(choice == "sq") {
+            printf("here i am");
             //hdc2 = GetDC(hwnd);
             hdcMems = CreateCompatibleDC(hdc2);
 
@@ -207,7 +304,7 @@ DWORD WINAPI downs(void *data) {
             sq.y2 += 20;
             sq.y3 += 20;
         
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+            HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
@@ -218,7 +315,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect4 = {sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20};
             FillRect(hdc2, &rrect4, brush);
             DeleteObject(brush);
@@ -229,7 +326,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect5 = {sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20};
             FillRect(hdc2, &rrect5, brush);
             DeleteObject(brush);
@@ -240,7 +337,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect6 = {sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20};
             FillRect(hdc2, &rrect6, brush);
             DeleteObject(brush);
@@ -264,7 +361,7 @@ DWORD WINAPI downs(void *data) {
                 b[sq.x1][sq.y1] = 1;
                 b[sq.x2][sq.y2] = 1;
                 b[sq.x3][sq.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
 
@@ -286,13 +383,13 @@ DWORD WINAPI downs(void *data) {
                 b[sq.x1][sq.y1] = 1;
                 b[sq.x2][sq.y2] = 1;
                 b[sq.x3][sq.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
                 blocks = 0;
                 lines = 0;
-                points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
+                points = 1000000;
             }
-
+            if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
@@ -310,7 +407,7 @@ DWORD WINAPI downs(void *data) {
                 }
             }
         }
-        else if(choice == 'lne') {
+        else if(choice == "lne") {
             //hdc2 = GetDC(hwnd);
             hdcMems = CreateCompatibleDC(hdc2);
 
@@ -329,7 +426,7 @@ DWORD WINAPI downs(void *data) {
             lne.y2 += 20;
             lne.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+            HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
@@ -340,7 +437,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect4 = {lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20};
             FillRect(hdc2, &rrect4, brush);
             DeleteObject(brush);
@@ -351,7 +448,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect5 = {lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20};
             FillRect(hdc2, &rrect5, brush);
             DeleteObject(brush);
@@ -362,7 +459,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect6 = {lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20};
             FillRect(hdc2, &rrect6, brush);
             DeleteObject(brush);
@@ -386,7 +483,7 @@ DWORD WINAPI downs(void *data) {
                 b[lne.x1][lne.y1] = 1;
                 b[lne.x2][lne.y2] = 1;
                 b[lne.x3][lne.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
 
@@ -408,13 +505,13 @@ DWORD WINAPI downs(void *data) {
                 b[lne.x1][lne.y1] = 1;
                 b[lne.x2][lne.y2] = 1;
                 b[lne.x3][lne.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
                 blocks = 0;
                 lines = 0;
-                points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
+                points = 1000000;
             }
-
+            if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
@@ -432,7 +529,7 @@ DWORD WINAPI downs(void *data) {
                 }
             }
         }
-        else if(choice == 'ht') {
+        else if(choice == "ht") {
             //hdc2 = GetDC(hwnd);
             hdcMems = CreateCompatibleDC(hdc2);
 
@@ -451,7 +548,7 @@ DWORD WINAPI downs(void *data) {
             ht.y2 += 20;
             ht.y3 += 20;
         
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+            HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
@@ -462,7 +559,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect4 = {ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20};
             FillRect(hdc2, &rrect4, brush);
             DeleteObject(brush);
@@ -473,7 +570,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect5 = {ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20};
             FillRect(hdc2, &rrect5, brush);
             DeleteObject(brush);
@@ -484,7 +581,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect6 = {ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20};
             FillRect(hdc2, &rrect6, brush);
             DeleteObject(brush);
@@ -508,7 +605,7 @@ DWORD WINAPI downs(void *data) {
                 b[ht.x1][ht.y1] = 1;
                 b[ht.x2][ht.y2] = 1;
                 b[ht.x3][ht.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
 
@@ -530,13 +627,10 @@ DWORD WINAPI downs(void *data) {
                 b[ht.x1][ht.y1] = 1;
                 b[ht.x2][ht.y2] = 1;
                 b[ht.x3][ht.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                blocks = 0;
-                lines = 0;
-                points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
             }
-
+            if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
@@ -554,7 +648,7 @@ DWORD WINAPI downs(void *data) {
                 }
             }
         }
-        else if(choice == 'larm') {
+        else if(choice == "larm") {
             //hdc2 = GetDC(hwnd);
             hdcMems = CreateCompatibleDC(hdc2);
 
@@ -573,7 +667,7 @@ DWORD WINAPI downs(void *data) {
             larm.y2 += 20;
             larm.y3 += 20;
         
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+            HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
@@ -584,7 +678,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect4 = {larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20};
             FillRect(hdc2, &rrect4, brush);
             DeleteObject(brush);
@@ -595,7 +689,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect5 = {larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20};
             FillRect(hdc2, &rrect5, brush);
             DeleteObject(brush);
@@ -606,7 +700,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect6 = {larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20};
             FillRect(hdc2, &rrect6, brush);
             DeleteObject(brush);
@@ -630,7 +724,7 @@ DWORD WINAPI downs(void *data) {
                 b[larm.x1][larm.y1] = 1;
                 b[larm.x2][larm.y2] = 1;
                 b[larm.x3][larm.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
 
@@ -652,13 +746,10 @@ DWORD WINAPI downs(void *data) {
                 b[larm.x1][larm.y1] = 1;
                 b[larm.x2][larm.y2] = 1;
                 b[larm.x3][larm.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                blocks = 0;
-                lines = 0;
-                points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
             }
-
+            if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
@@ -676,7 +767,7 @@ DWORD WINAPI downs(void *data) {
                 }
             }
         }
-        else if(choice == 'rarm') {
+        else if(choice == "rarm") {
             //hdc2 = GetDC(hwnd);
             hdcMems = CreateCompatibleDC(hdc2);
 
@@ -695,7 +786,7 @@ DWORD WINAPI downs(void *data) {
             rarm.y2 += 20;
             rarm.y3 += 20;
         
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+            HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
@@ -706,7 +797,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect4 = {rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20};
             FillRect(hdc2, &rrect4, brush);
             DeleteObject(brush);
@@ -717,7 +808,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect5 = {rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20};
             FillRect(hdc2, &rrect5, brush);
             DeleteObject(brush);
@@ -728,7 +819,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect6 = {rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20};
             FillRect(hdc2, &rrect6, brush);
             DeleteObject(brush);
@@ -752,7 +843,7 @@ DWORD WINAPI downs(void *data) {
                 b[rarm.x1][rarm.y1] = 1;
                 b[rarm.x2][rarm.y2] = 1;
                 b[rarm.x3][rarm.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
 
@@ -774,13 +865,10 @@ DWORD WINAPI downs(void *data) {
                 b[rarm.x1][rarm.y1] = 1;
                 b[rarm.x2][rarm.y2] = 1;
                 b[rarm.x3][rarm.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                blocks = 0;
-                lines = 0;
-                points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
             }
-
+            if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
@@ -798,7 +886,7 @@ DWORD WINAPI downs(void *data) {
                 }
             }
         }
-        else if(choice == 'lsh') {
+        else if(choice == "lsh") {
             //hdc2 = GetDC(hwnd);
             hdcMems = CreateCompatibleDC(hdc2);
 
@@ -817,7 +905,7 @@ DWORD WINAPI downs(void *data) {
             lsh.y2 += 20;
             lsh.y3 += 20;
         
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+            HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
@@ -828,7 +916,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect4 = {lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20};
             FillRect(hdc2, &rrect4, brush);
             DeleteObject(brush);
@@ -839,7 +927,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect5 = {lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20};
             FillRect(hdc2, &rrect5, brush);
             DeleteObject(brush);
@@ -850,7 +938,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect6 = {lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20};
             FillRect(hdc2, &rrect6, brush);
             DeleteObject(brush);
@@ -874,7 +962,7 @@ DWORD WINAPI downs(void *data) {
                 b[lsh.x1][lsh.y1] = 1;
                 b[lsh.x2][lsh.y2] = 1;
                 b[lsh.x3][lsh.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
 
@@ -896,13 +984,10 @@ DWORD WINAPI downs(void *data) {
                 b[lsh.x1][lsh.y1] = 1;
                 b[lsh.x2][lsh.y2] = 1;
                 b[lsh.x3][lsh.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                blocks = 0;
-                lines = 0;
-                points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
             }
-
+            if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
@@ -920,7 +1005,7 @@ DWORD WINAPI downs(void *data) {
                 }
             }
         }
-        else if(choice == 'rsh') {
+        else if(choice == "rsh") {
             //hdc2 = GetDC(hwnd);
             hdcMems = CreateCompatibleDC(hdc2);
 
@@ -939,7 +1024,7 @@ DWORD WINAPI downs(void *data) {
             rsh.y2 += 20;
             rsh.y3 += 20;
         
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+            HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
@@ -950,7 +1035,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect4 = {rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20};
             FillRect(hdc2, &rrect4, brush);
             DeleteObject(brush);
@@ -961,7 +1046,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect5 = {rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20};
             FillRect(hdc2, &rrect5, brush);
             DeleteObject(brush);
@@ -972,7 +1057,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(255, 255, 255));
+            brush = CreateSolidBrush(RGB(4, 4, 204));
             RECT rrect6 = {rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20};
             FillRect(hdc2, &rrect6, brush);
             DeleteObject(brush);
@@ -996,7 +1081,7 @@ DWORD WINAPI downs(void *data) {
                 b[rsh.x1][rsh.y1] = 1;
                 b[rsh.x2][rsh.y2] = 1;
                 b[rsh.x3][rsh.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
 
@@ -1018,13 +1103,10 @@ DWORD WINAPI downs(void *data) {
                 b[rsh.x1][rsh.y1] = 1;
                 b[rsh.x2][rsh.y2] = 1;
                 b[rsh.x3][rsh.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                blocks = 0;
-                lines = 0;
-                points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
             }
-
+            if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
@@ -1048,21 +1130,22 @@ DWORD WINAPI downs(void *data) {
 
 void prep() {
     fist = FALSE;
+    choice = choicepre;
     int r = rand() % 7;
     if(r == 1)
-      choice = 'sq';
+      choicepre = "sq";
     else if(r == 2)
-      choice = 'lne';
+      choicepre = "lne";
     else if(r == 3)
-      choice = 'sq';
+      choicepre = "ht";
     else if(r == 4)
-      choice = 'larm';
+      choicepre = "larm";
     else if(r == 5)
-      choice = 'rarm';
+      choicepre = "rarm";
     else if(r == 6)
-      choice = 'lsh';
+      choicepre = "lsh";
     else
-      choice = 'rsh';
+      choicepre = "rsh";
     lsh.x0 = 300;
     lsh.y0 = 50;
     lsh.x1 = 280;
@@ -1128,7 +1211,7 @@ void prep() {
 }
 
 void rotate() {
-    if(choice == 'sq') {
+    if(choice == "sq") {
         //hdc2 = GetDC(hwnd);
         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -1147,7 +1230,7 @@ void rotate() {
         sq.y2 += 0;
         sq.y3 += 0;
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
@@ -1158,7 +1241,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
         
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect4 = {sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20};
         FillRect(hdc2, &rrect4, brush);
         DeleteObject(brush);
@@ -1169,7 +1252,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect5 = {sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
@@ -1180,7 +1263,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect6 = {sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20};
         FillRect(hdc2, &rrect6, brush);
         DeleteObject(brush);
@@ -1191,7 +1274,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
     }
-    else if(choice == 'lne') {
+    else if(choice == "lne") {
         //hdc2 = GetDC(hwnd);
         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -1250,7 +1333,7 @@ void rotate() {
             lne.y3 -= 20* 0;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
@@ -1261,7 +1344,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
         
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect4 = {lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20};
         FillRect(hdc2, &rrect4, brush);
         DeleteObject(brush);
@@ -1272,7 +1355,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect5 = {lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
@@ -1283,7 +1366,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect6 = {lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20};
         FillRect(hdc2, &rrect6, brush);
         DeleteObject(brush);
@@ -1294,7 +1377,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
     }
-    else if(choice == 'ht') {
+    else if(choice == "ht") {
         //hdc2 = GetDC(hwnd);
         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -1353,7 +1436,7 @@ void rotate() {
             ht.y3 += 20* 2;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
@@ -1364,7 +1447,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect4 = {ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20};
         FillRect(hdc2, &rrect4, brush);
         DeleteObject(brush);
@@ -1375,7 +1458,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect5 = {ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
@@ -1386,7 +1469,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect6 = {ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20};
         FillRect(hdc2, &rrect6, brush);
         DeleteObject(brush);
@@ -1397,7 +1480,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
     }
-    else if(choice == 'larm') {
+    else if(choice == "larm") {
         //hdc2 = GetDC(hwnd);
         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -1456,7 +1539,7 @@ void rotate() {
             larm.y3 -= 20* 1;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
@@ -1467,7 +1550,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
         
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect4 = {larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20};
         FillRect(hdc2, &rrect4, brush);
         DeleteObject(brush);
@@ -1478,7 +1561,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect5 = {larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
@@ -1489,7 +1572,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect6 = {larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20};
         FillRect(hdc2, &rrect6, brush);
         DeleteObject(brush);
@@ -1500,7 +1583,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
     }
-    else if(choice == 'rarm') {
+    else if(choice == "rarm") {
         //hdc2 = GetDC(hwnd);
         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -1559,7 +1642,7 @@ void rotate() {
             rarm.y3 += 20* 1;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
@@ -1570,7 +1653,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
         
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect4 = {rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20};
         FillRect(hdc2, &rrect4, brush);
         DeleteObject(brush);
@@ -1581,7 +1664,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect5 = {rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
@@ -1592,7 +1675,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect6 = {rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20};
         FillRect(hdc2, &rrect6, brush);
         DeleteObject(brush);
@@ -1603,7 +1686,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
     }
-    else if(choice == 'lsh') {
+    else if(choice == "lsh") {
         //hdc2 = GetDC(hwnd);
         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -1662,7 +1745,7 @@ void rotate() {
             lsh.y3 += 20* 0;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
@@ -1673,7 +1756,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
         
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect4 = {lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20};
         FillRect(hdc2, &rrect4, brush);
         DeleteObject(brush);
@@ -1684,7 +1767,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect5 = {lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
@@ -1695,7 +1778,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect6 = {lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20};
         FillRect(hdc2, &rrect6, brush);
         DeleteObject(brush);
@@ -1706,7 +1789,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
     }
-    else if(choice == 'rsh') {
+    else if(choice == "rsh") {
         //hdc2 = GetDC(hwnd);
         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -1765,7 +1848,7 @@ void rotate() {
             rsh.y3 += 20* 2;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
@@ -1776,7 +1859,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
         
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect4 = {rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20};
         FillRect(hdc2, &rrect4, brush);
         DeleteObject(brush);
@@ -1787,7 +1870,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect5 = {rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
@@ -1798,7 +1881,7 @@ void rotate() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(255, 255, 255));
+        brush = CreateSolidBrush(RGB(4, 4, 204));
         RECT rrect6 = {rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20};
         FillRect(hdc2, &rrect6, brush);
         DeleteObject(brush);
@@ -1841,7 +1924,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 }
                 case 'k':  {
                         //your code here    
-                    if(choice == 'sq' && (sq.y0 <= 610 || sq.y1 <= 610 || sq.y2 <= 610 || sq.y3 <= 610)) {
+                    if(choice == "sq" && (sq.y0 <= 610 || sq.y1 <= 610 || sq.y2 <= 610 || sq.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
                         
@@ -1859,7 +1942,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         sq.y2 += 20;
                         sq.y3 += 20;
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -1870,7 +1953,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -1881,7 +1964,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -1892,7 +1975,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -1929,14 +2012,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[sq.x1][sq.y1] = 1;
                             b[sq.x2][sq.y2] = 1;
                             b[sq.x3][sq.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
-                    else if(choice == 'lne' && (lne.y0 <= 580 || lne.y1 <= 580 || lne.y2 <= 580 || lne.y3 <= 580)) {
+                    else if(choice == "lne" && (lne.y0 <= 580 || lne.y1 <= 580 || lne.y2 <= 580 || lne.y3 <= 580)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -1954,7 +2035,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         lne.y2 += 20;
                         lne.y3 += 20;
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -1965,7 +2046,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -1976,7 +2057,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -1987,7 +2068,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -2024,14 +2105,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lne.x1][lne.y1] = 1;
                             b[lne.x2][lne.y2] = 1;
                             b[lne.x3][lne.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
-                    else if(choice == 'ht' && (ht.y0 <= 610 || ht.y1 <= 610 || ht.y2 <= 610 || ht.y3 <= 610)) {
+                    else if(choice == "ht" && (ht.y0 <= 610 || ht.y1 <= 610 || ht.y2 <= 610 || ht.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2049,7 +2128,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         ht.y2 += 20;
                         ht.y3 += 20;
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2060,7 +2139,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -2071,7 +2150,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -2082,7 +2161,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -2119,14 +2198,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[ht.x1][ht.y1] = 1;
                             b[ht.x2][ht.y2] = 1;
                             b[ht.x3][ht.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
-                    else if(choice == 'larm' && (larm.y0 <= 610 || larm.y1 <= 610 || larm.y2 <= 610 || larm.y3 <= 610)) {
+                    else if(choice == "larm" && (larm.y0 <= 610 || larm.y1 <= 610 || larm.y2 <= 610 || larm.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2145,7 +2222,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         larm.y2 += 20;
                         larm.y3 += 20;
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2156,7 +2233,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -2167,7 +2244,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -2178,7 +2255,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -2202,7 +2279,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x1][larm.y1] = 1;
                             b[larm.x2][larm.y2] = 1;
                             b[larm.x3][larm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -2224,13 +2301,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x1][larm.y1] = 1;
                             b[larm.x2][larm.y2] = 1;
                             b[larm.x3][larm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
-
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
@@ -2248,7 +2322,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == 'rarm' && (rarm.y0 <= 610 || rarm.y1 <= 610 || rarm.y2 <= 610 || rarm.y3 <= 610)) {
+                    else if(choice == "rarm" && (rarm.y0 <= 610 || rarm.y1 <= 610 || rarm.y2 <= 610 || rarm.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2267,7 +2341,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         rarm.y2 += 20;
                         rarm.y3 += 20;
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2278,7 +2352,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -2289,7 +2363,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -2300,7 +2374,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -2324,7 +2398,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x1][rarm.y1] = 1;
                             b[rarm.x2][rarm.y2] = 1;
                             b[rarm.x3][rarm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -2346,13 +2420,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x1][rarm.y1] = 1;
                             b[rarm.x2][rarm.y2] = 1;
                             b[rarm.x3][rarm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
-
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
@@ -2370,7 +2441,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == 'lsh' && (lsh.y0 <= 610 || lsh.y1 <= 610 || lsh.y2 <= 610 || lsh.y3 <= 610)) {
+                    else if(choice == "lsh" && (lsh.y0 <= 610 || lsh.y1 <= 610 || lsh.y2 <= 610 || lsh.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2389,7 +2460,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         lsh.y2 += 20;
                         lsh.y3 += 20;
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2400,7 +2471,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -2411,7 +2482,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -2422,7 +2493,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -2446,7 +2517,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x1][lsh.y1] = 1;
                             b[lsh.x2][lsh.y2] = 1;
                             b[lsh.x3][lsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -2468,13 +2539,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x1][lsh.y1] = 1;
                             b[lsh.x2][lsh.y2] = 1;
                             b[lsh.x3][lsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
-
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
@@ -2492,7 +2560,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == 'rsh' && (rsh.y0 <= 610 || rsh.y1 <= 610 || rsh.y2 <= 610 || rsh.y3 <= 610)) {
+                    else if(choice == "rsh" && (rsh.y0 <= 610 || rsh.y1 <= 610 || rsh.y2 <= 610 || rsh.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2511,7 +2579,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         rsh.y2 += 20;
                         rsh.y3 += 20;
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2522,7 +2590,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -2533,7 +2601,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -2544,7 +2612,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -2568,7 +2636,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x1][rsh.y1] = 1;
                             b[rsh.x2][rsh.y2] = 1;
                             b[rsh.x3][rsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -2590,13 +2658,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x1][rsh.y1] = 1;
                             b[rsh.x2][rsh.y2] = 1;
                             b[rsh.x3][rsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
-
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
@@ -2634,7 +2699,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 break;  
                 case 'j':  {
                       //your code here    
-                    if(choice == 'sq' && (sq.y0 <= 650 || sq.y1 <= 650 || sq.y2 <= 650 || sq.y3 <= 650)) {
+                    if(choice == "sq" && (sq.y0 <= 650 || sq.y1 <= 650 || sq.y2 <= 650 || sq.y3 <= 650)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2663,7 +2728,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2674,7 +2739,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -2685,7 +2750,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -2696,7 +2761,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -2707,7 +2772,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
                     }
-                    if(choice == 'lne' && (lne.y0 <= 650 || lne.y1 <= 650 || lne.y2 <= 650 || lne.y3 <= 650)) {
+                    if(choice == "lne" && (lne.y0 <= 650 || lne.y1 <= 650 || lne.y2 <= 650 || lne.y3 <= 650)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2735,7 +2800,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2746,7 +2811,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -2757,7 +2822,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -2768,7 +2833,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -2779,7 +2844,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
                     }
-                    else if(choice == 'ht' && (ht.y0 <= 610 || ht.y1 <= 610 || ht.y2 <= 610 || ht.y3 <= 610)) {
+                    else if(choice == "ht" && (ht.y0 <= 610 || ht.y1 <= 610 || ht.y2 <= 610 || ht.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2807,7 +2872,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2818,7 +2883,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -2829,7 +2894,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -2840,7 +2905,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -2869,14 +2934,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[ht.x1][ht.y1] = 1;
                             b[ht.x2][ht.y2] = 1;
                             b[ht.x3][ht.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
-                    else if(choice == 'larm' && (larm.y0 <= 610 || larm.y1 <= 610 || larm.y2 <= 610 || larm.y3 <= 610)) {
+                    else if(choice == "larm" && (larm.y0 <= 610 || larm.y1 <= 610 || larm.y2 <= 610 || larm.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2905,7 +2968,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                         
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -2916,7 +2979,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -2927,7 +2990,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -2938,7 +3001,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -2962,7 +3025,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x1][larm.y1] = 1;
                             b[larm.x2][larm.y2] = 1;
                             b[larm.x3][larm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -2984,13 +3047,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x1][larm.y1] = 1;
                             b[larm.x2][larm.y2] = 1;
                             b[larm.x3][larm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
-
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
@@ -3008,7 +3068,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == 'rarm' && (rarm.y0 <= 610 || rarm.y1 <= 610 || rarm.y2 <= 610 || rarm.y3 <= 610)) {
+                    else if(choice == "rarm" && (rarm.y0 <= 610 || rarm.y1 <= 610 || rarm.y2 <= 610 || rarm.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3037,7 +3097,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -3048,7 +3108,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -3059,7 +3119,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -3070,7 +3130,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -3094,7 +3154,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x1][rarm.y1] = 1;
                             b[rarm.x2][rarm.y2] = 1;
                             b[rarm.x3][rarm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -3116,13 +3176,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x1][rarm.y1] = 1;
                             b[rarm.x2][rarm.y2] = 1;
                             b[rarm.x3][rarm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
-
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
@@ -3140,7 +3197,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == 'lsh' && (lsh.y0 <= 610 || lsh.y1 <= 610 || lsh.y2 <= 610 || lsh.y3 <= 610)) {
+                    else if(choice == "lsh" && (lsh.y0 <= 610 || lsh.y1 <= 610 || lsh.y2 <= 610 || lsh.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3169,7 +3226,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                         
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -3180,7 +3237,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -3191,7 +3248,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -3202,7 +3259,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -3226,7 +3283,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x1][lsh.y1] = 1;
                             b[lsh.x2][lsh.y2] = 1;
                             b[lsh.x3][lsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -3248,13 +3305,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x1][lsh.y1] = 1;
                             b[lsh.x2][lsh.y2] = 1;
                             b[lsh.x3][lsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
-
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
@@ -3272,7 +3326,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == 'rsh' && (rsh.y0 <= 610 || rsh.y1 <= 610 || rsh.y2 <= 610 || rsh.y3 <= 610)) {
+                    else if(choice == "rsh" && (rsh.y0 <= 610 || rsh.y1 <= 610 || rsh.y2 <= 610 || rsh.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3301,7 +3355,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -3312,7 +3366,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -3323,7 +3377,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -3334,7 +3388,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -3358,7 +3412,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x1][rsh.y1] = 1;
                             b[rsh.x2][rsh.y2] = 1;
                             b[rsh.x3][rsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -3380,13 +3434,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x1][rsh.y1] = 1;
                             b[rsh.x2][rsh.y2] = 1;
                             b[rsh.x3][rsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
-
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
@@ -3424,7 +3475,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 break;
                 case 'l':  {
                         //your code here    
-                    if(choice == 'sq' && (sq.y0 <= 650 || sq.y1 <= 650 || sq.y2 <= 650 || sq.y3 <= 650)) {
+                    if(choice == "sq" && (sq.y0 <= 650 || sq.y1 <= 650 || sq.y2 <= 650 || sq.y3 <= 650)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3453,7 +3504,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             sq.x3 += 20;
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -3464,7 +3515,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -3475,7 +3526,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -3486,7 +3537,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -3497,7 +3548,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
                     }
-                    else if(choice == 'lne' && (lne.y0 <= 650 || lne.y1 <= 650 || lne.y2 <= 650 || lne.y3 <= 650)) {
+                    else if(choice == "lne" && (lne.y0 <= 650 || lne.y1 <= 650 || lne.y2 <= 650 || lne.y3 <= 650)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3526,7 +3577,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             lne.x3 += 20;
                         }
                         
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -3537,7 +3588,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -3548,7 +3599,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -3559,7 +3610,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -3570,7 +3621,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
                     }
-                    else if(choice == 'ht' && (ht.y0 <= 610 || ht.y1 <= 610 || ht.y2 <= 610 || ht.y3 <= 610)) {
+                    else if(choice == "ht" && (ht.y0 <= 610 || ht.y1 <= 610 || ht.y2 <= 610 || ht.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3599,7 +3650,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             ht.x3 += 20;
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -3610,7 +3661,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -3621,7 +3672,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -3632,7 +3683,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -3661,14 +3712,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[ht.x1][ht.y1] = 1;
                             b[ht.x2][ht.y2] = 1;
                             b[ht.x3][ht.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
-                    else if(choice == 'larm' && (larm.y0 <= 610 || larm.y1 <= 610 || larm.y2 <= 610 || larm.y3 <= 610)) {
+                    else if(choice == "larm" && (larm.y0 <= 610 || larm.y1 <= 610 || larm.y2 <= 610 || larm.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3698,7 +3747,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             larm.x3 += 20;
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -3709,7 +3758,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -3720,7 +3769,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -3731,7 +3780,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -3755,7 +3804,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x1][larm.y1] = 1;
                             b[larm.x2][larm.y2] = 1;
                             b[larm.x3][larm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -3777,13 +3826,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x1][larm.y1] = 1;
                             b[larm.x2][larm.y2] = 1;
                             b[larm.x3][larm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
-
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
@@ -3801,7 +3847,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == 'rarm' && (rarm.y0 <= 610 || rarm.y1 <= 610 || rarm.y2 <= 610 || rarm.y3 <= 610)) {
+                    else if(choice == "rarm" && (rarm.y0 <= 610 || rarm.y1 <= 610 || rarm.y2 <= 610 || rarm.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3831,7 +3877,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             rarm.x3 += 20;
                         }
                         
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -3842,7 +3888,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -3853,7 +3899,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -3864,7 +3910,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -3888,7 +3934,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x1][rarm.y1] = 1;
                             b[rarm.x2][rarm.y2] = 1;
                             b[rarm.x3][rarm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -3910,13 +3956,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x1][rarm.y1] = 1;
                             b[rarm.x2][rarm.y2] = 1;
                             b[rarm.x3][rarm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
-
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
@@ -3934,7 +3977,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == 'lsh' && (lsh.y0 <= 610 || lsh.y1 <= 610 || lsh.y2 <= 610 || lsh.y3 <= 610)) {
+                    else if(choice == "lsh" && (lsh.y0 <= 610 || lsh.y1 <= 610 || lsh.y2 <= 610 || lsh.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3964,7 +4007,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             lsh.x3 += 20;
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -3975,7 +4018,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -3986,7 +4029,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -3997,7 +4040,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -4021,7 +4064,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x1][lsh.y1] = 1;
                             b[lsh.x2][lsh.y2] = 1;
                             b[lsh.x3][lsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -4043,13 +4086,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x1][lsh.y1] = 1;
                             b[lsh.x2][lsh.y2] = 1;
                             b[lsh.x3][lsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
-
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
@@ -4067,7 +4107,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == 'rsh' && (rsh.y0 <= 610 || rsh.y1 <= 610 || rsh.y2 <= 610 || rsh.y3 <= 610)) {
+                    else if(choice == "rsh" && (rsh.y0 <= 610 || rsh.y1 <= 610 || rsh.y2 <= 610 || rsh.y3 <= 610)) {
                         //hdc2 = GetDC(hwnd);
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -4097,7 +4137,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             rsh.x3 += 20;
                         }
                         
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+                        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
@@ -4108,7 +4148,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect4 = {rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
@@ -4119,7 +4159,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect5 = {rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
@@ -4130,7 +4170,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(255, 255, 255));
+                        brush = CreateSolidBrush(RGB(4, 4, 204));
                         RECT rrect6 = {rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -4154,7 +4194,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x1][rsh.y1] = 1;
                             b[rsh.x2][rsh.y2] = 1;
                             b[rsh.x3][rsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -4176,13 +4216,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x1][rsh.y1] = 1;
                             b[rsh.x2][rsh.y2] = 1;
                             b[rsh.x3][rsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"Tetris | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            blocks = 0;
-                            lines = 0;
-                            points = 1000000; if(level < 40 && lines % 4 == 0) {level++;sleeptime-=10;}
                         }
-
+                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
@@ -4260,11 +4297,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
                 SelectObject(hdc2, font);
                 SetBkColor((HDC)wParam,RGB(100,100,255));
-                TextOut(hdc2, 20, 8, "Tetris (fix levels)", 19);
+                TextOut(hdc2, 20, 8, "TetrisC", 7);
                 DeleteObject(font);
-
                 //EndPaint(hwnd, &ps);
-
                 srand(time(NULL));
                 prep();
             }
@@ -4293,6 +4328,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                        (HINSTANCE) GetWindowLong (hwnd, GWL_HINSTANCE), NULL);
             SetTextColor(hdc2, RGB(255,255,255));
             SetWindowText(hwnd_title, c);
+
+            char d[7] = "NEXT - ";
+            y = 150; h = 16;
+            x = 10; w = 44;
+            hwnd_next = CreateWindow("static", NULL,
+                                       WS_CHILD | WS_VISIBLE | WS_TABSTOP,
+                                       x, y, w, h,
+                                       hwnd, (HMENU)(501),
+                                       (HINSTANCE) GetWindowLong (hwnd, GWL_HINSTANCE), NULL);
+            SetTextColor(hdc2, RGB(255,255,255));
+            SetWindowText(hwnd_next, d);
         }
         break;
         case WM_CLOSE:
