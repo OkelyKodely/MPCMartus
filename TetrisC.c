@@ -2,6 +2,9 @@
 
 #include <windows.h>
 
+char g_szClassName[] = "TetrisC";
+char* choice;
+char * choicepre = "sq";
 int sleeptime = 800;
 int points=1000000;
 int level = 1;
@@ -9,9 +12,6 @@ int blocks=0;
 int lines=0;
 int linenext = 4;
 int b[740][720];
-char g_szClassName[] = "TetrisC";
-char* choice;
-char * choicepre = "sq";
 HWND hwnd, hwnd_title, hwnd_stage, hwnd_next, hwnd_lines, hwnd_points, hwnd_blocks, hwnd_level;
 HINSTANCE hInst;
 BITMAP bitmap;
@@ -300,46 +300,46 @@ DWORD WINAPI downs(void *data) {
             sq.y2 += 20;
             sq.y3 += 20;
         
-            HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
 
             HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect4 = {sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20};
             FillRect(hdc2, &rrect4, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect5 = {sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20};
             FillRect(hdc2, &rrect5, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect6 = {sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20};
             FillRect(hdc2, &rrect6, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
@@ -350,6 +350,7 @@ DWORD WINAPI downs(void *data) {
                         b[i][j] = 0;
                     }
                 }
+                exit(0);
             }
 
             if(sq.y0 > 650 || sq.y1 > 650 || sq.y2 > 650 || sq.y3 > 650) {
@@ -381,11 +382,11 @@ DWORD WINAPI downs(void *data) {
                 b[sq.x3][sq.y3] = 1;
                 blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                sleeptime = 800;
-                level = 1;
-                blocks = 0;
-                lines = 0; linenext = 4;
-                points = 1000000;
+                //sleeptime = 800;
+                //level = 1;
+                //blocks = 0;
+                //lines = 0; linenext = 4;
+                //points = 1000000;
             }
             if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
@@ -397,7 +398,7 @@ DWORD WINAPI downs(void *data) {
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -424,46 +425,46 @@ DWORD WINAPI downs(void *data) {
             lne.y2 += 20;
             lne.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
 
             HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect4 = {lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20};
             FillRect(hdc2, &rrect4, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect5 = {lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20};
             FillRect(hdc2, &rrect5, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect6 = {lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20};
             FillRect(hdc2, &rrect6, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
@@ -474,6 +475,7 @@ DWORD WINAPI downs(void *data) {
                         b[i][j] = 0;
                     }
                 }
+                exit(0);
             }
 
             if(lne.y0 > 650 || lne.y1 > 650 || lne.y2 > 650 || lne.y3 > 650) {
@@ -505,11 +507,11 @@ DWORD WINAPI downs(void *data) {
                 b[lne.x3][lne.y3] = 1;
                 blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                sleeptime = 800;
-                level = 1;
-                blocks = 0;
-                lines = 0; linenext = 4;
-                points = 1000000;
+                //sleeptime = 800;
+                //level = 1;
+                //blocks = 0;
+                //lines = 0; linenext = 4;
+                //points = 1000000;
             }
             if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
@@ -521,7 +523,7 @@ DWORD WINAPI downs(void *data) {
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -548,46 +550,46 @@ DWORD WINAPI downs(void *data) {
             ht.y2 += 20;
             ht.y3 += 20;
         
-            HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
 
             HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect4 = {ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20};
             FillRect(hdc2, &rrect4, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect5 = {ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20};
             FillRect(hdc2, &rrect5, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect6 = {ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20};
             FillRect(hdc2, &rrect6, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
@@ -598,6 +600,7 @@ DWORD WINAPI downs(void *data) {
                         b[i][j] = 0;
                     }
                 }
+                exit(0);
             }
 
             if(ht.y0 > 650 || ht.y1 > 650 || ht.y2 > 650 || ht.y3 > 650) {
@@ -628,11 +631,11 @@ DWORD WINAPI downs(void *data) {
                 b[ht.x2][ht.y2] = 1;
                 b[ht.x3][ht.y3] = 1;
                 blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
-                sleeptime = 800;
-                level = 1;
-                blocks = 0;
-                lines = 0; linenext = 4;
-                points = 1000000;
+                //sleeptime = 800;
+                //level = 1;
+                //blocks = 0;
+                //lines = 0; linenext = 4;
+                //points = 1000000;
                 prep();
             }
             if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
@@ -645,7 +648,7 @@ DWORD WINAPI downs(void *data) {
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -672,46 +675,46 @@ DWORD WINAPI downs(void *data) {
             larm.y2 += 20;
             larm.y3 += 20;
         
-            HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
 
             HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect4 = {larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20};
             FillRect(hdc2, &rrect4, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect5 = {larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20};
             FillRect(hdc2, &rrect5, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect6 = {larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20};
             FillRect(hdc2, &rrect6, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
@@ -722,6 +725,7 @@ DWORD WINAPI downs(void *data) {
                         b[i][j] = 0;
                     }
                 }
+                exit(0);
             }
 
             if(larm.y0 > 650 || larm.y1 > 650 || larm.y2 > 650 || larm.y3 > 650) {
@@ -753,11 +757,11 @@ DWORD WINAPI downs(void *data) {
                 b[larm.x3][larm.y3] = 1;
                 blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                sleeptime = 800;
-                level = 1;
-                blocks = 0;
-                lines = 0; linenext = 4;
-                points = 1000000;
+                //sleeptime = 800;
+                //level = 1;
+                //blocks = 0;
+                //lines = 0; linenext = 4;
+                //points = 1000000;
             }
             if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
@@ -769,7 +773,7 @@ DWORD WINAPI downs(void *data) {
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -796,46 +800,46 @@ DWORD WINAPI downs(void *data) {
             rarm.y2 += 20;
             rarm.y3 += 20;
         
-            HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
 
             HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect4 = {rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20};
             FillRect(hdc2, &rrect4, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect5 = {rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20};
             FillRect(hdc2, &rrect5, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect6 = {rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20};
             FillRect(hdc2, &rrect6, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
@@ -846,6 +850,7 @@ DWORD WINAPI downs(void *data) {
                         b[i][j] = 0;
                     }
                 }
+                exit(0);
             }
 
             if(rarm.y0 > 650 || rarm.y1 > 650 || rarm.y2 > 650 || rarm.y3 > 650) {
@@ -877,11 +882,11 @@ DWORD WINAPI downs(void *data) {
                 b[rarm.x3][rarm.y3] = 1;
                 blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                sleeptime = 800;
-                level = 1;
-                blocks = 0;
-                lines = 0; linenext = 4;
-                points = 1000000;
+                //sleeptime = 800;
+                //level = 1;
+                //blocks = 0;
+                //lines = 0; linenext = 4;
+                //points = 1000000;
             }
             if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
@@ -893,7 +898,7 @@ DWORD WINAPI downs(void *data) {
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -920,46 +925,46 @@ DWORD WINAPI downs(void *data) {
             lsh.y2 += 20;
             lsh.y3 += 20;
         
-            HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
 
             HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect4 = {lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20};
             FillRect(hdc2, &rrect4, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect5 = {lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20};
             FillRect(hdc2, &rrect5, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect6 = {lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20};
             FillRect(hdc2, &rrect6, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
@@ -970,6 +975,7 @@ DWORD WINAPI downs(void *data) {
                         b[i][j] = 0;
                     }
                 }
+                exit(0);
             }
 
             if(lsh.y0 > 650 || lsh.y1 > 650 || lsh.y2 > 650 || lsh.y3 > 650) {
@@ -1001,11 +1007,11 @@ DWORD WINAPI downs(void *data) {
                 b[lsh.x3][lsh.y3] = 1;
                 blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                sleeptime = 800;
-                level = 1;
-                blocks = 0;
-                lines = 0; linenext = 4;
-                points = 1000000;
+                //sleeptime = 800;
+                //level = 1;
+                //blocks = 0;
+                //lines = 0; linenext = 4;
+                //points = 1000000;
             }
             if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
@@ -1017,7 +1023,7 @@ DWORD WINAPI downs(void *data) {
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -1044,46 +1050,46 @@ DWORD WINAPI downs(void *data) {
             rsh.y2 += 20;
             rsh.y3 += 20;
         
-            HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
 
             HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect4 = {rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20};
             FillRect(hdc2, &rrect4, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect5 = {rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20};
             FillRect(hdc2, &rrect5, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            brush = CreateSolidBrush(RGB(80, 110, 0));
+            brush = CreateSolidBrush(RGB(255, 0, 0));
             RECT rrect6 = {rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20};
             FillRect(hdc2, &rrect6, brush);
             DeleteObject(brush);
 
             hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
             Rectangle(hdc2, rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
@@ -1094,6 +1100,7 @@ DWORD WINAPI downs(void *data) {
                         b[i][j] = 0;
                     }
                 }
+                exit(0);
             }
 
             if(rsh.y0 > 650 || rsh.y1 > 650 || rsh.y2 > 650 || rsh.y3 > 650) {
@@ -1125,11 +1132,11 @@ DWORD WINAPI downs(void *data) {
                 b[rsh.x3][rsh.y3] = 1;
                 blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                sleeptime = 800;
-                level = 1;
-                blocks = 0;
-                lines = 0; linenext = 4;
-                points = 1000000;
+                //sleeptime = 800;
+                //level = 1;
+                //blocks = 0;
+                //lines = 0; linenext = 4;
+                //points = 1000000;
             }
             if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
@@ -1141,7 +1148,7 @@ DWORD WINAPI downs(void *data) {
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -1257,46 +1264,46 @@ void rotate() {
         sq.y2 += 0;
         sq.y3 += 0;
 
-        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
         
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect4 = {sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20};
         FillRect(hdc2, &rrect4, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect5 = {sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect6 = {sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20};
         FillRect(hdc2, &rrect6, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1360,46 +1367,46 @@ void rotate() {
             lne.y3 -= 20* 0;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
         
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect4 = {lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20};
         FillRect(hdc2, &rrect4, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect5 = {lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect6 = {lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20};
         FillRect(hdc2, &rrect6, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1463,46 +1470,46 @@ void rotate() {
             ht.y3 += 20* 2;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect4 = {ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20};
         FillRect(hdc2, &rrect4, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect5 = {ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect6 = {ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20};
         FillRect(hdc2, &rrect6, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1566,46 +1573,46 @@ void rotate() {
             larm.y3 -= 20* 1;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
         
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect4 = {larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20};
         FillRect(hdc2, &rrect4, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect5 = {larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect6 = {larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20};
         FillRect(hdc2, &rrect6, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1669,46 +1676,46 @@ void rotate() {
             rarm.y3 += 20* 1;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
         
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect4 = {rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20};
         FillRect(hdc2, &rrect4, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect5 = {rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect6 = {rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20};
         FillRect(hdc2, &rrect6, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1772,46 +1779,46 @@ void rotate() {
             lsh.y3 += 20* 0;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
         
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect4 = {lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20};
         FillRect(hdc2, &rrect4, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect5 = {lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect6 = {lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20};
         FillRect(hdc2, &rrect6, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1875,46 +1882,46 @@ void rotate() {
             rsh.y3 += 20* 2;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
         
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect4 = {rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20};
         FillRect(hdc2, &rrect4, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect5 = {rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
-        brush = CreateSolidBrush(RGB(80, 110, 0));
+        brush = CreateSolidBrush(RGB(255, 0, 0));
         RECT rrect6 = {rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20};
         FillRect(hdc2, &rrect6, brush);
         DeleteObject(brush);
 
         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
         Rectangle(hdc2, rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1940,7 +1947,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                 DeleteObject(brush);
 
                                 HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                 Rectangle(hdc2, i, j, i + 20, j + 20);
                                 DeleteObject(SelectObject(hdc2, hOldPen));
                                 SelectObject(hdc2, hOldBsh);
@@ -1969,46 +1976,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         sq.y2 += 20;
                         sq.y3 += 20;
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2019,6 +2026,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     b[i][j] = 0;
                                 }
                             }
+                            exit(0);
                         }
 
                         BOOLEAN flag = FALSE;
@@ -2041,11 +2049,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[sq.x3][sq.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            sleeptime = 800;
-                            level = 1;
-                            blocks = 0;
-                            lines = 0; linenext = 4;
-                            points = 1000000;
+                            //sleeptime = 800;
+                            //level = 1;
+                            //blocks = 0;
+                            //lines = 0; linenext = 4;
+                            //points = 1000000;
                         }
                         if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
@@ -2067,46 +2075,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         lne.y2 += 20;
                         lne.y3 += 20;
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2117,6 +2125,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     b[i][j] = 0;
                                 }
                             }
+                            exit(0);
                         }
 
                         BOOLEAN flag = FALSE;
@@ -2139,11 +2148,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lne.x3][lne.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            sleeptime = 800;
-                            level = 1;
-                            blocks = 0;
-                            lines = 0; linenext = 4;
-                            points = 1000000;
+                            //sleeptime = 800;
+                            //level = 1;
+                            //blocks = 0;
+                            //lines = 0; linenext = 4;
+                            //points = 1000000;
                         }
                         if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
@@ -2165,46 +2174,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         ht.y2 += 20;
                         ht.y3 += 20;
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2215,6 +2224,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     b[i][j] = 0;
                                 }
                             }
+                            exit(0);
                         }
 
                         BOOLEAN flag = FALSE;
@@ -2259,46 +2269,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         larm.y2 += 20;
                         larm.y3 += 20;
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2318,11 +2328,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x3][larm.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            sleeptime = 800;
-                            level = 1;
-                            blocks = 0;
-                            lines = 0; linenext = 4;
-                            points = 1000000;
+                            //sleeptime = 800;
+                            //level = 1;
+                            //blocks = 0;
+                            //lines = 0; linenext = 4;
+                            //points = 1000000;
                         }
 
                         BOOLEAN flag = FALSE;
@@ -2356,7 +2366,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     DeleteObject(brush);
 
                                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                     Rectangle(hdc2, i, j, i + 20, j + 20);
                                     DeleteObject(SelectObject(hdc2, hOldPen));
                                     SelectObject(hdc2, hOldBsh);
@@ -2383,46 +2393,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         rarm.y2 += 20;
                         rarm.y3 += 20;
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2433,6 +2443,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     b[i][j] = 0;
                                 }
                             }
+                            exit(0);
                         }
 
                         if(rarm.y0 > 650 || rarm.y1 > 650 || rarm.y2 > 650 || rarm.y3 > 650) {
@@ -2464,11 +2475,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x3][rarm.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            sleeptime = 800;
-                            level = 1;
-                            blocks = 0;
-                            lines = 0; linenext = 4;
-                            points = 1000000;
+                            //sleeptime = 800;
+                            //level = 1;
+                            //blocks = 0;
+                            //lines = 0; linenext = 4;
+                            //points = 1000000;
                         }
                         if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -2480,7 +2491,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     DeleteObject(brush);
 
                                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                     Rectangle(hdc2, i, j, i + 20, j + 20);
                                     DeleteObject(SelectObject(hdc2, hOldPen));
                                     SelectObject(hdc2, hOldBsh);
@@ -2507,46 +2518,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         lsh.y2 += 20;
                         lsh.y3 += 20;
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2557,6 +2568,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     b[i][j] = 0;
                                 }
                             }
+                            exit(0);
                         }
 
                         if(lsh.y0 > 650 || lsh.y1 > 650 || lsh.y2 > 650 || lsh.y3 > 650) {
@@ -2588,11 +2600,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x3][lsh.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            sleeptime = 800;
-                            level = 1;
-                            blocks = 0;
-                            lines = 0; linenext = 4;
-                            points = 1000000;
+                            //sleeptime = 800;
+                            //level = 1;
+                            //blocks = 0;
+                            //lines = 0; linenext = 4;
+                            //points = 1000000;
                         }
                         if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -2604,7 +2616,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     DeleteObject(brush);
 
                                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                     Rectangle(hdc2, i, j, i + 20, j + 20);
                                     DeleteObject(SelectObject(hdc2, hOldPen));
                                     SelectObject(hdc2, hOldBsh);
@@ -2631,46 +2643,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         rsh.y2 += 20;
                         rsh.y3 += 20;
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2681,6 +2693,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     b[i][j] = 0;
                                 }
                             }
+                            exit(0);
                         }
 
                         if(rsh.y0 > 650 || rsh.y1 > 650 || rsh.y2 > 650 || rsh.y3 > 650) {
@@ -2723,7 +2736,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     DeleteObject(brush);
 
                                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                     Rectangle(hdc2, i, j, i + 20, j + 20);
                                     DeleteObject(SelectObject(hdc2, hOldPen));
                                     SelectObject(hdc2, hOldBsh);
@@ -2740,7 +2753,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                 DeleteObject(brush);
 
                                 HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                 Rectangle(hdc2, i, j, i + 20, j + 20);
                                 DeleteObject(SelectObject(hdc2, hOldPen));
                                 SelectObject(hdc2, hOldBsh);
@@ -2780,46 +2793,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2852,46 +2865,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2924,46 +2937,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -3020,46 +3033,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                         
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -3070,6 +3083,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     b[i][j] = 0;
                                 }
                             }
+                            exit(0);
                         }
 
                         if(larm.y0 > 650 || larm.y1 > 650 || larm.y2 > 650 || larm.y3 > 650) {
@@ -3112,7 +3126,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     DeleteObject(brush);
 
                                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                     Rectangle(hdc2, i, j, i + 20, j + 20);
                                     DeleteObject(SelectObject(hdc2, hOldPen));
                                     SelectObject(hdc2, hOldBsh);
@@ -3149,46 +3163,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -3199,6 +3213,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     b[i][j] = 0;
                                 }
                             }
+                            exit(0);
                         }
 
                         if(rarm.y0 > 650 || rarm.y1 > 650 || rarm.y2 > 650 || rarm.y3 > 650) {
@@ -3230,11 +3245,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x3][rarm.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            sleeptime = 800;
-                            level = 1;
-                            blocks = 0;
-                            lines = 0; linenext = 4;
-                            points = 1000000;
+                            //sleeptime = 800;
+                            //level = 1;
+                            //blocks = 0;
+                            //lines = 0; linenext = 4;
+                            //points = 1000000;
                         }
                         if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -3246,7 +3261,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     DeleteObject(brush);
 
                                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                     Rectangle(hdc2, i, j, i + 20, j + 20);
                                     DeleteObject(SelectObject(hdc2, hOldPen));
                                     SelectObject(hdc2, hOldBsh);
@@ -3283,46 +3298,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                         
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -3333,6 +3348,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     b[i][j] = 0;
                                 }
                             }
+                            exit(0);
                         }
 
                         if(lsh.y0 > 650 || lsh.y1 > 650 || lsh.y2 > 650 || lsh.y3 > 650) {
@@ -3364,11 +3380,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x3][lsh.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            sleeptime = 800;
-                            level = 1;
-                            blocks = 0;
-                            lines = 0; linenext = 4;
-                            points = 1000000;
+                            //sleeptime = 800;
+                            //level = 1;
+                            //blocks = 0;
+                            //lines = 0; linenext = 4;
+                            //points = 1000000;
                         }
                         if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -3380,7 +3396,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     DeleteObject(brush);
 
                                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                     Rectangle(hdc2, i, j, i + 20, j + 20);
                                     DeleteObject(SelectObject(hdc2, hOldPen));
                                     SelectObject(hdc2, hOldBsh);
@@ -3417,46 +3433,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -3467,6 +3483,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     b[i][j] = 0;
                                 }
                             }
+                            exit(0);
                         }
 
                         if(rsh.y0 > 650 || rsh.y1 > 650 || rsh.y2 > 650 || rsh.y3 > 650) {
@@ -3498,11 +3515,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x3][rsh.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            sleeptime = 800;
-                            level = 1;
-                            blocks = 0;
-                            lines = 0; linenext = 4;
-                            points = 1000000;
+                            //sleeptime = 800;
+                            //level = 1;
+                            //blocks = 0;
+                            //lines = 0; linenext = 4;
+                            //points = 1000000;
                         }
                         if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -3514,7 +3531,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     DeleteObject(brush);
 
                                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                     Rectangle(hdc2, i, j, i + 20, j + 20);
                                     DeleteObject(SelectObject(hdc2, hOldPen));
                                     SelectObject(hdc2, hOldBsh);
@@ -3531,7 +3548,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                 DeleteObject(brush);
 
                                 HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                 Rectangle(hdc2, i, j, i + 20, j + 20);
                                 DeleteObject(SelectObject(hdc2, hOldPen));
                                 SelectObject(hdc2, hOldBsh);
@@ -3571,46 +3588,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             sq.x3 += 20;
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -3644,46 +3661,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             lne.x3 += 20;
                         }
                         
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -3717,46 +3734,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             ht.x3 += 20;
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -3781,11 +3798,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[ht.x3][ht.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            sleeptime = 800;
-                            level = 1;
-                            blocks = 0;
-                            lines = 0; linenext = 4;
-                            points = 1000000;
+                            //sleeptime = 800;
+                            //level = 1;
+                            //blocks = 0;
+                            //lines = 0; linenext = 4;
+                            //points = 1000000;
                         }
                         if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
@@ -3819,46 +3836,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             larm.x3 += 20;
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -3869,6 +3886,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     b[i][j] = 0;
                                 }
                             }
+                            exit(0);
                         }
 
                         if(larm.y0 > 650 || larm.y1 > 650 || larm.y2 > 650 || larm.y3 > 650) {
@@ -3900,11 +3918,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x3][larm.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            sleeptime = 800;
-                            level = 1;
-                            blocks = 0;
-                            lines = 0; linenext = 4;
-                            points = 1000000;
+                            //sleeptime = 800;
+                            //level = 1;
+                            //blocks = 0;
+                            //lines = 0; linenext = 4;
+                            //points = 1000000;
                         }
                         if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -3916,7 +3934,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     DeleteObject(brush);
 
                                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                     Rectangle(hdc2, i, j, i + 20, j + 20);
                                     DeleteObject(SelectObject(hdc2, hOldPen));
                                     SelectObject(hdc2, hOldBsh);
@@ -3954,46 +3972,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             rarm.x3 += 20;
                         }
                         
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -4004,6 +4022,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     b[i][j] = 0;
                                 }
                             }
+                            exit(0);
                         }
 
                         if(rarm.y0 > 650 || rarm.y1 > 650 || rarm.y2 > 650 || rarm.y3 > 650) {
@@ -4035,11 +4054,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x3][rarm.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            sleeptime = 800;
-                            level = 1;
-                            blocks = 0;
-                            lines = 0; linenext = 4;
-                            points = 1000000;
+                            //sleeptime = 800;
+                            //level = 1;
+                            //blocks = 0;
+                            //lines = 0; linenext = 4;
+                            //points = 1000000;
                         }
                         if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -4051,7 +4070,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     DeleteObject(brush);
 
                                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                     Rectangle(hdc2, i, j, i + 20, j + 20);
                                     DeleteObject(SelectObject(hdc2, hOldPen));
                                     SelectObject(hdc2, hOldBsh);
@@ -4089,46 +4108,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             lsh.x3 += 20;
                         }
 
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -4139,6 +4158,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     b[i][j] = 0;
                                 }
                             }
+                            exit(0);
                         }
 
                         if(lsh.y0 > 650 || lsh.y1 > 650 || lsh.y2 > 650 || lsh.y3 > 650) {
@@ -4181,7 +4201,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     DeleteObject(brush);
 
                                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                     Rectangle(hdc2, i, j, i + 20, j + 20);
                                     DeleteObject(SelectObject(hdc2, hOldPen));
                                     SelectObject(hdc2, hOldBsh);
@@ -4219,46 +4239,46 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             rsh.x3 += 20;
                         }
                         
-                        HBRUSH brush = CreateSolidBrush(RGB(80, 110, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
                         FillRect(hdc2, &rrect3, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect4 = {rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20};
                         FillRect(hdc2, &rrect4, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect5 = {rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20};
                         FillRect(hdc2, &rrect5, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        brush = CreateSolidBrush(RGB(80, 110, 0));
+                        brush = CreateSolidBrush(RGB(255, 0, 0));
                         RECT rrect6 = {rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                         Rectangle(hdc2, rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -4269,6 +4289,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     b[i][j] = 0;
                                 }
                             }
+                            exit(0);
                         }
 
                         if(rsh.y0 > 650 || rsh.y1 > 650 || rsh.y2 > 650 || rsh.y3 > 650) {
@@ -4300,11 +4321,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x3][rsh.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            sleeptime = 800;
-                            level = 1;
-                            blocks = 0;
-                            lines = 0; linenext = 4;
-                            points = 1000000;
+                            //sleeptime = 800;
+                            //level = 1;
+                            //blocks = 0;
+                            //lines = 0; linenext = 4;
+                            //points = 1000000;
                         }
                         if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -4316,7 +4337,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                     DeleteObject(brush);
 
                                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                     Rectangle(hdc2, i, j, i + 20, j + 20);
                                     DeleteObject(SelectObject(hdc2, hOldPen));
                                     SelectObject(hdc2, hOldBsh);
@@ -4333,7 +4354,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                 DeleteObject(brush);
 
                                 HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(0,4,0)));
+                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 2, RGB(255,0,0)));
                                 Rectangle(hdc2, i, j, i + 20, j + 20);
                                 DeleteObject(SelectObject(hdc2, hOldPen));
                                 SelectObject(hdc2, hOldBsh);
@@ -4472,10 +4493,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     }
     
     int number;
-    number = 86;
+    number = 96;
     SetLayeredWindowAttributes(hwnd, 0, (255 * number) / 100, LWA_ALPHA);
 
-    ShowWindow(hwnd, SW_MAXIMIZE);
+    ShowWindow(hwnd, nCmdShow);
     UpdateWindow(hwnd);
 
     HWND hWnd = GetConsoleWindow();
