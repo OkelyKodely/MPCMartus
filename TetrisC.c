@@ -113,19 +113,19 @@ DWORD WINAPI downs(void *data) {
 
     do {
 
-        HBRUSH brush = CreateSolidBrush(RGB(254, 254, 254));
+        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 4));
         RECT rrect5 = {60, 80, 190, 200};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(254,254,254)));
-        Rectangle(hdc2, 60, 80, 190, 200);
-        DeleteObject(SelectObject(hdc2, hOldPen));
-        SelectObject(hdc2, hOldBsh);
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(1,255,0)));
+//        Rectangle(hdc2, 60, 80, 190, 200);
+//        DeleteObject(SelectObject(hdc2, hOldPen));
+//        SelectObject(hdc2, hOldBsh);
         returnStage(level);
 
         if(choicepre == "sq") {
-            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(253, 0, 0));
             RECT rrect5 = {100, 100, 100 + 20, 100 + 20};
             FillRect(hdc2, &rrect5, brush);
             RECT rrect6 = {120, 100, 120 + 20, 100 + 20};
@@ -135,10 +135,30 @@ DWORD WINAPI downs(void *data) {
             RECT rrect8 = {120, 120, 120 + 20, 120 + 20};
             FillRect(hdc2, &rrect8, brush);
             DeleteObject(brush);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 100, 100, 100 + 20, 100 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 120, 100, 120 + 20, 100 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 100, 120, 100 + 20, 120 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 120, 120, 120 + 20, 120 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
         }
 
         else if(choicepre == "lne") {
-            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(253, 0, 0));
             RECT rrect5 = {100, 100, 100 + 20, 100 + 20};
             FillRect(hdc2, &rrect5, brush);
             RECT rrect6 = {100, 120, 100 + 20, 120 + 20};
@@ -148,10 +168,30 @@ DWORD WINAPI downs(void *data) {
             RECT rrect8 = {100, 160, 100 + 20, 160 + 20};
             FillRect(hdc2, &rrect8, brush);
             DeleteObject(brush);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 100, 100, 100 + 20, 100 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 100, 120, 100 + 20, 120 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 100, 140, 100 + 20, 140 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 100, 160, 100 + 20, 160 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
         }
 
         else if(choicepre == "ht") {
-            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(253, 0, 0));
             RECT rrect5 = {120, 100, 120 + 20, 100 + 20};
             FillRect(hdc2, &rrect5, brush);
             RECT rrect6 = {100, 120, 100 + 20, 120 + 20};
@@ -161,10 +201,30 @@ DWORD WINAPI downs(void *data) {
             RECT rrect8 = {140, 120, 140 + 20, 120 + 20};
             FillRect(hdc2, &rrect8, brush);
             DeleteObject(brush);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 120, 100, 120 + 20, 100 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 100, 120, 100 + 20, 120 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 120, 120, 120 + 20, 120 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 140, 120, 140 + 20, 120 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
         }
 
         else if(choicepre == "larm") {
-            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(253, 0, 0));
             RECT rrect5 = {120, 100, 120 + 20, 100 + 20};
             FillRect(hdc2, &rrect5, brush);
             RECT rrect6 = {120, 120, 120 + 20, 120 + 20};
@@ -174,10 +234,30 @@ DWORD WINAPI downs(void *data) {
             RECT rrect8 = {100, 140, 100 + 20, 140 + 20};
             FillRect(hdc2, &rrect8, brush);
             DeleteObject(brush);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 120, 100, 120 + 20, 100 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 120, 120, 120 + 20, 120 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 120, 140, 120 + 20, 140 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 100, 140, 100 + 20, 140 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
         }
 
         else if(choicepre == "rarm") {
-            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(253, 0, 0));
             RECT rrect5 = {120, 100, 120 + 20, 100 + 20};
             FillRect(hdc2, &rrect5, brush);
             RECT rrect6 = {120, 120, 120 + 20, 120 + 20};
@@ -187,10 +267,30 @@ DWORD WINAPI downs(void *data) {
             RECT rrect8 = {140, 140, 140 + 20, 140 + 20};
             FillRect(hdc2, &rrect8, brush);
             DeleteObject(brush);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 120, 100, 120 + 20, 100 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 120, 120, 120 + 20, 120 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 120, 140, 120 + 20, 140 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 140, 140, 140 + 20, 140 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
         }
 
         else if(choicepre == "lsh") {
-            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(253, 0, 0));
             RECT rrect5 = {120, 100, 120 + 20, 100 + 20};
             FillRect(hdc2, &rrect5, brush);
             RECT rrect6 = {120, 120, 120 + 20, 120 + 20};
@@ -200,10 +300,30 @@ DWORD WINAPI downs(void *data) {
             RECT rrect8 = {100, 140, 100 + 20, 140 + 20};
             FillRect(hdc2, &rrect8, brush);
             DeleteObject(brush);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 120, 100, 120 + 20, 100 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 120, 120, 120 + 20, 120 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 100, 120, 100 + 20, 120 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 100, 140, 100 + 20, 140 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
         }
 
         else if(choicepre == "rsh") {
-            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(253, 0, 0));
             RECT rrect5 = {100, 100, 100 + 20, 100 + 20};
             FillRect(hdc2, &rrect5, brush);
             RECT rrect6 = {100, 120, 100 + 20, 120 + 20};
@@ -213,12 +333,34 @@ DWORD WINAPI downs(void *data) {
             RECT rrect8 = {120, 140, 120 + 20, 140 + 20};
             FillRect(hdc2, &rrect8, brush);
             DeleteObject(brush);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 100, 100, 100 + 20, 100 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 100, 120, 100 + 20, 120 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 120, 120, 120 + 20, 120 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,0,2)));
+            Rectangle(hdc2, 120, 140, 120 + 20, 140 + 20);
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
         }
 
-        hdc2 = GetDC (hwnd);
+        hdc2 = GetDC(hwnd);
+
         Sleep(sleeptime);
 
         int count =0;
+
         int clearBlocks[700];
 
         for(int i=0; i<700; i+=10) {
@@ -236,11 +378,12 @@ DWORD WINAPI downs(void *data) {
             }
 
             if(clearThisLine >= 10) {
-                points += 10;
-                lines += 1;
-                char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                char aa[10];
+                sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 clearBlocks[count] = j;
-                ++count;
+                count++;
+                lines++;
+                points+=10;
             }
         }
 
@@ -275,11 +418,11 @@ DWORD WINAPI downs(void *data) {
             }
         }
 
-        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 5, RGB(4,4,4)));
-        Rectangle(hdc2, 219, 20, 421, 691);
-        DeleteObject(SelectObject(hdc2, hOldPen));
-        SelectObject(hdc2, hOldBsh);
+//        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+//        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 5, RGB(4,4,4)));
+//        Rectangle(hdc2, 219, 20, 421, 691);
+//        DeleteObject(SelectObject(hdc2, hOldPen));
+//        SelectObject(hdc2, hOldBsh);
 
         if(choice == "sq") {
             
@@ -347,10 +490,10 @@ DWORD WINAPI downs(void *data) {
             if(b[sq.x0][sq.y0] == 1) {
                 for(int i=0; i<600; i++) {
                     for(int j=0; j<720; j++) {
-                        b[i][j] = 0;
+                        //b[i][j] = 0;
                     }
                 }
-                exit(0);
+                //exit(0);
             }
 
             if(sq.y0 > 650 || sq.y1 > 650 || sq.y2 > 650 || sq.y3 > 650) {
@@ -358,7 +501,7 @@ DWORD WINAPI downs(void *data) {
                 b[sq.x1][sq.y1] = 1;
                 b[sq.x2][sq.y2] = 1;
                 b[sq.x3][sq.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
 
@@ -380,7 +523,7 @@ DWORD WINAPI downs(void *data) {
                 b[sq.x1][sq.y1] = 1;
                 b[sq.x2][sq.y2] = 1;
                 b[sq.x3][sq.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
                 //sleeptime = 800;
                 //level = 1;
@@ -388,11 +531,11 @@ DWORD WINAPI downs(void *data) {
                 //lines = 0; linenext = 4;
                 //points = 1000000;
             }
-            if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+            if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -472,10 +615,10 @@ DWORD WINAPI downs(void *data) {
             if(b[lne.x0][lne.y0] == 1) {
                 for(int i=0; i<600; i++) {
                     for(int j=0; j<700; j++) {
-                        b[i][j] = 0;
+                        //b[i][j] = 0;
                     }
                 }
-                exit(0);
+                //exit(0);
             }
 
             if(lne.y0 > 650 || lne.y1 > 650 || lne.y2 > 650 || lne.y3 > 650) {
@@ -483,7 +626,7 @@ DWORD WINAPI downs(void *data) {
                 b[lne.x1][lne.y1] = 1;
                 b[lne.x2][lne.y2] = 1;
                 b[lne.x3][lne.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
 
@@ -505,7 +648,7 @@ DWORD WINAPI downs(void *data) {
                 b[lne.x1][lne.y1] = 1;
                 b[lne.x2][lne.y2] = 1;
                 b[lne.x3][lne.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
                 //sleeptime = 800;
                 //level = 1;
@@ -513,11 +656,11 @@ DWORD WINAPI downs(void *data) {
                 //lines = 0; linenext = 4;
                 //points = 1000000;
             }
-            if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+            if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -597,10 +740,10 @@ DWORD WINAPI downs(void *data) {
             if(b[ht.x0][ht.y0] == 1) {
                 for(int i=0; i<600; i++) {
                     for(int j=0; j<700; j++) {
-                        b[i][j] = 0;
+                        //b[i][j] = 0;
                     }
                 }
-                exit(0);
+                //exit(0);
             }
 
             if(ht.y0 > 650 || ht.y1 > 650 || ht.y2 > 650 || ht.y3 > 650) {
@@ -608,7 +751,7 @@ DWORD WINAPI downs(void *data) {
                 b[ht.x1][ht.y1] = 1;
                 b[ht.x2][ht.y2] = 1;
                 b[ht.x3][ht.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
 
@@ -630,7 +773,7 @@ DWORD WINAPI downs(void *data) {
                 b[ht.x1][ht.y1] = 1;
                 b[ht.x2][ht.y2] = 1;
                 b[ht.x3][ht.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 //sleeptime = 800;
                 //level = 1;
                 //blocks = 0;
@@ -638,11 +781,11 @@ DWORD WINAPI downs(void *data) {
                 //points = 1000000;
                 prep();
             }
-            if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+            if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -722,10 +865,10 @@ DWORD WINAPI downs(void *data) {
             if(b[larm.x0][larm.y0] == 1) {
                 for(int i=0; i<600; i++) {
                     for(int j=0; j<700; j++) {
-                        b[i][j] = 0;
+                        //b[i][j] = 0;
                     }
                 }
-                exit(0);
+                //exit(0);
             }
 
             if(larm.y0 > 650 || larm.y1 > 650 || larm.y2 > 650 || larm.y3 > 650) {
@@ -733,7 +876,7 @@ DWORD WINAPI downs(void *data) {
                 b[larm.x1][larm.y1] = 1;
                 b[larm.x2][larm.y2] = 1;
                 b[larm.x3][larm.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
 
@@ -755,7 +898,7 @@ DWORD WINAPI downs(void *data) {
                 b[larm.x1][larm.y1] = 1;
                 b[larm.x2][larm.y2] = 1;
                 b[larm.x3][larm.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
                 //sleeptime = 800;
                 //level = 1;
@@ -763,11 +906,11 @@ DWORD WINAPI downs(void *data) {
                 //lines = 0; linenext = 4;
                 //points = 1000000;
             }
-            if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+            if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -847,10 +990,10 @@ DWORD WINAPI downs(void *data) {
             if(b[rarm.x0][rarm.y0] == 1) {
                 for(int i=0; i<600; i++) {
                     for(int j=0; j<700; j++) {
-                        b[i][j] = 0;
+                        //b[i][j] = 0;
                     }
                 }
-                exit(0);
+                //exit(0);
             }
 
             if(rarm.y0 > 650 || rarm.y1 > 650 || rarm.y2 > 650 || rarm.y3 > 650) {
@@ -858,7 +1001,7 @@ DWORD WINAPI downs(void *data) {
                 b[rarm.x1][rarm.y1] = 1;
                 b[rarm.x2][rarm.y2] = 1;
                 b[rarm.x3][rarm.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
 
@@ -880,7 +1023,7 @@ DWORD WINAPI downs(void *data) {
                 b[rarm.x1][rarm.y1] = 1;
                 b[rarm.x2][rarm.y2] = 1;
                 b[rarm.x3][rarm.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
                 //sleeptime = 800;
                 //level = 1;
@@ -888,11 +1031,11 @@ DWORD WINAPI downs(void *data) {
                 //lines = 0; linenext = 4;
                 //points = 1000000;
             }
-            if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+            if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -972,10 +1115,10 @@ DWORD WINAPI downs(void *data) {
             if(b[lsh.x0][lsh.y0] == 1) {
                 for(int i=0; i<600; i++) {
                     for(int j=0; j<700; j++) {
-                        b[i][j] = 0;
+                        //b[i][j] = 0;
                     }
                 }
-                exit(0);
+                //exit(0);
             }
 
             if(lsh.y0 > 650 || lsh.y1 > 650 || lsh.y2 > 650 || lsh.y3 > 650) {
@@ -983,7 +1126,7 @@ DWORD WINAPI downs(void *data) {
                 b[lsh.x1][lsh.y1] = 1;
                 b[lsh.x2][lsh.y2] = 1;
                 b[lsh.x3][lsh.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
 
@@ -1005,7 +1148,7 @@ DWORD WINAPI downs(void *data) {
                 b[lsh.x1][lsh.y1] = 1;
                 b[lsh.x2][lsh.y2] = 1;
                 b[lsh.x3][lsh.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
                 //sleeptime = 800;
                 //level = 1;
@@ -1013,11 +1156,11 @@ DWORD WINAPI downs(void *data) {
                 //lines = 0; linenext = 4;
                 //points = 1000000;
             }
-            if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+            if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -1097,10 +1240,10 @@ DWORD WINAPI downs(void *data) {
             if(b[rsh.x0][rsh.y0] == 1) {
                 for(int i=0; i<600; i++) {
                     for(int j=0; j<700; j++) {
-                        b[i][j] = 0;
+                        //b[i][j] = 0;
                     }
                 }
-                exit(0);
+                //exit(0);
             }
 
             if(rsh.y0 > 650 || rsh.y1 > 650 || rsh.y2 > 650 || rsh.y3 > 650) {
@@ -1108,7 +1251,7 @@ DWORD WINAPI downs(void *data) {
                 b[rsh.x1][rsh.y1] = 1;
                 b[rsh.x2][rsh.y2] = 1;
                 b[rsh.x3][rsh.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
 
@@ -1130,7 +1273,7 @@ DWORD WINAPI downs(void *data) {
                 b[rsh.x1][rsh.y1] = 1;
                 b[rsh.x2][rsh.y2] = 1;
                 b[rsh.x3][rsh.y3] = 1;
-                blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
                 //sleeptime = 800;
                 //level = 1;
@@ -1138,11 +1281,11 @@ DWORD WINAPI downs(void *data) {
                 //lines = 0; linenext = 4;
                 //points = 1000000;
             }
-            if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+            if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
@@ -1941,7 +2084,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     for(int i=0; i<700; i++) {
                         for(int j=0; j<700; j++) {
                             if(b[i][j] == 1) {
-                                HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                                HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                                 RECT rrect6 = {i, j, i + 20, j + 20};
                                 FillRect(hdc2, &rrect6, brush);
                                 DeleteObject(brush);
@@ -1958,7 +2101,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 }
                 case 'k':  {
                             
-                    if(choice == "sq" && (sq.y0 <= 610 || sq.y1 <= 610 || sq.y2 <= 610 || sq.y3 <= 610)) {
+                    if(choice == "sq" && (sq.y0 <= 610 && sq.y1 <= 610 && sq.y2 <= 610 && sq.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
                         
@@ -2023,10 +2166,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         if(b[sq.x0][sq.y0] == 1) {
                             for(int i=0; i<600; i++) {
                                 for(int j=0; j<720; j++) {
-                                    b[i][j] = 0;
+                                    //b[i][j] = 0;
                                 }
                             }
-                            exit(0);
+                            //exit(0);
                         }
 
                         BOOLEAN flag = FALSE;
@@ -2047,7 +2190,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[sq.x1][sq.y1] = 1;
                             b[sq.x2][sq.y2] = 1;
                             b[sq.x3][sq.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                             //sleeptime = 800;
                             //level = 1;
@@ -2055,7 +2198,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             //lines = 0; linenext = 4;
                             //points = 1000000;
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
                     else if(choice == "lne" && (lne.y0 <= 580 || lne.y1 <= 580 || lne.y2 <= 580 || lne.y3 <= 580)) {
                         
@@ -2122,10 +2265,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         if(b[lne.x0][lne.y0] == 1) {
                             for(int i=0; i<600; i++) {
                                 for(int j=0; j<720; j++) {
-                                    b[i][j] = 0;
+                                    //b[i][j] = 0;
                                 }
                             }
-                            exit(0);
+                            //exit(0);
                         }
 
                         BOOLEAN flag = FALSE;
@@ -2146,7 +2289,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lne.x1][lne.y1] = 1;
                             b[lne.x2][lne.y2] = 1;
                             b[lne.x3][lne.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                             //sleeptime = 800;
                             //level = 1;
@@ -2154,9 +2297,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             //lines = 0; linenext = 4;
                             //points = 1000000;
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
-                    else if(choice == "ht" && (ht.y0 <= 610 || ht.y1 <= 610 || ht.y2 <= 610 || ht.y3 <= 610)) {
+                    else if(choice == "ht" && (ht.y0 <= 610 && ht.y1 <= 610 && ht.y2 <= 610 && ht.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2221,10 +2364,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         if(b[ht.x0][ht.y0] == 1) {
                             for(int i=0; i<600; i++) {
                                 for(int j=0; j<720; j++) {
-                                    b[i][j] = 0;
+                                    //b[i][j] = 0;
                                 }
                             }
-                            exit(0);
+                            //exit(0);
                         }
 
                         BOOLEAN flag = FALSE;
@@ -2245,12 +2388,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[ht.x1][ht.y1] = 1;
                             b[ht.x2][ht.y2] = 1;
                             b[ht.x3][ht.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
-                    else if(choice == "larm" && (larm.y0 <= 610 || larm.y1 <= 610 || larm.y2 <= 610 || larm.y3 <= 610)) {
+                    else if(choice == "larm" && (larm.y0 <= 610 && larm.y1 <= 610 && larm.y2 <= 610 && larm.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2316,7 +2459,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         if(b[larm.x0][larm.y0] == 1) {
                             for(int i=0; i<600; i++) {
                                 for(int j=0; j<700; j++) {
-                                    b[i][j] = 0;
+                                    //b[i][j] = 0;
                                 }
                             }
                         }
@@ -2326,7 +2469,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x1][larm.y1] = 1;
                             b[larm.x2][larm.y2] = 1;
                             b[larm.x3][larm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                             //sleeptime = 800;
                             //level = 1;
@@ -2353,10 +2496,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x1][larm.y1] = 1;
                             b[larm.x2][larm.y2] = 1;
                             b[larm.x3][larm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
@@ -2374,7 +2517,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == "rarm" && (rarm.y0 <= 610 || rarm.y1 <= 610 || rarm.y2 <= 610 || rarm.y3 <= 610)) {
+                    else if(choice == "rarm" && (rarm.y0 <= 610 && rarm.y1 <= 610 && rarm.y2 <= 610 && rarm.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2440,10 +2583,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         if(b[rarm.x0][rarm.y0] == 1) {
                             for(int i=0; i<600; i++) {
                                 for(int j=0; j<700; j++) {
-                                    b[i][j] = 0;
+                                    //b[i][j] = 0;
                                 }
                             }
-                            exit(0);
+                            //exit(0);
                         }
 
                         if(rarm.y0 > 650 || rarm.y1 > 650 || rarm.y2 > 650 || rarm.y3 > 650) {
@@ -2451,7 +2594,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x1][rarm.y1] = 1;
                             b[rarm.x2][rarm.y2] = 1;
                             b[rarm.x3][rarm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -2473,7 +2616,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x1][rarm.y1] = 1;
                             b[rarm.x2][rarm.y2] = 1;
                             b[rarm.x3][rarm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                             //sleeptime = 800;
                             //level = 1;
@@ -2481,11 +2624,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             //lines = 0; linenext = 4;
                             //points = 1000000;
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
-                                    HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                                    HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                                     RECT rrect6 = {i, j, i + 20, j + 20};
                                     FillRect(hdc2, &rrect6, brush);
                                     DeleteObject(brush);
@@ -2499,7 +2642,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == "lsh" && (lsh.y0 <= 610 || lsh.y1 <= 610 || lsh.y2 <= 610 || lsh.y3 <= 610)) {
+                    else if(choice == "lsh" && (lsh.y0 <= 610 && lsh.y1 <= 610 && lsh.y2 <= 610 && lsh.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2565,10 +2708,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         if(b[lsh.x0][lsh.y0] == 1) {
                             for(int i=0; i<600; i++) {
                                 for(int j=0; j<700; j++) {
-                                    b[i][j] = 0;
+                                    //b[i][j] = 0;
                                 }
                             }
-                            exit(0);
+                            //exit(0);
                         }
 
                         if(lsh.y0 > 650 || lsh.y1 > 650 || lsh.y2 > 650 || lsh.y3 > 650) {
@@ -2576,7 +2719,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x1][lsh.y1] = 1;
                             b[lsh.x2][lsh.y2] = 1;
                             b[lsh.x3][lsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -2598,7 +2741,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x1][lsh.y1] = 1;
                             b[lsh.x2][lsh.y2] = 1;
                             b[lsh.x3][lsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                             //sleeptime = 800;
                             //level = 1;
@@ -2606,11 +2749,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             //lines = 0; linenext = 4;
                             //points = 1000000;
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
-                                    HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                                    HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                                     RECT rrect6 = {i, j, i + 20, j + 20};
                                     FillRect(hdc2, &rrect6, brush);
                                     DeleteObject(brush);
@@ -2624,7 +2767,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == "rsh" && (rsh.y0 <= 610 || rsh.y1 <= 610 || rsh.y2 <= 610 || rsh.y3 <= 610)) {
+                    else if(choice == "rsh" && (rsh.y0 <= 610 && rsh.y1 <= 610 && rsh.y2 <= 610 && rsh.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2690,10 +2833,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         if(b[rsh.x0][rsh.y0] == 1) {
                             for(int i=0; i<600; i++) {
                                 for(int j=0; j<700; j++) {
-                                    b[i][j] = 0;
+                                    //b[i][j] = 0;
                                 }
                             }
-                            exit(0);
+                            //exit(0);
                         }
 
                         if(rsh.y0 > 650 || rsh.y1 > 650 || rsh.y2 > 650 || rsh.y3 > 650) {
@@ -2701,7 +2844,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x1][rsh.y1] = 1;
                             b[rsh.x2][rsh.y2] = 1;
                             b[rsh.x3][rsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -2723,14 +2866,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x1][rsh.y1] = 1;
                             b[rsh.x2][rsh.y2] = 1;
                             b[rsh.x3][rsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
-                                    HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                                    HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                                     RECT rrect6 = {i, j, i + 20, j + 20};
                                     FillRect(hdc2, &rrect6, brush);
                                     DeleteObject(brush);
@@ -2747,7 +2890,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     for(int i=0; i<700; i++) {
                         for(int j=0; j<700; j++) {
                             if(b[i][j] == 1) {
-                                HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                                HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                                 RECT rrect6 = {i, j, i + 20, j + 20};
                                 FillRect(hdc2, &rrect6, brush);
                                 DeleteObject(brush);
@@ -2764,7 +2907,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 break;
                 case 'j':  {
                           
-                    if(choice == "sq" && (sq.y0 <= 650 || sq.y1 <= 650 || sq.y2 <= 650 || sq.y3 <= 650)) {
+                    if(choice == "sq" && (sq.y0 <= 650 && sq.y1 <= 650 && sq.y2 <= 650 && sq.y3 <= 650)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2837,7 +2980,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
                     }
-                    if(choice == "lne" && (lne.y0 <= 650 || lne.y1 <= 650 || lne.y2 <= 650 || lne.y3 <= 650)) {
+                    if(choice == "lne" && (lne.y0 <= 650 && lne.y1 <= 650 && lne.y2 <= 650 && lne.y3 <= 650)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2909,7 +3052,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
                     }
-                    else if(choice == "ht" && (ht.y0 <= 610 || ht.y1 <= 610 || ht.y2 <= 610 || ht.y3 <= 610)) {
+                    else if(choice == "ht" && (ht.y0 <= 610 && ht.y1 <= 610 && ht.y2 <= 610 && ht.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -2999,12 +3142,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[ht.x1][ht.y1] = 1;
                             b[ht.x2][ht.y2] = 1;
                             b[ht.x3][ht.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
-                    else if(choice == "larm" && (larm.y0 <= 610 || larm.y1 <= 610 || larm.y2 <= 610 || larm.y3 <= 610)) {
+                    else if(choice == "larm" && (larm.y0 <= 610 && larm.y1 <= 610 && larm.y2 <= 610 && larm.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3080,10 +3223,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         if(b[larm.x0][larm.y0] == 1) {
                             for(int i=0; i<600; i++) {
                                 for(int j=0; j<700; j++) {
-                                    b[i][j] = 0;
+                                    //b[i][j] = 0;
                                 }
                             }
-                            exit(0);
+                            //exit(0);
                         }
 
                         if(larm.y0 > 650 || larm.y1 > 650 || larm.y2 > 650 || larm.y3 > 650) {
@@ -3091,7 +3234,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x1][larm.y1] = 1;
                             b[larm.x2][larm.y2] = 1;
                             b[larm.x3][larm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -3113,14 +3256,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x1][larm.y1] = 1;
                             b[larm.x2][larm.y2] = 1;
                             b[larm.x3][larm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
-                                    HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                                    HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                                     RECT rrect6 = {i, j, i + 20, j + 20};
                                     FillRect(hdc2, &rrect6, brush);
                                     DeleteObject(brush);
@@ -3134,7 +3277,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == "rarm" && (rarm.y0 <= 610 || rarm.y1 <= 610 || rarm.y2 <= 610 || rarm.y3 <= 610)) {
+                    else if(choice == "rarm" && (rarm.y0 <= 610 && rarm.y1 <= 610 && rarm.y2 <= 610 && rarm.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3210,10 +3353,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         if(b[rarm.x0][rarm.y0] == 1) {
                             for(int i=0; i<600; i++) {
                                 for(int j=0; j<700; j++) {
-                                    b[i][j] = 0;
+                                    //b[i][j] = 0;
                                 }
                             }
-                            exit(0);
+                            //exit(0);
                         }
 
                         if(rarm.y0 > 650 || rarm.y1 > 650 || rarm.y2 > 650 || rarm.y3 > 650) {
@@ -3221,7 +3364,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x1][rarm.y1] = 1;
                             b[rarm.x2][rarm.y2] = 1;
                             b[rarm.x3][rarm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -3243,7 +3386,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x1][rarm.y1] = 1;
                             b[rarm.x2][rarm.y2] = 1;
                             b[rarm.x3][rarm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                             //sleeptime = 800;
                             //level = 1;
@@ -3251,11 +3394,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             //lines = 0; linenext = 4;
                             //points = 1000000;
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
-                                    HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                                    HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                                     RECT rrect6 = {i, j, i + 20, j + 20};
                                     FillRect(hdc2, &rrect6, brush);
                                     DeleteObject(brush);
@@ -3269,7 +3412,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == "lsh" && (lsh.y0 <= 610 || lsh.y1 <= 610 || lsh.y2 <= 610 || lsh.y3 <= 610)) {
+                    else if(choice == "lsh" && (lsh.y0 <= 610 && lsh.y1 <= 610 && lsh.y2 <= 610 && lsh.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3345,10 +3488,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         if(b[lsh.x0][lsh.y0] == 1) {
                             for(int i=0; i<600; i++) {
                                 for(int j=0; j<700; j++) {
-                                    b[i][j] = 0;
+                                    //b[i][j] = 0;
                                 }
                             }
-                            exit(0);
+                            //exit(0);
                         }
 
                         if(lsh.y0 > 650 || lsh.y1 > 650 || lsh.y2 > 650 || lsh.y3 > 650) {
@@ -3356,7 +3499,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x1][lsh.y1] = 1;
                             b[lsh.x2][lsh.y2] = 1;
                             b[lsh.x3][lsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -3378,7 +3521,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x1][lsh.y1] = 1;
                             b[lsh.x2][lsh.y2] = 1;
                             b[lsh.x3][lsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                             //sleeptime = 800;
                             //level = 1;
@@ -3386,11 +3529,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             //lines = 0; linenext = 4;
                             //points = 1000000;
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
-                                    HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                                    HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                                     RECT rrect6 = {i, j, i + 20, j + 20};
                                     FillRect(hdc2, &rrect6, brush);
                                     DeleteObject(brush);
@@ -3404,7 +3547,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == "rsh" && (rsh.y0 <= 610 || rsh.y1 <= 610 || rsh.y2 <= 610 || rsh.y3 <= 610)) {
+                    else if(choice == "rsh" && (rsh.y0 <= 610 && rsh.y1 <= 610 && rsh.y2 <= 610 && rsh.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3480,10 +3623,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         if(b[rsh.x0][rsh.y0] == 1) {
                             for(int i=0; i<600; i++) {
                                 for(int j=0; j<700; j++) {
-                                    b[i][j] = 0;
+                                    //b[i][j] = 0;
                                 }
                             }
-                            exit(0);
+                            //exit(0);
                         }
 
                         if(rsh.y0 > 650 || rsh.y1 > 650 || rsh.y2 > 650 || rsh.y3 > 650) {
@@ -3491,7 +3634,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x1][rsh.y1] = 1;
                             b[rsh.x2][rsh.y2] = 1;
                             b[rsh.x3][rsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -3513,7 +3656,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x1][rsh.y1] = 1;
                             b[rsh.x2][rsh.y2] = 1;
                             b[rsh.x3][rsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                             //sleeptime = 800;
                             //level = 1;
@@ -3521,11 +3664,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             //lines = 0; linenext = 4;
                             //points = 1000000;
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
-                                    HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                                    HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                                     RECT rrect6 = {i, j, i + 20, j + 20};
                                     FillRect(hdc2, &rrect6, brush);
                                     DeleteObject(brush);
@@ -3542,7 +3685,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     for(int i=0; i<700; i++) {
                         for(int j=0; j<700; j++) {
                             if(b[i][j] == 1) {
-                                HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                                HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                                 RECT rrect6 = {i, j, i + 20, j + 20};
                                 FillRect(hdc2, &rrect6, brush);
                                 DeleteObject(brush);
@@ -3559,7 +3702,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 break;
                 case 'l':  {
                             
-                    if(choice == "sq" && (sq.y0 <= 650 || sq.y1 <= 650 || sq.y2 <= 650 || sq.y3 <= 650)) {
+                    if(choice == "sq" && (sq.y0 <= 650 && sq.y1 <= 650 && sq.y2 <= 650 && sq.y3 <= 650)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3632,7 +3775,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
                     }
-                    else if(choice == "lne" && (lne.y0 <= 650 || lne.y1 <= 650 || lne.y2 <= 650 || lne.y3 <= 650)) {
+                    else if(choice == "lne" && (lne.y0 <= 650 && lne.y1 <= 650 && lne.y2 <= 650 && lne.y3 <= 650)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3705,7 +3848,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
                     }
-                    else if(choice == "ht" && (ht.y0 <= 610 || ht.y1 <= 610 || ht.y2 <= 610 || ht.y3 <= 610)) {
+                    else if(choice == "ht" && (ht.y0 <= 610 && ht.y1 <= 610 && ht.y2 <= 610 && ht.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3796,7 +3939,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[ht.x1][ht.y1] = 1;
                             b[ht.x2][ht.y2] = 1;
                             b[ht.x3][ht.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                             //sleeptime = 800;
                             //level = 1;
@@ -3804,9 +3947,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             //lines = 0; linenext = 4;
                             //points = 1000000;
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
-                    else if(choice == "larm" && (larm.y0 <= 610 || larm.y1 <= 610 || larm.y2 <= 610 || larm.y3 <= 610)) {
+                    else if(choice == "larm" && (larm.y0 <= 610 && larm.y1 <= 610 && larm.y2 <= 610 && larm.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -3883,10 +4026,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         if(b[larm.x0][larm.y0] == 1) {
                             for(int i=0; i<600; i++) {
                                 for(int j=0; j<700; j++) {
-                                    b[i][j] = 0;
+                                    //b[i][j] = 0;
                                 }
                             }
-                            exit(0);
+                            //exit(0);
                         }
 
                         if(larm.y0 > 650 || larm.y1 > 650 || larm.y2 > 650 || larm.y3 > 650) {
@@ -3894,7 +4037,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x1][larm.y1] = 1;
                             b[larm.x2][larm.y2] = 1;
                             b[larm.x3][larm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -3916,7 +4059,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x1][larm.y1] = 1;
                             b[larm.x2][larm.y2] = 1;
                             b[larm.x3][larm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                             //sleeptime = 800;
                             //level = 1;
@@ -3924,11 +4067,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             //lines = 0; linenext = 4;
                             //points = 1000000;
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
-                                    HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                                    HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                                     RECT rrect6 = {i, j, i + 20, j + 20};
                                     FillRect(hdc2, &rrect6, brush);
                                     DeleteObject(brush);
@@ -3942,7 +4085,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == "rarm" && (rarm.y0 <= 610 || rarm.y1 <= 610 || rarm.y2 <= 610 || rarm.y3 <= 610)) {
+                    else if(choice == "rarm" && (rarm.y0 <= 610 && rarm.y1 <= 610 && rarm.y2 <= 610 && rarm.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -4019,10 +4162,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         if(b[rarm.x0][rarm.y0] == 1) {
                             for(int i=0; i<600; i++) {
                                 for(int j=0; j<700; j++) {
-                                    b[i][j] = 0;
+                                    //b[i][j] = 0;
                                 }
                             }
-                            exit(0);
+                            //exit(0);
                         }
 
                         if(rarm.y0 > 650 || rarm.y1 > 650 || rarm.y2 > 650 || rarm.y3 > 650) {
@@ -4030,7 +4173,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x1][rarm.y1] = 1;
                             b[rarm.x2][rarm.y2] = 1;
                             b[rarm.x3][rarm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -4052,7 +4195,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x1][rarm.y1] = 1;
                             b[rarm.x2][rarm.y2] = 1;
                             b[rarm.x3][rarm.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                             //sleeptime = 800;
                             //level = 1;
@@ -4060,7 +4203,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             //lines = 0; linenext = 4;
                             //points = 1000000;
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
@@ -4078,7 +4221,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == "lsh" && (lsh.y0 <= 610 || lsh.y1 <= 610 || lsh.y2 <= 610 || lsh.y3 <= 610)) {
+                    else if(choice == "lsh" && (lsh.y0 <= 610 && lsh.y1 <= 610 && lsh.y2 <= 610 && lsh.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -4155,10 +4298,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         if(b[lsh.x0][lsh.y0] == 1) {
                             for(int i=0; i<600; i++) {
                                 for(int j=0; j<700; j++) {
-                                    b[i][j] = 0;
+                                    //b[i][j] = 0;
                                 }
                             }
-                            exit(0);
+                            //exit(0);
                         }
 
                         if(lsh.y0 > 650 || lsh.y1 > 650 || lsh.y2 > 650 || lsh.y3 > 650) {
@@ -4166,7 +4309,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x1][lsh.y1] = 1;
                             b[lsh.x2][lsh.y2] = 1;
                             b[lsh.x3][lsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -4188,14 +4331,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x1][lsh.y1] = 1;
                             b[lsh.x2][lsh.y2] = 1;
                             b[lsh.x3][lsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
-                                    HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                                    HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                                     RECT rrect6 = {i, j, i + 20, j + 20};
                                     FillRect(hdc2, &rrect6, brush);
                                     DeleteObject(brush);
@@ -4209,7 +4352,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-                    else if(choice == "rsh" && (rsh.y0 <= 610 || rsh.y1 <= 610 || rsh.y2 <= 610 || rsh.y3 <= 610)) {
+                    else if(choice == "rsh" && (rsh.y0 <= 610 && rsh.y1 <= 610 && rsh.y2 <= 610 && rsh.y3 <= 610)) {
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
@@ -4286,10 +4429,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         if(b[rsh.x0][rsh.y0] == 1) {
                             for(int i=0; i<600; i++) {
                                 for(int j=0; j<700; j++) {
-                                    b[i][j] = 0;
+                                    //b[i][j] = 0;
                                 }
                             }
-                            exit(0);
+                            //exit(0);
                         }
 
                         if(rsh.y0 > 650 || rsh.y1 > 650 || rsh.y2 > 650 || rsh.y3 > 650) {
@@ -4297,7 +4440,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x1][rsh.y1] = 1;
                             b[rsh.x2][rsh.y2] = 1;
                             b[rsh.x3][rsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                         }
 
@@ -4319,7 +4462,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x1][rsh.y1] = 1;
                             b[rsh.x2][rsh.y2] = 1;
                             b[rsh.x3][rsh.y3] = 1;
-                            blocks++;char aa[10];sprintf(aa,"TetrisC | Level: %d, Blocks: %d, Points: %d, Lines: %d",level,blocks,points,lines);SetWindowTextA(hwnd,aa);
+                            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
                             //sleeptime = 800;
                             //level = 1;
@@ -4327,7 +4470,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             //lines = 0; linenext = 4;
                             //points = 1000000;
                         }
-                        if(level < 40 && lines == linenext) {level++;linenext+=4;sleeptime-=15;}
+                        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
                             for(int j=0; j<700; j++) {
                                 if(b[i][j] == 1) {
@@ -4348,7 +4491,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     for(int i=0; i<700; i++) {
                         for(int j=0; j<700; j++) {
                             if(b[i][j] == 1) {
-                                HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                                HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                                 RECT rrect6 = {i, j, i + 20, j + 20};
                                 FillRect(hdc2, &rrect6, brush);
                                 DeleteObject(brush);
@@ -4375,13 +4518,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         {
             if(fist) {
                 thread = CreateThread(NULL, 0, downs, NULL, 0, NULL);
-
-                for(int i=0; i<700; i++) {
-                    for(int j=0; j<720; j++) {
-                        b[i][j] = 0;
-                    }
-                }
-                
                 srand(time(NULL));
                 prep();
             }
@@ -4389,7 +4525,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             for(int i=0; i<700; i++) {
                 for(int j=0; j<720; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(0, 1, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 1, 0));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
