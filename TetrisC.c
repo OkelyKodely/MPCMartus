@@ -113,7 +113,7 @@ DWORD WINAPI downs(void *data) {
 
     do {
 
-        HBRUSH brush = CreateSolidBrush(RGB(4, 4, 4));
+        HBRUSH brush = CreateSolidBrush(RGB(254, 254, 254));
         RECT rrect5 = {60, 80, 190, 200};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
@@ -4510,13 +4510,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         }
         case WM_CTLCOLORSTATIC:
         {
-            SetTextColor((HDC)wParam, RGB(55,55,55));
-            return (BOOL)CreateSolidBrush (GetSysColor(COLOR_MENU));
+            SetTextColor((HDC)wParam,RGB(55,55,55));
+            return (BOOL)CreateSolidBrush(GetSysColor(COLOR_MENU));
             break;
         }
         case WM_PAINT:
         {
             if(fist) {
+                hdc2 = GetDC(hwnd);
+                HBRUSH brush = CreateSolidBrush(RGB(254, 254, 4));
+                RECT rrect5 = {0, 0, 630, 750};
+                FillRect(hdc2, &rrect5, brush);
+                DeleteObject(brush);
                 thread = CreateThread(NULL, 0, downs, NULL, 0, NULL);
                 srand(time(NULL));
                 prep();
