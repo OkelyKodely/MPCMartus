@@ -1,8 +1,7 @@
 #include <stdio.h>
-
 #include <windows.h>
 
-char g_szClassName[] = "TetrisC";
+char g_szClassName[] = "\"TetrisC\"";
 char* choice;
 char * choicepre = "sq";
 int sleeptime = 800;
@@ -12,7 +11,7 @@ int blocks=0;
 int lines=0;
 int linenext = 4;
 int b[740][720];
-HWND hwnd, hwnd_title, hwnd_stage, hwnd_next, hwnd_lines, hwnd_points, hwnd_blocks, hwnd_level;
+HWND hwnd, hwnd_title, hwnd_ketchup, hwnd_ketchup_and_mustard, hwnd_stage, hwnd_next, hwnd_lines, hwnd_points, hwnd_blocks, hwnd_level;
 HINSTANCE hInst;
 BITMAP bitmap;
 WNDCLASSEX wc;
@@ -4552,7 +4551,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             SetTextColor(hdc2, RGB(255,255,255));
             SetWindowText(hwnd_title, c);
 
-            char d[7] = "NEXT - ";
+            char d[7] = "next =";
             y = 82; h = 16;
             x = 10; w = 44;
             hwnd_next = CreateWindow("static", NULL,
@@ -4562,6 +4561,28 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                        (HINSTANCE) GetWindowLong (hwnd, GWL_HINSTANCE), NULL);
             SetTextColor(hdc2, RGB(255,255,255));
             SetWindowText(hwnd_next, d);
+
+            char f[32] = "ketchup and mustard";
+            y = 230; h = 16;
+            x = 450; w = 136;
+            hwnd_ketchup_and_mustard = CreateWindow("static", NULL,
+                                       WS_CHILD | WS_VISIBLE | WS_TABSTOP,
+                                       x, y, w, h,
+                                       hwnd, (HMENU)(501),
+                                       (HINSTANCE) GetWindowLong (hwnd, GWL_HINSTANCE), NULL);
+            SetTextColor(hdc2, RGB(255,255,255));
+            SetWindowText(hwnd_ketchup_and_mustard, f);
+
+            char e[32] = "ketchup is your friend";
+            y = 300; h = 16;
+            x = 450; w = 141;
+            hwnd_ketchup = CreateWindow("static", NULL,
+                                       WS_CHILD | WS_VISIBLE | WS_TABSTOP,
+                                       x, y, w, h,
+                                       hwnd, (HMENU)(501),
+                                       (HINSTANCE) GetWindowLong (hwnd, GWL_HINSTANCE), NULL);
+            SetTextColor(hdc2, RGB(255,255,255));
+            SetWindowText(hwnd_ketchup, e);
         }
         break;
         case WM_CLOSE:
@@ -4599,7 +4620,7 @@ void returnStage(int stage) {
                    "Verdana");
 
     SelectObject(hdc2, font);
-    TextOut(hdc2, 86, 640, "TeTrIsC", 7);
+    TextOut(hdc2, 86, 640, "\"TeTrIsC\"", 9);
     DeleteObject(font);
 }
 
@@ -4634,10 +4655,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     }
     
     int number;
-    number = 96;
+    number = 100;
     SetLayeredWindowAttributes(hwnd, 0, (255 * number) / 100, LWA_ALPHA);
 
-    ShowWindow(hwnd, nCmdShow);
+    ShowWindow(hwnd, SW_MAXIMIZE);
     UpdateWindow(hwnd);
 
     HWND hWnd = GetConsoleWindow();
