@@ -142,15 +142,13 @@ DWORD WINAPI downs(void *data) {
         RECT rrect5 = {60, 80, 190, 200};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(1,255,0)));
-//        Rectangle(hdc2, 60, 80, 190, 200);
-//        DeleteObject(SelectObject(hdc2, hOldPen));
-//        SelectObject(hdc2, hOldBsh);
+        HGDIOBJ hOldBsh;
+        HGDIOBJ hOldPen;
+        
         returnStage(level);
 
         if(choicepre == "sq") {
-            HBRUSH brush = CreateSolidBrush(RGB(253, 253, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
             RECT rrect5 = {100, 100, 100 + 20, 100 + 20};
             FillRect(hdc2, &rrect5, brush);
             RECT rrect6 = {120, 100, 120 + 20, 100 + 20};
@@ -183,7 +181,7 @@ DWORD WINAPI downs(void *data) {
         }
 
         else if(choicepre == "lne") {
-            HBRUSH brush = CreateSolidBrush(RGB(253, 253, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
             RECT rrect5 = {100, 100, 100 + 20, 100 + 20};
             FillRect(hdc2, &rrect5, brush);
             RECT rrect6 = {100, 120, 100 + 20, 120 + 20};
@@ -216,7 +214,7 @@ DWORD WINAPI downs(void *data) {
         }
 
         else if(choicepre == "ht") {
-            HBRUSH brush = CreateSolidBrush(RGB(253, 253, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
             RECT rrect5 = {120, 100, 120 + 20, 100 + 20};
             FillRect(hdc2, &rrect5, brush);
             RECT rrect6 = {100, 120, 100 + 20, 120 + 20};
@@ -249,7 +247,7 @@ DWORD WINAPI downs(void *data) {
         }
 
         else if(choicepre == "larm") {
-            HBRUSH brush = CreateSolidBrush(RGB(253, 253, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
             RECT rrect5 = {120, 100, 120 + 20, 100 + 20};
             FillRect(hdc2, &rrect5, brush);
             RECT rrect6 = {120, 120, 120 + 20, 120 + 20};
@@ -282,7 +280,7 @@ DWORD WINAPI downs(void *data) {
         }
 
         else if(choicepre == "rarm") {
-            HBRUSH brush = CreateSolidBrush(RGB(253, 253, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
             RECT rrect5 = {120, 100, 120 + 20, 100 + 20};
             FillRect(hdc2, &rrect5, brush);
             RECT rrect6 = {120, 120, 120 + 20, 120 + 20};
@@ -315,7 +313,7 @@ DWORD WINAPI downs(void *data) {
         }
 
         else if(choicepre == "lsh") {
-            HBRUSH brush = CreateSolidBrush(RGB(253, 253, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
             RECT rrect5 = {120, 100, 120 + 20, 100 + 20};
             FillRect(hdc2, &rrect5, brush);
             RECT rrect6 = {120, 120, 120 + 20, 120 + 20};
@@ -348,7 +346,7 @@ DWORD WINAPI downs(void *data) {
         }
 
         else if(choicepre == "rsh") {
-            HBRUSH brush = CreateSolidBrush(RGB(253, 253, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
             RECT rrect5 = {100, 100, 100 + 20, 100 + 20};
             FillRect(hdc2, &rrect5, brush);
             RECT rrect6 = {100, 120, 100 + 20, 120 + 20};
@@ -388,72 +386,75 @@ DWORD WINAPI downs(void *data) {
 
         int clearBlocks[700];
 
-        for(int i=0; i<700; i+=10) {
-            clearBlocks[i] = 0;
-        }
+        int cc = 0;
+        
+        BOOLEAN keepon = TRUE;
+        
+        do {
+            for(int i=0; i<700; i++) {
+                clearBlocks[i] = 0;
+            }
 
-        for(int j=0; j<=700; j+=10) {
+            for(int j=0; j<=700 && keepon; j++) {
 
-            int clearThisLine = 0;
+                int clearThisLine = 0;
 
-            for(int i=0; i<740; i+=10) {
-                if(1 == b[i][j]) {
-                    clearThisLine++;
+                for(int i=0; i<740; i++) {
+                    if(1 == b[i][j]) {
+                        clearThisLine++;
+                    }
+                }
+
+                if(clearThisLine == 10) {
+                    char aa[10];
+                    sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+                    clearBlocks[count] = j;
+                    count++;
+                    lines++;
+                    points+=10;
+                    keepon = FALSE;
                 }
             }
 
-            if(clearThisLine >= 10) {
-                char aa[10];
-                sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
-                clearBlocks[count] = j;
-                count++;
-                lines++;
-                points+=10;
-            }
-        }
+            if(count > 0) {
 
-        if(count > 0) {
+                int cnt;
 
-            int cnt;
-            cnt = 0;
+                cnt = 0;
 
-            for(;cnt < count; cnt++) {
-                for(int j=0; j<700; j+=10) {
-                    for(int i=0; i<740; i+=10) {
-                        if(j == clearBlocks[cnt]) {
-                            b[i][j] = 0;
+                for(;cnt < count; cnt++) {
+                    for(int j=0; j<700; j++) {
+                        for(int i=0; i<740; i++) {
+                            if(j == clearBlocks[cnt]) {
+                                b[i][j] = 0;
+                            }
                         }
                     }
                 }
-            }
 
-            cnt = 0;
+                cnt = 0;
 
-            for(;cnt < count; cnt++) {
-                for(int j=650; j>=0; j-=10) {
-                    for(int i=0; i<740; i+=10) {
-                        if(b[i][j] == 1 && j < clearBlocks[cnt]) {
-                            //if(j < 690) {
+                for(;cnt < count; cnt++) {
+                    for(int j=650; j>=0; j-=20) {
+                        for(int i=0; i<740; i++) {
+                            if(b[i][j] == 1 && j < clearBlocks[cnt]) {
                                 b[i][j] = 0;
                                 b[i][j+20] = 1;
-                            //}
+                            }
                         }
                     }
                 }
             }
-        }
-
-//        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-//        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 5, RGB(4,4,4)));
-//        Rectangle(hdc2, 219, 20, 421, 691);
-//        DeleteObject(SelectObject(hdc2, hOldPen));
-//        SelectObject(hdc2, hOldBsh);
+            
+            cc++;
+            
+        } while(cc < 35);
 
         if(choice == "sq") {
             
             hdcMems = CreateCompatibleDC(hdc2);
 
-            hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
             oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -512,15 +513,6 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            if(b[sq.x0][sq.y0] == 1) {
-                for(int i=0; i<600; i++) {
-                    for(int j=0; j<720; j++) {
-                        //b[i][j] = 0;
-                    }
-                }
-                //exit(0);
-            }
-
             if(sq.y0 > 650 || sq.y1 > 650 || sq.y2 > 650 || sq.y3 > 650) {
                 b[sq.x0][sq.y0] = 1;
                 b[sq.x1][sq.y1] = 1;
@@ -550,11 +542,6 @@ DWORD WINAPI downs(void *data) {
                 b[sq.x3][sq.y3] = 1;
                 blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                //sleeptime = 800;
-                //level = 1;
-                //blocks = 0;
-                //lines = 0; linenext = 4;
-                //points = 1000000;
             }
             if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
@@ -578,7 +565,7 @@ DWORD WINAPI downs(void *data) {
             
             hdcMems = CreateCompatibleDC(hdc2);
 
-            hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
             oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -637,15 +624,6 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            if(b[lne.x0][lne.y0] == 1) {
-                for(int i=0; i<600; i++) {
-                    for(int j=0; j<700; j++) {
-                        //b[i][j] = 0;
-                    }
-                }
-                //exit(0);
-            }
-
             if(lne.y0 > 650 || lne.y1 > 650 || lne.y2 > 650 || lne.y3 > 650) {
                 b[lne.x0][lne.y0] = 1;
                 b[lne.x1][lne.y1] = 1;
@@ -675,11 +653,6 @@ DWORD WINAPI downs(void *data) {
                 b[lne.x3][lne.y3] = 1;
                 blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                //sleeptime = 800;
-                //level = 1;
-                //blocks = 0;
-                //lines = 0; linenext = 4;
-                //points = 1000000;
             }
             if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
@@ -703,7 +676,7 @@ DWORD WINAPI downs(void *data) {
             
             hdcMems = CreateCompatibleDC(hdc2);
 
-            hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
             oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -762,15 +735,6 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            if(b[ht.x0][ht.y0] == 1) {
-                for(int i=0; i<600; i++) {
-                    for(int j=0; j<700; j++) {
-                        //b[i][j] = 0;
-                    }
-                }
-                //exit(0);
-            }
-
             if(ht.y0 > 650 || ht.y1 > 650 || ht.y2 > 650 || ht.y3 > 650) {
                 b[ht.x0][ht.y0] = 1;
                 b[ht.x1][ht.y1] = 1;
@@ -799,11 +763,6 @@ DWORD WINAPI downs(void *data) {
                 b[ht.x2][ht.y2] = 1;
                 b[ht.x3][ht.y3] = 1;
                 blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
-                //sleeptime = 800;
-                //level = 1;
-                //blocks = 0;
-                //lines = 0; linenext = 4;
-                //points = 1000000;
                 prep();
             }
             if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
@@ -828,7 +787,7 @@ DWORD WINAPI downs(void *data) {
             
             hdcMems = CreateCompatibleDC(hdc2);
 
-            hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
             oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -887,15 +846,6 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            if(b[larm.x0][larm.y0] == 1) {
-                for(int i=0; i<600; i++) {
-                    for(int j=0; j<700; j++) {
-                        //b[i][j] = 0;
-                    }
-                }
-                //exit(0);
-            }
-
             if(larm.y0 > 650 || larm.y1 > 650 || larm.y2 > 650 || larm.y3 > 650) {
                 b[larm.x0][larm.y0] = 1;
                 b[larm.x1][larm.y1] = 1;
@@ -925,11 +875,6 @@ DWORD WINAPI downs(void *data) {
                 b[larm.x3][larm.y3] = 1;
                 blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                //sleeptime = 800;
-                //level = 1;
-                //blocks = 0;
-                //lines = 0; linenext = 4;
-                //points = 1000000;
             }
             if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
@@ -953,7 +898,7 @@ DWORD WINAPI downs(void *data) {
             
             hdcMems = CreateCompatibleDC(hdc2);
 
-            hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
             oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1012,15 +957,6 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            if(b[rarm.x0][rarm.y0] == 1) {
-                for(int i=0; i<600; i++) {
-                    for(int j=0; j<700; j++) {
-                        //b[i][j] = 0;
-                    }
-                }
-                //exit(0);
-            }
-
             if(rarm.y0 > 650 || rarm.y1 > 650 || rarm.y2 > 650 || rarm.y3 > 650) {
                 b[rarm.x0][rarm.y0] = 1;
                 b[rarm.x1][rarm.y1] = 1;
@@ -1050,11 +986,6 @@ DWORD WINAPI downs(void *data) {
                 b[rarm.x3][rarm.y3] = 1;
                 blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                //sleeptime = 800;
-                //level = 1;
-                //blocks = 0;
-                //lines = 0; linenext = 4;
-                //points = 1000000;
             }
             if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
@@ -1078,7 +1009,7 @@ DWORD WINAPI downs(void *data) {
             
             hdcMems = CreateCompatibleDC(hdc2);
 
-            hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
             oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1137,15 +1068,6 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            if(b[lsh.x0][lsh.y0] == 1) {
-                for(int i=0; i<600; i++) {
-                    for(int j=0; j<700; j++) {
-                        //b[i][j] = 0;
-                    }
-                }
-                //exit(0);
-            }
-
             if(lsh.y0 > 650 || lsh.y1 > 650 || lsh.y2 > 650 || lsh.y3 > 650) {
                 b[lsh.x0][lsh.y0] = 1;
                 b[lsh.x1][lsh.y1] = 1;
@@ -1175,11 +1097,6 @@ DWORD WINAPI downs(void *data) {
                 b[lsh.x3][lsh.y3] = 1;
                 blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                //sleeptime = 800;
-                //level = 1;
-                //blocks = 0;
-                //lines = 0; linenext = 4;
-                //points = 1000000;
             }
             if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
@@ -1203,7 +1120,7 @@ DWORD WINAPI downs(void *data) {
             
             hdcMems = CreateCompatibleDC(hdc2);
 
-            hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
             oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1262,15 +1179,6 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            if(b[rsh.x0][rsh.y0] == 1) {
-                for(int i=0; i<600; i++) {
-                    for(int j=0; j<700; j++) {
-                        //b[i][j] = 0;
-                    }
-                }
-                //exit(0);
-            }
-
             if(rsh.y0 > 650 || rsh.y1 > 650 || rsh.y2 > 650 || rsh.y3 > 650) {
                 b[rsh.x0][rsh.y0] = 1;
                 b[rsh.x1][rsh.y1] = 1;
@@ -1300,11 +1208,6 @@ DWORD WINAPI downs(void *data) {
                 b[rsh.x3][rsh.y3] = 1;
                 blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
-                //sleeptime = 800;
-                //level = 1;
-                //blocks = 0;
-                //lines = 0; linenext = 4;
-                //points = 1000000;
             }
             if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
             for(int i=0; i<700; i++) {
@@ -1417,7 +1320,7 @@ void rotate() {
         
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1480,7 +1383,7 @@ void rotate() {
         
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1583,7 +1486,7 @@ void rotate() {
         
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1686,7 +1589,7 @@ void rotate() {
         
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1789,7 +1692,7 @@ void rotate() {
         
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1892,7 +1795,7 @@ void rotate() {
         
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1995,7 +1898,7 @@ void rotate() {
         
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -2109,7 +2012,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -2182,7 +2085,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -2254,7 +2157,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -2349,7 +2252,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -2418,15 +2321,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        if(b[larm.x0][larm.y0] == 1) {
-                            for(int i=0; i<600; i++) {
-                                for(int j=0; j<700; j++) {
-                                    //b[i][j] = 0;
-                                }
-                            }
-                            //exit(0);
-                        }
-
                         if(larm.y0 > 650 || larm.y1 > 650 || larm.y2 > 650 || larm.y3 > 650) {
                             b[larm.x0][larm.y0] = 1;
                             b[larm.x1][larm.y1] = 1;
@@ -2479,7 +2373,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -2548,15 +2442,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        if(b[rarm.x0][rarm.y0] == 1) {
-                            for(int i=0; i<600; i++) {
-                                for(int j=0; j<700; j++) {
-                                    //b[i][j] = 0;
-                                }
-                            }
-                            //exit(0);
-                        }
-
                         if(rarm.y0 > 650 || rarm.y1 > 650 || rarm.y2 > 650 || rarm.y3 > 650) {
                             b[rarm.x0][rarm.y0] = 1;
                             b[rarm.x1][rarm.y1] = 1;
@@ -2586,11 +2471,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x3][rarm.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            //sleeptime = 800;
-                            //level = 1;
-                            //blocks = 0;
-                            //lines = 0; linenext = 4;
-                            //points = 1000000;
                         }
                         if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -2614,7 +2494,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -2683,15 +2563,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        if(b[lsh.x0][lsh.y0] == 1) {
-                            for(int i=0; i<600; i++) {
-                                for(int j=0; j<700; j++) {
-                                    //b[i][j] = 0;
-                                }
-                            }
-                            //exit(0);
-                        }
-
                         if(lsh.y0 > 650 || lsh.y1 > 650 || lsh.y2 > 650 || lsh.y3 > 650) {
                             b[lsh.x0][lsh.y0] = 1;
                             b[lsh.x1][lsh.y1] = 1;
@@ -2721,11 +2592,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x3][lsh.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            //sleeptime = 800;
-                            //level = 1;
-                            //blocks = 0;
-                            //lines = 0; linenext = 4;
-                            //points = 1000000;
                         }
                         if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -2749,7 +2615,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -2818,15 +2684,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        if(b[rsh.x0][rsh.y0] == 1) {
-                            for(int i=0; i<600; i++) {
-                                for(int j=0; j<700; j++) {
-                                    //b[i][j] = 0;
-                                }
-                            }
-                            //exit(0);
-                        }
-
                         if(rsh.y0 > 650 || rsh.y1 > 650 || rsh.y2 > 650 || rsh.y3 > 650) {
                             b[rsh.x0][rsh.y0] = 1;
                             b[rsh.x1][rsh.y1] = 1;
@@ -2856,11 +2713,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x3][rsh.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            //sleeptime = 800;
-                            //level = 1;
-                            //blocks = 0;
-                            //lines = 0; linenext = 4;
-                            //points = 1000000;
                         }
                         if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -2905,7 +2757,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -2978,7 +2830,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3051,7 +2903,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3140,11 +2992,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[ht.x3][ht.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            //sleeptime = 800;
-                            //level = 1;
-                            //blocks = 0;
-                            //lines = 0; linenext = 4;
-                            //points = 1000000;
                         }
                         if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
@@ -3152,7 +2999,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3222,15 +3069,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        if(b[larm.x0][larm.y0] == 1) {
-                            for(int i=0; i<600; i++) {
-                                for(int j=0; j<700; j++) {
-                                    //b[i][j] = 0;
-                                }
-                            }
-                            //exit(0);
-                        }
-
                         if(larm.y0 > 650 || larm.y1 > 650 || larm.y2 > 650 || larm.y3 > 650) {
                             b[larm.x0][larm.y0] = 1;
                             b[larm.x1][larm.y1] = 1;
@@ -3260,11 +3098,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x3][larm.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            //sleeptime = 800;
-                            //level = 1;
-                            //blocks = 0;
-                            //lines = 0; linenext = 4;
-                            //points = 1000000;
                         }
                         if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -3288,7 +3121,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3358,15 +3191,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        if(b[rarm.x0][rarm.y0] == 1) {
-                            for(int i=0; i<600; i++) {
-                                for(int j=0; j<700; j++) {
-                                    //b[i][j] = 0;
-                                }
-                            }
-                            //exit(0);
-                        }
-
                         if(rarm.y0 > 650 || rarm.y1 > 650 || rarm.y2 > 650 || rarm.y3 > 650) {
                             b[rarm.x0][rarm.y0] = 1;
                             b[rarm.x1][rarm.y1] = 1;
@@ -3396,11 +3220,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x3][rarm.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            //sleeptime = 800;
-                            //level = 1;
-                            //blocks = 0;
-                            //lines = 0; linenext = 4;
-                            //points = 1000000;
                         }
                         if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -3424,7 +3243,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3494,15 +3313,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        if(b[lsh.x0][lsh.y0] == 1) {
-                            for(int i=0; i<600; i++) {
-                                for(int j=0; j<700; j++) {
-                                    //b[i][j] = 0;
-                                }
-                            }
-                            //exit(0);
-                        }
-
                         if(lsh.y0 > 650 || lsh.y1 > 650 || lsh.y2 > 650 || lsh.y3 > 650) {
                             b[lsh.x0][lsh.y0] = 1;
                             b[lsh.x1][lsh.y1] = 1;
@@ -3555,7 +3365,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3625,15 +3435,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        if(b[rsh.x0][rsh.y0] == 1) {
-                            for(int i=0; i<600; i++) {
-                                for(int j=0; j<700; j++) {
-                                    //b[i][j] = 0;
-                                }
-                            }
-                            //exit(0);
-                        }
-
                         if(rsh.y0 > 650 || rsh.y1 > 650 || rsh.y2 > 650 || rsh.y3 > 650) {
                             b[rsh.x0][rsh.y0] = 1;
                             b[rsh.x1][rsh.y1] = 1;
@@ -3663,11 +3464,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rsh.x3][rsh.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            //sleeptime = 800;
-                            //level = 1;
-                            //blocks = 0;
-                            //lines = 0; linenext = 4;
-                            //points = 1000000;
                         }
                         if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -3734,7 +3530,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
                         
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3792,15 +3588,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        if(b[sq.x0][sq.y0] == 1) {
-                            for(int i=0; i<600; i++) {
-                                for(int j=0; j<720; j++) {
-                                    //b[i][j] = 0;
-                                }
-                            }
-                            //exit(0);
-                        }
-
                         BOOLEAN flag = FALSE;
                         if(b[sq.x0][sq.y0+20] == 1) {
                             flag = TRUE;
@@ -3821,11 +3608,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[sq.x3][sq.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            //sleeptime = 800;
-                            //level = 1;
-                            //blocks = 0;
-                            //lines = 0; linenext = 4;
-                            //points = 1000000;
                         }
                         if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
@@ -3833,7 +3615,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3891,15 +3673,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        if(b[lne.x0][lne.y0] == 1) {
-                            for(int i=0; i<600; i++) {
-                                for(int j=0; j<720; j++) {
-                                    //b[i][j] = 0;
-                                }
-                            }
-                            //exit(0);
-                        }
-
                         BOOLEAN flag = FALSE;
                         if(b[lne.x0][lne.y0+20] == 1) {
                             flag = TRUE;
@@ -3920,11 +3693,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lne.x3][lne.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            //sleeptime = 800;
-                            //level = 1;
-                            //blocks = 0;
-                            //lines = 0; linenext = 4;
-                            //points = 1000000;
                         }
                         if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                     }
@@ -3932,7 +3700,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3990,15 +3758,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        if(b[ht.x0][ht.y0] == 1) {
-                            for(int i=0; i<600; i++) {
-                                for(int j=0; j<720; j++) {
-                                    //b[i][j] = 0;
-                                }
-                            }
-                            //exit(0);
-                        }
-
                         BOOLEAN flag = FALSE;
                         if(b[ht.x0][ht.y0+20] == 1) {
                             flag = TRUE;
@@ -4026,7 +3785,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -4085,14 +3844,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        if(b[larm.x0][larm.y0] == 1) {
-                            for(int i=0; i<600; i++) {
-                                for(int j=0; j<700; j++) {
-                                    //b[i][j] = 0;
-                                }
-                            }
-                        }
-
                         if(larm.y0 > 650 || larm.y1 > 650 || larm.y2 > 650 || larm.y3 > 650) {
                             b[larm.x0][larm.y0] = 1;
                             b[larm.x1][larm.y1] = 1;
@@ -4100,11 +3851,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[larm.x3][larm.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            //sleeptime = 800;
-                            //level = 1;
-                            //blocks = 0;
-                            //lines = 0; linenext = 4;
-                            //points = 1000000;
                         }
 
                         BOOLEAN flag = FALSE;
@@ -4150,7 +3896,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -4209,15 +3955,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        if(b[rarm.x0][rarm.y0] == 1) {
-                            for(int i=0; i<600; i++) {
-                                for(int j=0; j<700; j++) {
-                                    //b[i][j] = 0;
-                                }
-                            }
-                            //exit(0);
-                        }
-
                         if(rarm.y0 > 650 || rarm.y1 > 650 || rarm.y2 > 650 || rarm.y3 > 650) {
                             b[rarm.x0][rarm.y0] = 1;
                             b[rarm.x1][rarm.y1] = 1;
@@ -4247,11 +3984,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[rarm.x3][rarm.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            //sleeptime = 800;
-                            //level = 1;
-                            //blocks = 0;
-                            //lines = 0; linenext = 4;
-                            //points = 1000000;
                         }
                         if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -4275,7 +4007,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -4334,15 +4066,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
 
-                        if(b[lsh.x0][lsh.y0] == 1) {
-                            for(int i=0; i<600; i++) {
-                                for(int j=0; j<700; j++) {
-                                    //b[i][j] = 0;
-                                }
-                            }
-                            //exit(0);
-                        }
-
                         if(lsh.y0 > 650 || lsh.y1 > 650 || lsh.y2 > 650 || lsh.y3 > 650) {
                             b[lsh.x0][lsh.y0] = 1;
                             b[lsh.x1][lsh.y1] = 1;
@@ -4372,11 +4095,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             b[lsh.x3][lsh.y3] = 1;
                             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                             prep();
-                            //sleeptime = 800;
-                            //level = 1;
-                            //blocks = 0;
-                            //lines = 0; linenext = 4;
-                            //points = 1000000;
                         }
                         if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
                         for(int i=0; i<700; i++) {
@@ -4400,7 +4118,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         
                         hdcMems = CreateCompatibleDC(hdc2);
 
-                        hBitmap = (HBITMAP)LoadImage(hInst, "bgg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(145, 0, 0));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
                         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -4458,15 +4176,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         Rectangle(hdc2, rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
-
-                        if(b[rsh.x0][rsh.y0] == 1) {
-                            for(int i=0; i<600; i++) {
-                                for(int j=0; j<700; j++) {
-                                    //b[i][j] = 0;
-                                }
-                            }
-                            //exit(0);
-                        }
 
                         if(rsh.y0 > 650 || rsh.y1 > 650 || rsh.y2 > 650 || rsh.y3 > 650) {
                             b[rsh.x0][rsh.y0] = 1;
@@ -4536,7 +4245,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         }
         case WM_CTLCOLORSTATIC:
         {
-            SetTextColor((HDC)wParam,RGB(255,55,55));
+            SetBkColor((HDC)wParam,RGB(255,255,255));
             return (BOOL)CreateSolidBrush(GetSysColor(COLOR_MENU));
             break;
         }
@@ -4546,13 +4255,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
                 hdc2 = GetDC(hwnd);
                 hdcMems = CreateCompatibleDC(hdc2);
-                hBitmap = (HBITMAP)LoadImage(hInst, "bg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+                hBitmap = (HBITMAP)LoadImage(hInst, "bf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
                 oldBitmap = SelectObject(hdcMems, hBitmap);
                 GetObject(hBitmap, sizeof(bitmap), &bitmap);
                 BitBlt(hdc2, 0, 0, 630, 750, hdcMems, 0, 0, SRCCOPY);
                 SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
                 DeleteDC(hdcMems); DeleteObject(hBitmap);
 
+                HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 255));RECT rrect3f = {0, 0, 630, 750};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);                
+                
                 thread = CreateThread(NULL, 0, downs, NULL, 0, NULL);
                 srand(time(NULL));
                 prep();
@@ -4713,7 +4424,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     number = 90;
     SetLayeredWindowAttributes(hwnd, 0, (255 * number) / 100, LWA_ALPHA);
 
-    ShowWindow(hwnd, nCmdShow);
+    ShowWindow(hwnd, SW_MAXIMIZE);
     UpdateWindow(hwnd);
 
     HWND hWnd = GetConsoleWindow();
