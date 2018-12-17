@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <windows.h>
 
+#define IDC_NEW_GAME_BUTTON 100
+
 #ifdef WINDOWS
 #include <direct.h>
 #define GetCurrentDir _getcwd
@@ -10,12 +12,9 @@
 #define GetCurrentDir getcwd
 #endif
 
+char g_szClassName[] = "\"TetrisC\"";
 char filename[FILENAME_MAX];
 char buff[FILENAME_MAX];
-
-#define IDC_NEW_GAME_BUTTON 100
-
-char g_szClassName[] = "\"TetrisC\"";
 char* choice;
 char * choicepre = "sq";
 int sleeptime = 800;
@@ -25,6 +24,7 @@ int blocks=0;
 int lines=0;
 int linenext = 4;
 int b[740][720];
+
 HWND hwnd, hwnd_title, hwnd_new_game, hwnd_ketchup, hwnd_ketchup_and_mustard, hwnd_stage, hwnd_next, hwnd_lines, hwnd_points, hwnd_blocks, hwnd_level;
 HINSTANCE hInst;
 BITMAP bitmap;
@@ -43,6 +43,7 @@ BITMAP bitmaps;
 HDC hdcMems;
 HGDIOBJ oldBitmaps;
 HBITMAP hbitmap, hhbbs;
+
 struct hat {
   int x0;
   int y0;
@@ -54,6 +55,7 @@ struct hat {
   int y3;
   int dir;
 } ht;
+
 struct square {
   int x0;
   int y0;
@@ -64,6 +66,7 @@ struct square {
   int x3;
   int y3;
 } sq;
+
 struct line {
   int x0;
   int y0;
@@ -75,6 +78,7 @@ struct line {
   int y3;
   int dir;
 } lne;
+
 struct lsho {
   int x0;
   int y0;
@@ -86,6 +90,7 @@ struct lsho {
   int y3;
   int dir;
 } lsh;
+
 struct rsho {
   int x0;
   int y0;
@@ -97,6 +102,7 @@ struct rsho {
   int y3;
   int dir;
 } rsh;
+
 struct larm {
   int x0;
   int y0;
@@ -108,6 +114,7 @@ struct larm {
   int y3;
   int dir;
 } larm;
+
 struct rarm {
   int x0;
   int y0;
