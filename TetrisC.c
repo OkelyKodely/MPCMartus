@@ -1,17 +1,5 @@
 #include <stdio.h>
 #include <windows.h>
-#include <winsock2.h>
-#include <stdbool.h>
-#include <windows.h>
-#include <commctrl.h>
-#include <mmsystem.h>
-#include <time.h>
-#include <tchar.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <math.h>
 
 #ifdef WINDOWS
 #include <direct.h>
