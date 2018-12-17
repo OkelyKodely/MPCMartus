@@ -22,7 +22,7 @@ int points=1000000;
 int level = 1;
 int blocks=0;
 int lines=0;
-int linenext = 4;
+int linenext = 10;
 int b[740][720];
 
 HWND hwnd, hwnd_title, hwnd_new_game, hwnd_ketchup, hwnd_ketchup_and_mustard, hwnd_stage, hwnd_next, hwnd_lines, hwnd_points, hwnd_blocks, hwnd_level;
@@ -132,8 +132,19 @@ void goDown() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
 
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
+        
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
         GetObject(hBitmap, sizeof(bitmap), &bitmap);
@@ -151,8 +162,8 @@ void goDown() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -190,6 +201,15 @@ void goDown() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
+        if(sq.y0 > 650 || sq.y1 > 650 || sq.y2 > 650 || sq.y3 > 650) {
+            b[sq.x0][sq.y0] = 1;
+            b[sq.x1][sq.y1] = 1;
+            b[sq.x2][sq.y2] = 1;
+            b[sq.x3][sq.y3] = 1;
+            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+            prep();
+        }
+
         BOOLEAN flag = FALSE;
         if(b[sq.x0][sq.y0+20] == 1) {
             flag = TRUE;
@@ -211,13 +231,24 @@ void goDown() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
     }
     else if(choice == "lne" && (lne.y0 <= 580 || lne.y1 <= 580 || lne.y2 <= 580 || lne.y3 <= 580)) {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -236,8 +267,8 @@ void goDown() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -275,6 +306,15 @@ void goDown() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
+        if(lne.y0 > 650 || lne.y1 > 650 || lne.y2 > 650 || lne.y3 > 650) {
+            b[lne.x0][lne.y0] = 1;
+            b[lne.x1][lne.y1] = 1;
+            b[lne.x2][lne.y2] = 1;
+            b[lne.x3][lne.y3] = 1;
+            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+            prep();
+        }
+
         BOOLEAN flag = FALSE;
         if(b[lne.x0][lne.y0+20] == 1) {
             flag = TRUE;
@@ -296,13 +336,24 @@ void goDown() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
     }
     else if(choice == "ht" && (ht.y0 <= 650 && ht.y1 <= 650 && ht.y2 <= 650 && ht.y3 <= 650)) {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -321,8 +372,8 @@ void goDown() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -360,6 +411,15 @@ void goDown() {
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
 
+        if(ht.y0 > 650 || ht.y1 > 650 || ht.y2 > 650 || ht.y3 > 650) {
+            b[ht.x0][ht.y0] = 1;
+            b[ht.x1][ht.y1] = 1;
+            b[ht.x2][ht.y2] = 1;
+            b[ht.x3][ht.y3] = 1;
+            blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+            prep();
+        }
+
         BOOLEAN flag = FALSE;
         if(b[ht.x0][ht.y0+20] == 1) {
             flag = TRUE;
@@ -381,13 +441,24 @@ void goDown() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
     }
     else if(choice == "larm" && (larm.y0 <= 650 && larm.y1 <= 650 && larm.y2 <= 650 && larm.y3 <= 650)) {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -407,8 +478,8 @@ void goDown() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -476,7 +547,7 @@ void goDown() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
@@ -498,7 +569,18 @@ void goDown() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -518,8 +600,8 @@ void goDown() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -587,7 +669,7 @@ void goDown() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
@@ -609,7 +691,18 @@ void goDown() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -629,8 +722,8 @@ void goDown() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -698,7 +791,7 @@ void goDown() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
@@ -720,7 +813,18 @@ void goDown() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -740,8 +844,8 @@ void goDown() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -809,7 +913,7 @@ void goDown() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
@@ -834,7 +938,18 @@ void goRight() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -864,8 +979,8 @@ void goRight() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -907,7 +1022,18 @@ void goRight() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -937,8 +1063,8 @@ void goRight() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -980,7 +1106,18 @@ void goRight() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1010,8 +1147,8 @@ void goRight() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1070,13 +1207,24 @@ void goRight() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
     }
     else if(choice == "larm" && (larm.y0 <= 650 && larm.y1 <= 650 && larm.y2 <= 650 && larm.y3 <= 650)) {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1107,8 +1255,8 @@ void goRight() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1176,7 +1324,7 @@ void goRight() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
@@ -1198,7 +1346,18 @@ void goRight() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1229,8 +1388,8 @@ void goRight() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1298,7 +1457,7 @@ void goRight() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
@@ -1320,7 +1479,18 @@ void goRight() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1351,8 +1521,8 @@ void goRight() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1420,7 +1590,7 @@ void goRight() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
@@ -1442,7 +1612,18 @@ void goRight() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1473,8 +1654,8 @@ void goRight() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1542,7 +1723,7 @@ void goRight() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
@@ -1567,7 +1748,18 @@ void goLeft() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1597,8 +1789,8 @@ void goLeft() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1640,7 +1832,18 @@ void goLeft() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1669,8 +1872,8 @@ void goLeft() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1712,7 +1915,18 @@ void goLeft() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1741,8 +1955,8 @@ void goLeft() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1801,13 +2015,24 @@ void goLeft() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
     }
     else if(choice == "larm" && (larm.y0 <= 650 && larm.y1 <= 650 && larm.y2 <= 650 && larm.y3 <= 650)) {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1837,8 +2062,8 @@ void goLeft() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -1906,7 +2131,7 @@ void goLeft() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
@@ -1928,7 +2153,18 @@ void goLeft() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -1958,8 +2194,8 @@ void goLeft() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -2027,7 +2263,7 @@ void goLeft() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
@@ -2049,7 +2285,18 @@ void goLeft() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -2079,8 +2326,8 @@ void goLeft() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -2148,7 +2395,7 @@ void goLeft() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
@@ -2170,7 +2417,18 @@ void goLeft() {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -2200,8 +2458,8 @@ void goLeft() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -2269,7 +2527,7 @@ void goLeft() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
-        if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+        if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
@@ -2296,7 +2554,7 @@ DWORD WINAPI downs(void *data) {
     do {
 
         HBRUSH brush = CreateSolidBrush(RGB(254, 254, 254));
-        RECT rrect5 = {60, 80, 190, 200};
+        RECT rrect5 = {90, 80, 190, 200};
         FillRect(hdc2, &rrect5, brush);
         DeleteObject(brush);
         HGDIOBJ hOldBsh;
@@ -2611,7 +2869,18 @@ DWORD WINAPI downs(void *data) {
             
             hdcMems = CreateCompatibleDC(hdc2);
 
-            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+            for(int i=1; i<=10; i++) {
+                Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+            }
+            for(int i=1; i<35; i++) {
+                Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+            }
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
 
             oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -2631,8 +2900,8 @@ DWORD WINAPI downs(void *data) {
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
 
-            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
             Rectangle(hdc2, sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
@@ -2670,7 +2939,7 @@ DWORD WINAPI downs(void *data) {
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
 
-            if(sq.y0 > 630 || sq.y1 > 630 || sq.y2 > 630 || sq.y3 > 630) {
+            if(sq.y0 > 650 || sq.y1 > 650 || sq.y2 > 650 || sq.y3 > 650) {
                 b[sq.x0][sq.y0] = 1;
                 b[sq.x1][sq.y1] = 1;
                 b[sq.x2][sq.y2] = 1;
@@ -2700,7 +2969,7 @@ DWORD WINAPI downs(void *data) {
                 blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
-            if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+            if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
@@ -2722,7 +2991,18 @@ DWORD WINAPI downs(void *data) {
             
             hdcMems = CreateCompatibleDC(hdc2);
 
-            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+            for(int i=1; i<=10; i++) {
+                Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+            }
+            for(int i=1; i<35; i++) {
+                Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+            }
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
 
             oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -2742,8 +3022,8 @@ DWORD WINAPI downs(void *data) {
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
 
-            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
             Rectangle(hdc2, lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
@@ -2811,7 +3091,7 @@ DWORD WINAPI downs(void *data) {
                 blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
-            if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+            if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
@@ -2833,7 +3113,18 @@ DWORD WINAPI downs(void *data) {
             
             hdcMems = CreateCompatibleDC(hdc2);
 
-            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+            for(int i=1; i<=10; i++) {
+                Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+            }
+            for(int i=1; i<35; i++) {
+                Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+            }
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
 
             oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -2853,8 +3144,8 @@ DWORD WINAPI downs(void *data) {
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
 
-            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
             Rectangle(hdc2, ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
@@ -2922,7 +3213,7 @@ DWORD WINAPI downs(void *data) {
                 blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
-            if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+            if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
@@ -2944,7 +3235,18 @@ DWORD WINAPI downs(void *data) {
             
             hdcMems = CreateCompatibleDC(hdc2);
 
-            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+            for(int i=1; i<=10; i++) {
+                Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+            }
+            for(int i=1; i<35; i++) {
+                Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+            }
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
 
             oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -2964,8 +3266,8 @@ DWORD WINAPI downs(void *data) {
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
 
-            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
             Rectangle(hdc2, larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
@@ -3033,7 +3335,7 @@ DWORD WINAPI downs(void *data) {
                 blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
-            if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+            if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
@@ -3055,7 +3357,18 @@ DWORD WINAPI downs(void *data) {
             
             hdcMems = CreateCompatibleDC(hdc2);
 
-            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+            for(int i=1; i<=10; i++) {
+                Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+            }
+            for(int i=1; i<35; i++) {
+                Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+            }
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
 
             oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3075,8 +3388,8 @@ DWORD WINAPI downs(void *data) {
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
 
-            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
             Rectangle(hdc2, rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
@@ -3144,7 +3457,7 @@ DWORD WINAPI downs(void *data) {
                 blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
-            if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+            if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
@@ -3166,7 +3479,18 @@ DWORD WINAPI downs(void *data) {
             
             hdcMems = CreateCompatibleDC(hdc2);
 
-            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+            for(int i=1; i<=10; i++) {
+                Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+            }
+            for(int i=1; i<35; i++) {
+                Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+            }
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
 
             oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3186,8 +3510,8 @@ DWORD WINAPI downs(void *data) {
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
 
-            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
             Rectangle(hdc2, lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
@@ -3255,7 +3579,7 @@ DWORD WINAPI downs(void *data) {
                 blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
-            if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+            if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
@@ -3277,7 +3601,18 @@ DWORD WINAPI downs(void *data) {
             
             hdcMems = CreateCompatibleDC(hdc2);
 
-            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+            hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+            for(int i=1; i<=10; i++) {
+                Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+            }
+            for(int i=1; i<35; i++) {
+                Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+            }
+            DeleteObject(SelectObject(hdc2, hOldPen));
+            SelectObject(hdc2, hOldBsh);
 
             oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3297,8 +3632,8 @@ DWORD WINAPI downs(void *data) {
             FillRect(hdc2, &rrect3, brush);
             DeleteObject(brush);
 
-            HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-            HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+            hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+            hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
             Rectangle(hdc2, rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20);
             DeleteObject(SelectObject(hdc2, hOldPen));
             SelectObject(hdc2, hOldBsh);
@@ -3366,7 +3701,7 @@ DWORD WINAPI downs(void *data) {
                 blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
                 prep();
             }
-            if(level < 40 && lines >= linenext) {level++;linenext+=4;sleeptime-=15;}
+            if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
@@ -3391,8 +3726,26 @@ DWORD WINAPI downs(void *data) {
 }
 
 void prep() {
-    fist = FALSE;
     choice = choicepre;
+    if(fist) {
+        int r = rand() % 7;
+        if(r == 1)
+          choicepre = "sq";
+        else if(r == 2)
+          choicepre = "lne";
+        else if(r == 3)
+          choicepre = "ht";
+        else if(r == 4)
+          choicepre = "larm";
+        else if(r == 5)
+          choicepre = "rarm";
+        else if(r == 6)
+          choicepre = "lsh";
+        else
+          choicepre = "rsh";
+        choice = choicepre;
+    }
+    fist = FALSE;
     int r = rand() % 7;
     if(r == 1)
       choicepre = "sq";
@@ -3477,7 +3830,18 @@ void rotate() {
         
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3497,8 +3861,8 @@ void rotate() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -3540,7 +3904,18 @@ void rotate() {
         
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3600,8 +3975,8 @@ void rotate() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -3643,7 +4018,18 @@ void rotate() {
         
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3703,8 +4089,8 @@ void rotate() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -3746,7 +4132,18 @@ void rotate() {
         
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3806,8 +4203,8 @@ void rotate() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -3849,7 +4246,18 @@ void rotate() {
         
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -3909,8 +4317,8 @@ void rotate() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -3952,7 +4360,18 @@ void rotate() {
         
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -4012,8 +4431,8 @@ void rotate() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -4055,7 +4474,18 @@ void rotate() {
         
         hdcMems = CreateCompatibleDC(hdc2);
 
-        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(255, 255, 3));RECT rrect3f = {219, 20, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+        hBitmap = (HBITMAP)LoadImage(hInst, "bgf.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);HBRUSH fbrush = CreateSolidBrush(RGB(205, 205, 203));RECT rrect3f = {219, 30, 420, 690};FillRect(hdc2, &rrect3f, fbrush);DeleteObject(fbrush);
+
+        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255,253,255)));
+        for(int i=1; i<=10; i++) {
+            Rectangle(hdc2, 220 + i*20, 30, 220 + i*20+1, 690);
+        }
+        for(int i=1; i<35; i++) {
+            Rectangle(hdc2, 220, i*20+10, 420, i*20+10+1);
+        }
+        DeleteObject(SelectObject(hdc2, hOldPen));
+        SelectObject(hdc2, hOldBsh);
 
         oldBitmap = SelectObject(hdcMems, hBitmap);
 
@@ -4115,8 +4545,8 @@ void rotate() {
         FillRect(hdc2, &rrect3, brush);
         DeleteObject(brush);
 
-        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
+        hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+        hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(2,3,255)));
         Rectangle(hdc2, rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20);
         DeleteObject(SelectObject(hdc2, hOldPen));
         SelectObject(hdc2, hOldBsh);
@@ -4289,52 +4719,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         break;
         case WM_CREATE:
         {
-            char c[33] = "up(rotate),left,down,right";
-            int y = 30; int h = 16;
-            int x = 10; int w = 179;
-            hwnd_title = CreateWindow("static", NULL,
-                                       WS_CHILD | WS_VISIBLE | WS_TABSTOP,
-                                       x, y, w, h,
-                                       hwnd, (HMENU)(501),
-                                       (HINSTANCE) GetWindowLong (hwnd, GWL_HINSTANCE), NULL);
-            SetTextColor(hdc2, RGB(255,255,255));
-            SetWindowText(hwnd_title, c);
-
-            char d[7] = "next =";
-            y = 82; h = 16;
-            x = 10; w = 44;
-            hwnd_next = CreateWindow("static", NULL,
-                                       WS_CHILD | WS_VISIBLE | WS_TABSTOP,
-                                       x, y, w, h,
-                                       hwnd, (HMENU)(501),
-                                       (HINSTANCE) GetWindowLong (hwnd, GWL_HINSTANCE), NULL);
-            SetTextColor(hdc2, RGB(255,255,255));
-            SetWindowText(hwnd_next, d);
-
-            char f[32] = "the matrix and tetris";
-            y = 230; h = 16;
-            x = 450; w = 136;
-            hwnd_ketchup_and_mustard = CreateWindow("static", NULL,
-                                       WS_CHILD | WS_VISIBLE | WS_TABSTOP,
-                                       x, y, w, h,
-                                       hwnd, (HMENU)(501),
-                                       (HINSTANCE) GetWindowLong (hwnd, GWL_HINSTANCE), NULL);
-            SetTextColor(hdc2, RGB(255,255,255));
-            SetWindowText(hwnd_ketchup_and_mustard, f);
-
-            char e[32] = "tetris has you";
-            y = 300; h = 16;
-            x = 450; w = 141;
-            hwnd_ketchup = CreateWindow("static", NULL,
-                                       WS_CHILD | WS_VISIBLE | WS_TABSTOP,
-                                       x, y, w, h,
-                                       hwnd, (HMENU)(501),
-                                       (HINSTANCE) GetWindowLong (hwnd, GWL_HINSTANCE), NULL);
-            SetTextColor(hdc2, RGB(255,255,255));
-            SetWindowText(hwnd_ketchup, e);
-
-            y = 600; h = 48;
-            x = 450; w = 124;
+            int y = 600; int h = 48;
+            int x = 450; int w = 124;
   	    hwnd_new_game = CreateWindowEx(0, "BUTTON", "start new game", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
 								x, y, w, h, hwnd, (HMENU) IDC_NEW_GAME_BUTTON, GetModuleHandle(NULL), NULL);
         }
@@ -4378,10 +4764,36 @@ void returnStage(int stage) {
                     DEFAULT_PITCH | FF_ROMAN,
                    "Helvetica");
 
-    char aa[10];sprintf(aa,"Level: %d",stage);
+    char aa[16];sprintf(aa,"Stage: %d of 40",stage);
 
     SelectObject(hdc2, font);
-    TextOut(hdc2, 440, 20, aa, 9);
+    TextOut(hdc2, 440, 20, aa, 16);
+    
+    int v = 800 - sleeptime;
+    char bb[16];sprintf(bb,"Speed: %d", v);
+
+    SelectObject(hdc2, font);
+    TextOut(hdc2, 440, 120, bb, 9);
+    DeleteObject(font);
+
+    font = CreateFont(16, 0, 0, 0,
+                      FW_NORMAL, FALSE, FALSE, FALSE,
+                      ANSI_CHARSET, OUT_DEFAULT_PRECIS,
+                    CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
+                    DEFAULT_PITCH | FF_ROMAN,
+                   "Verdana");
+    
+    char b[5] = "Keys:";
+    SelectObject(hdc2, font);
+    TextOut(hdc2, 10, 12, b, 5);
+
+    char c[24] = "up(flip),left,down,right";
+    SelectObject(hdc2, font);
+    TextOut(hdc2, 10, 32, c, 24);
+    
+    char d[12] = "next block =";
+    SelectObject(hdc2, font);
+    TextOut(hdc2, 10, 82, d, 12);
     DeleteObject(font);
 
     font = CreateFont(30, 0, 0, 0,
@@ -4392,7 +4804,7 @@ void returnStage(int stage) {
                    "Verdana");
 
     SelectObject(hdc2, font);
-    TextOut(hdc2, 86, 640, "\"TeTrIsC\"", 9);
+    TextOut(hdc2, 460, 480, "TeTrIsC", 7);
     DeleteObject(font);
 }
 
