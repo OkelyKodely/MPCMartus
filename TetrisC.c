@@ -4773,7 +4773,10 @@ void returnStage(int stage) {
     char bb[16];sprintf(bb,"Speed: %d", v);
 
     SelectObject(hdc2, font);
-    TextOut(hdc2, 440, 120, bb, 9);
+    if(v < 100)
+        TextOut(hdc2, 440, 120, bb, 9);
+    else
+        TextOut(hdc2, 440, 120, bb, 10);
     DeleteObject(font);
 
     font = CreateFont(16, 0, 0, 0,
