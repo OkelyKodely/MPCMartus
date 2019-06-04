@@ -34,7 +34,7 @@ char buff[FILENAME_MAX];
 char* choice;
 char * choicepre = "sq";
 int sleeptime = 800;
-int points=1000000;
+int points=0;
 int level = 1;
 int blocks=0;
 int lines=0;
@@ -142,8 +142,10 @@ struct rarm {
   int dir;
 } rarm;
 
-void goDown() {
-    HBRUSH brush = CreateSolidBrush(RGB(0, 255, 0));
+BOOL goDown() {
+    BOOL canGoDown = FALSE;
+    
+    HBRUSH brush = CreateSolidBrush(RGB(5, 5, 5));
 
     RECT rrect3 = {219, 20, 420, 690};
     FillRect(hdc2, &rrect3, brush);
@@ -176,6 +178,7 @@ void goDown() {
             b[sq.x3][sq.y3] = 1;
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
+        } else {
         }
 
         BOOLEAN flag = FALSE;
@@ -192,13 +195,16 @@ void goDown() {
             flag = TRUE;
         }
         if(flag) {
+            canGoDown = FALSE;
             b[sq.x0][sq.y0] = 1;
             b[sq.x1][sq.y1] = 1;
             b[sq.x2][sq.y2] = 1;
             b[sq.x3][sq.y3] = 1;
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
-        }
+        } else
+            canGoDown = TRUE;
+          
         if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
     }
     else if(choice == "lne" && (lne.y0 <= 580 || lne.y1 <= 580 || lne.y2 <= 580 || lne.y3 <= 580)) {
@@ -229,6 +235,7 @@ void goDown() {
             b[lne.x3][lne.y3] = 1;
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
+        } else {
         }
 
         BOOLEAN flag = FALSE;
@@ -245,13 +252,16 @@ void goDown() {
             flag = TRUE;
         }
         if(flag) {
+            canGoDown = FALSE;
             b[lne.x0][lne.y0] = 1;
             b[lne.x1][lne.y1] = 1;
             b[lne.x2][lne.y2] = 1;
             b[lne.x3][lne.y3] = 1;
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
-        }
+        } else
+            canGoDown = TRUE;
+
         if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
     }
     else if(choice == "ht" && (ht.y0 <= 650 && ht.y1 <= 650 && ht.y2 <= 650 && ht.y3 <= 650)) {
@@ -282,6 +292,7 @@ void goDown() {
             b[ht.x3][ht.y3] = 1;
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
+        } else {
         }
 
         BOOLEAN flag = FALSE;
@@ -298,13 +309,15 @@ void goDown() {
             flag = TRUE;
         }
         if(flag) {
+            canGoDown = FALSE;
             b[ht.x0][ht.y0] = 1;
             b[ht.x1][ht.y1] = 1;
             b[ht.x2][ht.y2] = 1;
             b[ht.x3][ht.y3] = 1;
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
-        }
+        } else
+            canGoDown = TRUE;
         if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
     }
     else if(choice == "larm" && (larm.y0 <= 650 && larm.y1 <= 650 && larm.y2 <= 650 && larm.y3 <= 650)) {
@@ -335,6 +348,7 @@ void goDown() {
             b[larm.x3][larm.y3] = 1;
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
+        } else {
         }
 
         BOOLEAN flag = FALSE;
@@ -351,13 +365,16 @@ void goDown() {
             flag = TRUE;
         }
         if(flag) {
+            canGoDown = FALSE;
             b[larm.x0][larm.y0] = 1;
             b[larm.x1][larm.y1] = 1;
             b[larm.x2][larm.y2] = 1;
             b[larm.x3][larm.y3] = 1;
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
-        }
+        } else
+            canGoDown = TRUE;
+          
         if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
@@ -404,6 +421,7 @@ void goDown() {
             b[rarm.x3][rarm.y3] = 1;
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
+        } else {
         }
 
         BOOLEAN flag = FALSE;
@@ -420,13 +438,16 @@ void goDown() {
             flag = TRUE;
         }
         if(flag) {
+            canGoDown = FALSE;
             b[rarm.x0][rarm.y0] = 1;
             b[rarm.x1][rarm.y1] = 1;
             b[rarm.x2][rarm.y2] = 1;
             b[rarm.x3][rarm.y3] = 1;
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
-        }
+        } else
+            canGoDown = TRUE;
+
         if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
@@ -473,6 +494,7 @@ void goDown() {
             b[lsh.x3][lsh.y3] = 1;
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
+        } else {
         }
 
         BOOLEAN flag = FALSE;
@@ -489,13 +511,16 @@ void goDown() {
             flag = TRUE;
         }
         if(flag) {
+            canGoDown = FALSE;
             b[lsh.x0][lsh.y0] = 1;
             b[lsh.x1][lsh.y1] = 1;
             b[lsh.x2][lsh.y2] = 1;
             b[lsh.x3][lsh.y3] = 1;
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
-        }
+        } else
+            canGoDown = TRUE;
+
         if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
@@ -542,6 +567,7 @@ void goDown() {
             b[rsh.x3][rsh.y3] = 1;
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
+        } else {
         }
 
         BOOLEAN flag = FALSE;
@@ -558,13 +584,16 @@ void goDown() {
             flag = TRUE;
         }
         if(flag) {
+            canGoDown = FALSE;
             b[rsh.x0][rsh.y0] = 1;
             b[rsh.x1][rsh.y1] = 1;
             b[rsh.x2][rsh.y2] = 1;
             b[rsh.x3][rsh.y3] = 1;
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
-        }
+        } else
+            canGoDown = TRUE;
+
         if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
@@ -585,10 +614,12 @@ void goDown() {
     }
     
     DeleteObject(brush);
+    
+    return canGoDown;
 }
 
 void goRight() {
-    HBRUSH brush = CreateSolidBrush(RGB(0, 255, 0));
+    HBRUSH brush = CreateSolidBrush(RGB(5, 5, 5));
 
     RECT rrect3 = {219, 20, 420, 690};
     FillRect(hdc2, &rrect3, brush);
@@ -1037,7 +1068,7 @@ void goRight() {
 }
 
 void goLeft() {
-    HBRUSH brush = CreateSolidBrush(RGB(0, 255, 0));
+    HBRUSH brush = CreateSolidBrush(RGB(5, 5, 5));
 
     RECT rrect3 = {219, 20, 420, 690};
     FillRect(hdc2, &rrect3, brush);
@@ -1484,170 +1515,91 @@ void goLeft() {
 }
 
 void erasePreview() {
-    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
-    RECT rrect5 = {90, 60, 219, 220};
+    HBRUSH brush = CreateSolidBrush(RGB(5, 5, 5));
+    RECT rrect5 = {0, 20, 129, 220};
     FillRect(hdc2, &rrect5, brush);
     DeleteObject(brush);
 }
 
 void showNextPiece() {
-    HFONT fnt = CreateFont(14, 0, 0, 0,
-                          FW_NORMAL, FALSE, FALSE, FALSE,
-                          ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-                        CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-                        DEFAULT_PITCH | FF_ROMAN,
-                       "Helvetica");
-    SelectObject(hdc2, fnt);
-    TextOut(hdc2, 100, 60, "Next Piece:", 11);
-    DeleteObject(fnt);
-
-    HGDIOBJ hOldBsh;
-    HGDIOBJ hOldPen;
-
     if(choicepre == "sq") {
         HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
-        RECT rrect5 = {100, 100, 100 + 20, 100 + 20};
+        RECT rrect5 = {-90+100, 100, -90+100 + 20, 100 + 20};
         FillRect(hdc2, &rrect5, brush);
-        RECT rrect6 = {120, 100, 120 + 20, 100 + 20};
+        RECT rrect6 = {-90+120, 100, -90+120 + 20, 100 + 20};
         FillRect(hdc2, &rrect6, brush);
-        RECT rrect7 = {100, 120, 100 + 20, 120 + 20};
+        RECT rrect7 = {-90+100, 120, -90+100 + 20, 120 + 20};
         FillRect(hdc2, &rrect7, brush);
-        RECT rrect8 = {120, 120, 120 + 20, 120 + 20};
+        RECT rrect8 = {-90+120, 120, -90+120 + 20, 120 + 20};
         FillRect(hdc2, &rrect8, brush);
         DeleteObject(brush);
-        HFONT font = CreateFont(13, 0, 0, 0,
-                              FW_NORMAL, FALSE, FALSE, FALSE,
-                              ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-                            CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-                            DEFAULT_PITCH | FF_ROMAN,
-                           "Helvetica");
-        SelectObject(hdc2, font);
-        TextOut(hdc2, 100, 170, "Square", 6);
-        DeleteObject(font);
     } else if(choicepre == "lne") {
         HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
-        RECT rrect5 = {100, 100, 100 + 20, 100 + 20};
+        RECT rrect5 = {-90+100, 100, -90+100 + 20, 100 + 20};
         FillRect(hdc2, &rrect5, brush);
-        RECT rrect6 = {100, 120, 100 + 20, 120 + 20};
+        RECT rrect6 = {-90+100, 120, -90+100 + 20, 120 + 20};
         FillRect(hdc2, &rrect6, brush);
-        RECT rrect7 = {100, 140, 100 + 20, 140 + 20};
+        RECT rrect7 = {-90+100, 140, -90+100 + 20, 140 + 20};
         FillRect(hdc2, &rrect7, brush);
-        RECT rrect8 = {100, 160, 100 + 20, 160 + 20};
+        RECT rrect8 = {-90+100, 160, -90+100 + 20, 160 + 20};
         FillRect(hdc2, &rrect8, brush);
         DeleteObject(brush);
-        HFONT font = CreateFont(13, 0, 0, 0,
-                              FW_NORMAL, FALSE, FALSE, FALSE,
-                              ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-                            CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-                            DEFAULT_PITCH | FF_ROMAN,
-                           "Helvetica");
-        SelectObject(hdc2, font);
-        TextOut(hdc2, 100, 190, "Line", 4);
-        DeleteObject(font);
     } else if(choicepre == "ht") {
         HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
-        RECT rrect5 = {120, 100, 120 + 20, 100 + 20};
+        RECT rrect5 = {-90+120, 100, -90+120 + 20, 100 + 20};
         FillRect(hdc2, &rrect5, brush);
-        RECT rrect6 = {100, 120, 100 + 20, 120 + 20};
+        RECT rrect6 = {-90+100, 120, -90+100 + 20, 120 + 20};
         FillRect(hdc2, &rrect6, brush);
-        RECT rrect7 = {120, 120, 120 + 20, 120 + 20};
+        RECT rrect7 = {-90+120, 120, -90+120 + 20, 120 + 20};
         FillRect(hdc2, &rrect7, brush);
-        RECT rrect8 = {140, 120, 140 + 20, 120 + 20};
+        RECT rrect8 = {-90+140, 120, -90+140 + 20, 120 + 20};
         FillRect(hdc2, &rrect8, brush);
         DeleteObject(brush);
-        HFONT font = CreateFont(13, 0, 0, 0,
-                              FW_NORMAL, FALSE, FALSE, FALSE,
-                              ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-                            CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-                            DEFAULT_PITCH | FF_ROMAN,
-                           "Helvetica");
-        SelectObject(hdc2, font);
-        TextOut(hdc2, 100, 170, "Hat", 3);
-        DeleteObject(font);
     } else if(choicepre == "larm") {
         HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
-        RECT rrect5 = {120, 100, 120 + 20, 100 + 20};
+        RECT rrect5 = {-90+120, 100, -90+120 + 20, 100 + 20};
         FillRect(hdc2, &rrect5, brush);
-        RECT rrect6 = {120, 120, 120 + 20, 120 + 20};
+        RECT rrect6 = {-90+120, 120, -90+120 + 20, 120 + 20};
         FillRect(hdc2, &rrect6, brush);
-        RECT rrect7 = {120, 140, 120 + 20, 140 + 20};
+        RECT rrect7 = {-90+120, 140, -90+120 + 20, 140 + 20};
         FillRect(hdc2, &rrect7, brush);
-        RECT rrect8 = {100, 140, 100 + 20, 140 + 20};
+        RECT rrect8 = {-90+100, 140, -90+100 + 20, 140 + 20};
         FillRect(hdc2, &rrect8, brush);
         DeleteObject(brush);
-        HFONT font = CreateFont(13, 0, 0, 0,
-                              FW_NORMAL, FALSE, FALSE, FALSE,
-                              ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-                            CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-                            DEFAULT_PITCH | FF_ROMAN,
-                           "Helvetica");
-        SelectObject(hdc2, font);
-        TextOut(hdc2, 100, 170, "Left Arm", 8);
-        DeleteObject(font);
     } else if(choicepre == "rarm") {
         HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
-        RECT rrect5 = {120-20, 100, 120 + 20-20, 100 + 20};
+        RECT rrect5 = {-90+120-20, 100, -90+120 + 20-20, 100 + 20};
         FillRect(hdc2, &rrect5, brush);
-        RECT rrect6 = {120-20, 120, 120 + 20-20, 120 + 20};
+        RECT rrect6 = {-90+120-20, 120, -90+120 + 20-20, 120 + 20};
         FillRect(hdc2, &rrect6, brush);
-        RECT rrect7 = {120-20, 140, 120 + 20-20, 140 + 20};
+        RECT rrect7 = {-90+120-20, 140, -90+120 + 20-20, 140 + 20};
         FillRect(hdc2, &rrect7, brush);
-        RECT rrect8 = {140-20, 140, 140 + 20-20, 140 + 20};
+        RECT rrect8 = {-90+140-20, 140, -90+140 + 20-20, 140 + 20};
         FillRect(hdc2, &rrect8, brush);
         DeleteObject(brush);
-        HFONT font = CreateFont(13, 0, 0, 0,
-                              FW_NORMAL, FALSE, FALSE, FALSE,
-                              ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-                            CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-                            DEFAULT_PITCH | FF_ROMAN,
-                           "Helvetica");
-        SelectObject(hdc2, font);
-        TextOut(hdc2, 120-20, 170, "Right Arm", 9);
-        DeleteObject(font);
     } else if(choicepre == "lsh") {
         HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
-        RECT rrect5 = {120, 100, 120 + 20, 100 + 20};
+        RECT rrect5 = {-90+120, 100, -90+120 + 20, 100 + 20};
         FillRect(hdc2, &rrect5, brush);
-        RECT rrect6 = {120, 120, 120 + 20, 120 + 20};
+        RECT rrect6 = {-90+120, 120, -90+120 + 20, 120 + 20};
         FillRect(hdc2, &rrect6, brush);
-        RECT rrect7 = {100, 120, 100 + 20, 120 + 20};
+        RECT rrect7 = {-90+100, 120, -90+100 + 20, 120 + 20};
         FillRect(hdc2, &rrect7, brush);
-        RECT rrect8 = {100, 140, 100 + 20, 140 + 20};
+        RECT rrect8 = {-90+100, 140, -90+100 + 20, 140 + 20};
         FillRect(hdc2, &rrect8, brush);
         DeleteObject(brush);
-        HFONT font = CreateFont(13, 0, 0, 0,
-                              FW_NORMAL, FALSE, FALSE, FALSE,
-                              ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-                            CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-                            DEFAULT_PITCH | FF_ROMAN,
-                           "Helvetica");
-        SelectObject(hdc2, font);
-        TextOut(hdc2, 100, 170, "Left Shoulder", 13);
-        DeleteObject(font);
     } else if(choicepre == "rsh") {
         HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
-        RECT rrect5 = {100, 100, 100 + 20, 100 + 20};
+        RECT rrect5 = {-90+100, 100, -90+100 + 20, 100 + 20};
         FillRect(hdc2, &rrect5, brush);
-        RECT rrect6 = {100, 120, 100 + 20, 120 + 20};
+        RECT rrect6 = {-90+100, 120, -90+100 + 20, 120 + 20};
         FillRect(hdc2, &rrect6, brush);
-        RECT rrect7 = {120, 120, 120 + 20, 120 + 20};
+        RECT rrect7 = {-90+120, 120, -90+120 + 20, 120 + 20};
         FillRect(hdc2, &rrect7, brush);
-        RECT rrect8 = {120, 140, 120 + 20, 140 + 20};
+        RECT rrect8 = {-90+120, 140, -90+120 + 20, 140 + 20};
         FillRect(hdc2, &rrect8, brush);
         DeleteObject(brush);
-        HFONT font = CreateFont(13, 0, 0, 0,
-                              FW_NORMAL, FALSE, FALSE, FALSE,
-                              ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-                            CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-                            DEFAULT_PITCH | FF_ROMAN,
-                           "Helvetica");
-        SelectObject(hdc2, font);
-        TextOut(hdc2, 100, 170, "Right Shoulder", 14);
-        DeleteObject(font);
     }
-    
-    DeleteObject(hOldBsh);
-    DeleteObject(hOldPen);
 }
 
 void clearLine() {
@@ -1730,7 +1682,7 @@ DWORD WINAPI downs(void *data) {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        HBRUSH brush = CreateSolidBrush(RGB(0, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(5, 5, 5));
 
         RECT rrect3 = {219, 20, 420, 690};
         FillRect(hdc2, &rrect3, brush);
@@ -2172,7 +2124,7 @@ DWORD WINAPI downs(void *data) {
             }
         }
 
-        HBRUSH brus = CreateSolidBrush(RGB(0, 255, 0));
+        HBRUSH brus = CreateSolidBrush(RGB(5, 5, 5));
 
         RECT ect3 = {219, 20, 420, 690};
         FillRect(hdc2, &ect3, brus);
@@ -2815,7 +2767,7 @@ void prep() {
 }
 
 void rotate() {
-    HBRUSH brush = CreateSolidBrush(RGB(0, 255, 0));
+    HBRUSH brush = CreateSolidBrush(RGB(5, 5, 5));
 
     RECT rrect3 = {219, 20, 420, 690};
     FillRect(hdc2, &rrect3, brush);
@@ -3369,10 +3321,10 @@ void rotate() {
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-  DeleteObject(hdc2);
-  hdc2 = GetDC(hwnd);
+    DeleteObject(hdc2);
+    hdc2 = GetDC(hwnd);
   
-  switch(msg)
+    switch(msg)
     {
         case WM_KEYDOWN: 
             switch (wParam) 
@@ -3461,7 +3413,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                             }
                         }
                     }
-            break;
+                    break;
+                case VK_SPACE:
+                    do {
+                      
+                    } while (goDown());
+                    break;
         }
         case WM_PAINT:
         {
@@ -3473,6 +3430,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             DeleteDC(hdcMems); DeleteObject(hBitmap);
 
             if(fist) {
+                HBRUSH brush = CreateSolidBrush(RGB(55, 0, 250));
+                RECT rrect = {0, 0, 640, 750};
+                FillRect(hdc2, &rrect, brush);
+                DeleteObject(brush);
+
                 thread = CreateThread(NULL, 0, downs, NULL, 0, NULL);
                 srand(time(NULL));
                 prep();
@@ -3489,61 +3451,61 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 }
             }
 
-            if(b[rarm.x0][rarm.y0] == 1
+            if(b[rarm.x0][rarm.y0+20] == 1
                 ||        
-                b[rarm.x1][rarm.y1] == 1
+                b[rarm.x1][rarm.y1+20] == 1
                 ||
-                b[rarm.x2][rarm.y2] == 1
+                b[rarm.x2][rarm.y2+20] == 1
                 ||
-                b[rarm.x3][rarm.y3] == 1
+                b[rarm.x3][rarm.y3+20] == 1
                 ||
-                b[larm.x0][larm.y0] == 1
+                b[larm.x0][larm.y0+20] == 1
                 ||        
-                b[larm.x1][larm.y1] == 1
+                b[larm.x1][larm.y1+20] == 1
                 ||
-                b[larm.x2][larm.y2] == 1
+                b[larm.x2][larm.y2+20] == 1
                 ||
-                b[larm.x3][larm.y3] == 1
+                b[larm.x3][larm.y3+20] == 1
                 ||
-                b[rsh.x0][rsh.y0] == 1
+                b[rsh.x0][rsh.y0+20] == 1
                 ||        
-                b[rsh.x1][rsh.y1] == 1
+                b[rsh.x1][rsh.y1+20] == 1
                 ||
-                b[rsh.x2][rsh.y2] == 1
+                b[rsh.x2][rsh.y2+20] == 1
                 ||
-                b[rsh.x3][rsh.y3] == 1
+                b[rsh.x3][rsh.y3+20] == 1
                 ||
-                b[lsh.x0][lsh.y0] == 1
+                b[lsh.x0][lsh.y0+20] == 1
                 ||        
-                b[lsh.x1][lsh.y1] == 1
+                b[lsh.x1][lsh.y1+20] == 1
                 ||
-                b[lsh.x2][lsh.y2] == 1
+                b[lsh.x2][lsh.y2+20] == 1
                 ||
-                b[lsh.x3][lsh.y3] == 1               
+                b[lsh.x3][lsh.y3+20] == 1               
                 ||
-                b[sq.x0][sq.y0] == 1
+                b[sq.x0][sq.y0+20] == 1
                 ||        
-                b[sq.x1][sq.y1] == 1
+                b[sq.x1][sq.y1+20] == 1
                 ||
-                b[sq.x2][sq.y2] == 1
+                b[sq.x2][sq.y2+20] == 1
                 ||
-                b[sq.x3][sq.y3] == 1
+                b[sq.x3][sq.y3+20] == 1
                 ||
-                b[lne.x0][lne.y0] == 1
+                b[lne.x0][lne.y0+20] == 1
                 ||        
-                b[lne.x1][lne.y1] == 1
+                b[lne.x1][lne.y1+20] == 1
                 ||
-                b[lne.x2][lne.y2] == 1
+                b[lne.x2][lne.y2+20] == 1
                 ||
-                b[lne.x3][lne.y3] == 1
+                b[lne.x3][lne.y3+20] == 1
                 ||
-                b[ht.x0][ht.y0] == 1
+                b[ht.x0][ht.y0+20] == 1
                 ||        
-                b[ht.x1][ht.y1] == 1
+                b[ht.x1][ht.y1+20] == 1
                 ||
-                b[ht.x2][ht.y2] == 1
+                b[ht.x2][ht.y2+20] == 1
                 ||
-                b[ht.x3][ht.y3] == 1) {
+                b[ht.x3][ht.y3+20] == 1) {
                 
                 GetCurrentDir( buff, FILENAME_MAX );
                 buff[strlen(buff)] = '\0';
@@ -3562,8 +3524,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         case WM_CREATE:
         {
             int y = 600; int h = 48;
-            int x = 450; int w = 124;
-  	    hwnd_new_game = CreateWindowEx(0, "BUTTON", "Play again", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+            int x = 443; int w = 124;
+  	    hwnd_new_game = CreateWindowEx(0, "BUTTON", "Play Again", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
 								x, y, w, h, hwnd, (HMENU) PLAY_AGAIN_BUTTON, GetModuleHandle(NULL), NULL);
         }
         break;
@@ -3629,42 +3591,6 @@ void printMiscLabels(int stage) {
         TextOut(hdc2, 440, 120, bb, 10);
     DeleteObject(font);
 
-    font = CreateFont(16, 0, 0, 0,
-                      FW_NORMAL, FALSE, FALSE, FALSE,
-                      ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-                    CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-                    DEFAULT_PITCH | FF_ROMAN,
-                   "Verdana");
-    
-    char b[5] = "Keys:";
-    SelectObject(hdc2, font);
-    //TextOut(hdc2, 10, 12, b, 5);
-    DeleteObject(font);
-
-    font = CreateFont(16, 0, 0, 0,
-                      FW_NORMAL, FALSE, FALSE, FALSE,
-                      ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-                    CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-                    DEFAULT_PITCH | FF_ROMAN,
-                   "Verdana");
-
-    char c[24] = "up(flip),left,down,right";
-    SelectObject(hdc2, font);
-    //TextOut(hdc2, 10, 32, c, 24);
-    DeleteObject(font);
-
-    font = CreateFont(16, 0, 0, 0,
-                      FW_NORMAL, FALSE, FALSE, FALSE,
-                      ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-                    CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-                    DEFAULT_PITCH | FF_ROMAN,
-                   "Verdana");
-    
-    char d[12] = "next block =";
-    SelectObject(hdc2, font);
-    //TextOut(hdc2, 10, 82, d, 12);
-    DeleteObject(font);
-
     font = CreateFont(30, 0, 0, 0,
                       FW_NORMAL, FALSE, FALSE, FALSE,
                       ANSI_CHARSET, OUT_DEFAULT_PRECIS,
@@ -3673,7 +3599,7 @@ void printMiscLabels(int stage) {
                    "Verdana");
 
     SelectObject(hdc2, font);
-    TextOut(hdc2, 460, 480, "WinTris", 7);
+    TextOut(hdc2, 443, 480, "WinTris", 7);
     DeleteObject(font);
 }
 
@@ -3698,7 +3624,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     }
 
     hwnd = CreateWindowEx(WS_EX_LAYERED,
-            g_szClassName, "by okelykodely dh.cho428@gmail.com Copyright 2018 All Rights Reserved",
+            g_szClassName, "",
             WS_OVERLAPPEDWINDOW,
             0, 0, 640, 750,
             NULL, NULL, hInstance, NULL);
@@ -3707,8 +3633,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
         return 0;
     }
     
-    int number;
-    number = 95;
+    int number = 100;
+
     SetLayeredWindowAttributes(hwnd, 0, (255 * number) / 100, LWA_ALPHA);
 
     ShowWindow(hwnd, nCmdShow);
