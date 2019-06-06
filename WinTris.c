@@ -46,10 +46,10 @@ BITMAP bitmap;
 WNDCLASSEX wc;
 HDC hdcMem;
 HGDIOBJ oldBitmap;
-HBITMAP hBitmap;
+HBITMAP hBitmap, hb1,hb2,hb3,hb4,hb5;
 HFONT font;
 MSG Msg;
-HANDLE thread;
+HANDLE thread, thrad;
 BOOLEAN fist = TRUE;
 HDC hdc;
 HDC hdc2;
@@ -145,10 +145,16 @@ struct rarm {
 BOOL goDown() {
     BOOL canGoDown = FALSE;
     
-    HBRUSH brush = CreateSolidBrush(RGB(5, 5, 5));
+    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
 
     RECT rrect3 = {219, 20, 420, 690};
-    FillRect(hdc2, &rrect3, brush);
+    //FillRect(hdc2, &rrect3, brush);
+    hb1 = (HBITMAP)LoadImage(hInst, "bg1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+    oldBitmap = SelectObject(hdcMems, hb1);
+    GetObject(hb1, sizeof(bitmap), &bitmap);
+    BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+    SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+    DeleteDC(hdcMems); DeleteObject(hb1);
 
     if(choice == "sq" && (sq.y0 <= 630 && sq.y1 <= 630 && sq.y2 <= 630 && sq.y3 <= 630)) {
         sq.y0 += 20;
@@ -156,7 +162,7 @@ BOOL goDown() {
         sq.y2 += 20;
         sq.y3 += 20;
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -213,7 +219,7 @@ BOOL goDown() {
         lne.y2 += 20;
         lne.y3 += 20;
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -270,7 +276,7 @@ BOOL goDown() {
         ht.y2 += 20;
         ht.y3 += 20;
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -326,7 +332,7 @@ BOOL goDown() {
         larm.y2 += 20;
         larm.y3 += 20;
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -379,13 +385,13 @@ BOOL goDown() {
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
-                    HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
+                    HBRUSH brush = CreateSolidBrush(RGB(250, 50, 250));
                     RECT rrect6 = {i, j, i + 20, j + 20};
                     FillRect(hdc2, &rrect6, brush);
                     DeleteObject(brush);
 
                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                     Rectangle(hdc2, i, j, i + 20, j + 20);
                     DeleteObject(SelectObject(hdc2, hOldPen));
                     SelectObject(hdc2, hOldBsh);
@@ -399,7 +405,7 @@ BOOL goDown() {
         rarm.y2 += 20;
         rarm.y3 += 20;
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -452,13 +458,13 @@ BOOL goDown() {
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
-                    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                     RECT rrect6 = {i, j, i + 20, j + 20};
                     FillRect(hdc2, &rrect6, brush);
                     DeleteObject(brush);
 
                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                     Rectangle(hdc2, i, j, i + 20, j + 20);
                     DeleteObject(SelectObject(hdc2, hOldPen));
                     SelectObject(hdc2, hOldBsh);
@@ -472,7 +478,7 @@ BOOL goDown() {
         lsh.y2 += 20;
         lsh.y3 += 20;
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -525,13 +531,13 @@ BOOL goDown() {
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
-                    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                     RECT rrect6 = {i, j, i + 20, j + 20};
                     FillRect(hdc2, &rrect6, brush);
                     DeleteObject(brush);
 
                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                     Rectangle(hdc2, i, j, i + 20, j + 20);
                     DeleteObject(SelectObject(hdc2, hOldPen));
                     SelectObject(hdc2, hOldBsh);
@@ -545,7 +551,7 @@ BOOL goDown() {
         rsh.y2 += 20;
         rsh.y3 += 20;
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -598,13 +604,13 @@ BOOL goDown() {
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
-                    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                     RECT rrect6 = {i, j, i + 20, j + 20};
                     FillRect(hdc2, &rrect6, brush);
                     DeleteObject(brush);
 
                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                     Rectangle(hdc2, i, j, i + 20, j + 20);
                     DeleteObject(SelectObject(hdc2, hOldPen));
                     SelectObject(hdc2, hOldBsh);
@@ -619,10 +625,16 @@ BOOL goDown() {
 }
 
 void goRight() {
-    HBRUSH brush = CreateSolidBrush(RGB(5, 5, 5));
+    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
 
     RECT rrect3 = {219, 20, 420, 690};
-    FillRect(hdc2, &rrect3, brush);
+    //FillRect(hdc2, &rrect3, brush);
+    hb1 = (HBITMAP)LoadImage(hInst, "bg1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+    oldBitmap = SelectObject(hdcMems, hb1);
+    GetObject(hb1, sizeof(bitmap), &bitmap);
+    BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+    SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+    DeleteDC(hdcMems); DeleteObject(hb1);
 
     if(choice == "sq" && (sq.y0 <= 650 && sq.y1 <= 650 && sq.y2 <= 650 && sq.y3 <= 650)) {
         if(b[sq.x0+20][sq.y0] == 0 &&
@@ -641,7 +653,7 @@ void goRight() {
             sq.x3 += 20;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -673,7 +685,7 @@ void goRight() {
             lne.x3 += 20;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -705,7 +717,7 @@ void goRight() {
             ht.x3 += 20;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -760,7 +772,7 @@ void goRight() {
             larm.x3 += 20;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -809,13 +821,13 @@ void goRight() {
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
-                    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                     RECT rrect6 = {i, j, i + 20, j + 20};
                     FillRect(hdc2, &rrect6, brush);
                     DeleteObject(brush);
 
                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                     Rectangle(hdc2, i, j, i + 20, j + 20);
                     DeleteObject(SelectObject(hdc2, hOldPen));
                     SelectObject(hdc2, hOldBsh);
@@ -840,7 +852,7 @@ void goRight() {
             rarm.x3 += 20;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -889,13 +901,13 @@ void goRight() {
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
-                    HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
+                    HBRUSH brush = CreateSolidBrush(RGB(250, 50, 250));
                     RECT rrect6 = {i, j, i + 20, j + 20};
                     FillRect(hdc2, &rrect6, brush);
                     DeleteObject(brush);
 
                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                     Rectangle(hdc2, i, j, i + 20, j + 20);
                     DeleteObject(SelectObject(hdc2, hOldPen));
                     SelectObject(hdc2, hOldBsh);
@@ -920,7 +932,7 @@ void goRight() {
             lsh.x3 += 20;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -969,13 +981,13 @@ void goRight() {
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
-                    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                     RECT rrect6 = {i, j, i + 20, j + 20};
                     FillRect(hdc2, &rrect6, brush);
                     DeleteObject(brush);
 
                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                     Rectangle(hdc2, i, j, i + 20, j + 20);
                     DeleteObject(SelectObject(hdc2, hOldPen));
                     SelectObject(hdc2, hOldBsh);
@@ -1000,7 +1012,7 @@ void goRight() {
             rsh.x3 += 20;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -1049,13 +1061,13 @@ void goRight() {
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
-                    HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
+                    HBRUSH brush = CreateSolidBrush(RGB(250, 50, 250));
                     RECT rrect6 = {i, j, i + 20, j + 20};
                     FillRect(hdc2, &rrect6, brush);
                     DeleteObject(brush);
 
                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                     Rectangle(hdc2, i, j, i + 20, j + 20);
                     DeleteObject(SelectObject(hdc2, hOldPen));
                     SelectObject(hdc2, hOldBsh);
@@ -1068,10 +1080,16 @@ void goRight() {
 }
 
 void goLeft() {
-    HBRUSH brush = CreateSolidBrush(RGB(5, 5, 5));
+    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
 
     RECT rrect3 = {219, 20, 420, 690};
-    FillRect(hdc2, &rrect3, brush);
+    //FillRect(hdc2, &rrect3, brush);
+    hb1 = (HBITMAP)LoadImage(hInst, "bg1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+    oldBitmap = SelectObject(hdcMems, hb1);
+    GetObject(hb1, sizeof(bitmap), &bitmap);
+    BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+    SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+    DeleteDC(hdcMems); DeleteObject(hb1);
 
     if(choice == "sq" && (sq.y0 <= 650 && sq.y1 <= 650 && sq.y2 <= 650 && sq.y3 <= 650)) {
         if(sq.x0 > 220 &&
@@ -1089,7 +1107,7 @@ void goLeft() {
             }
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
 
@@ -1120,7 +1138,7 @@ void goLeft() {
             }
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -1152,7 +1170,7 @@ void goLeft() {
             }
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -1207,7 +1225,7 @@ void goLeft() {
             }
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -1257,13 +1275,13 @@ void goLeft() {
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
-                    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                     RECT rrect6 = {i, j, i + 20, j + 20};
                     FillRect(hdc2, &rrect6, brush);
                     DeleteObject(brush);
 
                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                     Rectangle(hdc2, i, j, i + 20, j + 20);
                     DeleteObject(SelectObject(hdc2, hOldPen));
                     SelectObject(hdc2, hOldBsh);
@@ -1287,7 +1305,7 @@ void goLeft() {
             }
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -1337,13 +1355,13 @@ void goLeft() {
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
-                    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                     RECT rrect6 = {i, j, i + 20, j + 20};
                     FillRect(hdc2, &rrect6, brush);
                     DeleteObject(brush);
 
                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                     Rectangle(hdc2, i, j, i + 20, j + 20);
                     DeleteObject(SelectObject(hdc2, hOldPen));
                     SelectObject(hdc2, hOldBsh);
@@ -1367,7 +1385,7 @@ void goLeft() {
             }
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -1417,13 +1435,13 @@ void goLeft() {
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
-                    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                     RECT rrect6 = {i, j, i + 20, j + 20};
                     FillRect(hdc2, &rrect6, brush);
                     DeleteObject(brush);
 
                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                     Rectangle(hdc2, i, j, i + 20, j + 20);
                     DeleteObject(SelectObject(hdc2, hOldPen));
                     SelectObject(hdc2, hOldBsh);
@@ -1447,7 +1465,7 @@ void goLeft() {
             }
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -1496,13 +1514,13 @@ void goLeft() {
         for(int i=0; i<700; i++) {
             for(int j=0; j<700; j++) {
                 if(b[i][j] == 1) {
-                    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                     RECT rrect6 = {i, j, i + 20, j + 20};
                     FillRect(hdc2, &rrect6, brush);
                     DeleteObject(brush);
 
                     HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                     Rectangle(hdc2, i, j, i + 20, j + 20);
                     DeleteObject(SelectObject(hdc2, hOldPen));
                     SelectObject(hdc2, hOldBsh);
@@ -1515,7 +1533,7 @@ void goLeft() {
 }
 
 void erasePreview() {
-    HBRUSH brush = CreateSolidBrush(RGB(5, 5, 5));
+    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
     RECT rrect5 = {0, 20, 129, 220};
     FillRect(hdc2, &rrect5, brush);
     DeleteObject(brush);
@@ -1523,7 +1541,7 @@ void erasePreview() {
 
 void showNextPiece() {
     if(choicepre == "sq") {
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
         RECT rrect5 = {-90+100, 100, -90+100 + 20, 100 + 20};
         FillRect(hdc2, &rrect5, brush);
         RECT rrect6 = {-90+120, 100, -90+120 + 20, 100 + 20};
@@ -1534,7 +1552,7 @@ void showNextPiece() {
         FillRect(hdc2, &rrect8, brush);
         DeleteObject(brush);
     } else if(choicepre == "lne") {
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
         RECT rrect5 = {-90+100, 100, -90+100 + 20, 100 + 20};
         FillRect(hdc2, &rrect5, brush);
         RECT rrect6 = {-90+100, 120, -90+100 + 20, 120 + 20};
@@ -1545,7 +1563,7 @@ void showNextPiece() {
         FillRect(hdc2, &rrect8, brush);
         DeleteObject(brush);
     } else if(choicepre == "ht") {
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
         RECT rrect5 = {-90+120, 100, -90+120 + 20, 100 + 20};
         FillRect(hdc2, &rrect5, brush);
         RECT rrect6 = {-90+100, 120, -90+100 + 20, 120 + 20};
@@ -1556,7 +1574,7 @@ void showNextPiece() {
         FillRect(hdc2, &rrect8, brush);
         DeleteObject(brush);
     } else if(choicepre == "larm") {
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
         RECT rrect5 = {-90+120, 100, -90+120 + 20, 100 + 20};
         FillRect(hdc2, &rrect5, brush);
         RECT rrect6 = {-90+120, 120, -90+120 + 20, 120 + 20};
@@ -1567,7 +1585,7 @@ void showNextPiece() {
         FillRect(hdc2, &rrect8, brush);
         DeleteObject(brush);
     } else if(choicepre == "rarm") {
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
         RECT rrect5 = {-90+120-20, 100, -90+120 + 20-20, 100 + 20};
         FillRect(hdc2, &rrect5, brush);
         RECT rrect6 = {-90+120-20, 120, -90+120 + 20-20, 120 + 20};
@@ -1578,7 +1596,7 @@ void showNextPiece() {
         FillRect(hdc2, &rrect8, brush);
         DeleteObject(brush);
     } else if(choicepre == "lsh") {
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
         RECT rrect5 = {-90+120, 100, -90+120 + 20, 100 + 20};
         FillRect(hdc2, &rrect5, brush);
         RECT rrect6 = {-90+120, 120, -90+120 + 20, 120 + 20};
@@ -1589,7 +1607,7 @@ void showNextPiece() {
         FillRect(hdc2, &rrect8, brush);
         DeleteObject(brush);
     } else if(choicepre == "rsh") {
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
         RECT rrect5 = {-90+100, 100, -90+100 + 20, 100 + 20};
         FillRect(hdc2, &rrect5, brush);
         RECT rrect6 = {-90+100, 120, -90+100 + 20, 120 + 20};
@@ -1673,28 +1691,25 @@ void clearLine() {
     } while(cc < 35);
 }
 
-DWORD WINAPI downs(void *data) {
-  
-    BOOLEAN downIt = TRUE;
-
+DWORD WINAPI paintMe(void *data) {
+    int a=1;
     do {
-        Sleep(sleeptime);
-
+        char *str = (char *) malloc(strlen("bg1.bmp"));
+        strcpy(str,"bg");
+        char buffer[26];
+        strcat(str,itoa(a,buffer,10));
+        strcat(str,".bmp");
         hdcMems = CreateCompatibleDC(hdc2);
-
-        HBRUSH brush = CreateSolidBrush(RGB(5, 5, 5));
-
-        RECT rrect3 = {219, 20, 420, 690};
-        FillRect(hdc2, &rrect3, brush);
-        DeleteObject(brush);
-
+        hb1 = (HBITMAP)LoadImage(hInst, str, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+        Sleep(120);
+        oldBitmap = SelectObject(hdcMems, hb1);
+        GetObject(hb1, sizeof(bitmap), &bitmap);
+        BitBlt(hdc2, 219, 20, 420, 690, hdcMems, 0, 0, SRCCOPY);
+        SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
+        DeleteDC(hdcMems); DeleteObject(hb1);
         if(choice == "sq" && (sq.y0 <= 630 && sq.y1 <= 630 && sq.y2 <= 630 && sq.y3 <= 630)) {
-    //        sq.y0 += 20;
-    //        sq.y1 += 20;
-    //        sq.y2 += 20;
-    //        sq.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
             RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
@@ -1747,7 +1762,7 @@ DWORD WINAPI downs(void *data) {
     //        lne.y2 += 20;
     //        lne.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
             RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
@@ -1800,7 +1815,7 @@ DWORD WINAPI downs(void *data) {
     //        ht.y2 += 20;
     //        ht.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
             RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
@@ -1853,7 +1868,7 @@ DWORD WINAPI downs(void *data) {
     //        larm.y2 += 20;
     //        larm.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
             RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
@@ -1902,13 +1917,13 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(50, 50, 50));
+                        HBRUSH brush = CreateSolidBrush(RGB(250, 50, 250));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -1922,7 +1937,7 @@ DWORD WINAPI downs(void *data) {
     //        rarm.y2 += 20;
     //        rarm.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
             RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
@@ -1971,13 +1986,13 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -1991,7 +2006,7 @@ DWORD WINAPI downs(void *data) {
     //        lsh.y2 += 20;
     //        lsh.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
             RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
@@ -2040,13 +2055,13 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2060,7 +2075,7 @@ DWORD WINAPI downs(void *data) {
     //        rsh.y2 += 20;
     //        rsh.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
             RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
@@ -2109,13 +2124,485 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
+                        Rectangle(hdc2, i, j, i + 20, j + 20);
+                        DeleteObject(SelectObject(hdc2, hOldPen));
+                        SelectObject(hdc2, hOldBsh);
+                    }
+                }
+            }
+        }
+        a++;
+        if(a == 13)
+          a = 1;
+
+        for(int i=0; i<700; i++) {
+            for(int j=0; j<700; j++) {
+                if(b[i][j] == 1) {
+                    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
+                    RECT rrect6 = {i, j, i + 20, j + 20};
+                    FillRect(hdc2, &rrect6, brush);
+                    DeleteObject(brush);
+
+                    HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                    HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
+                    Rectangle(hdc2, i, j, i + 20, j + 20);
+                    DeleteObject(SelectObject(hdc2, hOldPen));
+                    SelectObject(hdc2, hOldBsh);
+                }
+            }
+        }
+
+    } while (TRUE);
+
+    return 0;
+}
+
+DWORD WINAPI downs(void *data) {
+  
+    BOOLEAN downIt = TRUE;
+
+    do {
+        Sleep(sleeptime);
+
+        hdcMems = CreateCompatibleDC(hdc2);
+
+        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+
+        RECT rrect3 = {219, 20, 420, 690};
+        //FillRect(hdc2, &rrect3, brush);
+        DeleteObject(brush);
+
+        if(choice == "sq" && (sq.y0 <= 630 && sq.y1 <= 630 && sq.y2 <= 630 && sq.y3 <= 630)) {
+
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
+
+            RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
+            FillRect(hdc2, &rrect3, brush);
+
+            RECT rrect4 = {sq.x1, sq.y1, sq.x1 + 20, sq.y1 + 20};
+            FillRect(hdc2, &rrect4, brush);
+
+            RECT rrect5 = {sq.x2, sq.y2, sq.x2 + 20, sq.y2 + 20};
+            FillRect(hdc2, &rrect5, brush);
+
+            RECT rrect6 = {sq.x3, sq.y3, sq.x3 + 20, sq.y3 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            DeleteObject(brush);
+
+            if(sq.y0 > 650 || sq.y1 > 650 || sq.y2 > 650 || sq.y3 > 650) {
+                b[sq.x0][sq.y0] = 1;
+                b[sq.x1][sq.y1] = 1;
+                b[sq.x2][sq.y2] = 1;
+                b[sq.x3][sq.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+
+            BOOLEAN flag = FALSE;
+            if(b[sq.x0][sq.y0+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[sq.x1][sq.y1+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[sq.x2][sq.y2+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[sq.x3][sq.y3+20] == 1) {
+                flag = TRUE;
+            }
+            if(flag) {
+                b[sq.x0][sq.y0] = 1;
+                b[sq.x1][sq.y1] = 1;
+                b[sq.x2][sq.y2] = 1;
+                b[sq.x3][sq.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+            if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
+        }
+        else if(choice == "lne" && (lne.y0 <= 580 || lne.y1 <= 580 || lne.y2 <= 580 || lne.y3 <= 580)) {
+    //        lne.y0 += 20;
+    //        lne.y1 += 20;
+    //        lne.y2 += 20;
+    //        lne.y3 += 20;
+
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
+
+            RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
+            FillRect(hdc2, &rrect3, brush);
+
+            RECT rrect4 = {lne.x1, lne.y1, lne.x1 + 20, lne.y1 + 20};
+            FillRect(hdc2, &rrect4, brush);
+
+            RECT rrect5 = {lne.x2, lne.y2, lne.x2 + 20, lne.y2 + 20};
+            FillRect(hdc2, &rrect5, brush);
+
+            RECT rrect6 = {lne.x3, lne.y3, lne.x3 + 20, lne.y3 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            DeleteObject(brush);
+
+            if(lne.y0 > 650 || lne.y1 > 650 || lne.y2 > 650 || lne.y3 > 650) {
+                b[lne.x0][lne.y0] = 1;
+                b[lne.x1][lne.y1] = 1;
+                b[lne.x2][lne.y2] = 1;
+                b[lne.x3][lne.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+
+            BOOLEAN flag = FALSE;
+            if(b[lne.x0][lne.y0+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[lne.x1][lne.y1+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[lne.x2][lne.y2+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[lne.x3][lne.y3+20] == 1) {
+                flag = TRUE;
+            }
+            if(flag) {
+                b[lne.x0][lne.y0] = 1;
+                b[lne.x1][lne.y1] = 1;
+                b[lne.x2][lne.y2] = 1;
+                b[lne.x3][lne.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+            if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
+        }
+        else if(choice == "ht" && (ht.y0 <= 650 && ht.y1 <= 650 && ht.y2 <= 650 && ht.y3 <= 650)) {
+    //        ht.y0 += 20;
+    //        ht.y1 += 20;
+    //        ht.y2 += 20;
+    //        ht.y3 += 20;
+
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
+
+            RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
+            FillRect(hdc2, &rrect3, brush);
+
+            RECT rrect4 = {ht.x1, ht.y1, ht.x1 + 20, ht.y1 + 20};
+            FillRect(hdc2, &rrect4, brush);
+
+            RECT rrect5 = {ht.x2, ht.y2, ht.x2 + 20, ht.y2 + 20};
+            FillRect(hdc2, &rrect5, brush);
+
+            RECT rrect6 = {ht.x3, ht.y3, ht.x3 + 20, ht.y3 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            DeleteObject(brush);
+
+            if(ht.y0 > 650 || ht.y1 > 650 || ht.y2 > 650 || ht.y3 > 650) {
+                b[ht.x0][ht.y0] = 1;
+                b[ht.x1][ht.y1] = 1;
+                b[ht.x2][ht.y2] = 1;
+                b[ht.x3][ht.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+
+            BOOLEAN flag = FALSE;
+            if(b[ht.x0][ht.y0+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[ht.x1][ht.y1+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[ht.x2][ht.y2+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[ht.x3][ht.y3+20] == 1) {
+                flag = TRUE;
+            }
+            if(flag) {
+                b[ht.x0][ht.y0] = 1;
+                b[ht.x1][ht.y1] = 1;
+                b[ht.x2][ht.y2] = 1;
+                b[ht.x3][ht.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+            if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
+        }
+        else if(choice == "larm" && (larm.y0 <= 650 && larm.y1 <= 650 && larm.y2 <= 650 && larm.y3 <= 650)) {
+    //        larm.y0 += 20;
+    //        larm.y1 += 20;
+    //        larm.y2 += 20;
+    //        larm.y3 += 20;
+
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
+
+            RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
+            FillRect(hdc2, &rrect3, brush);
+
+            RECT rrect4 = {larm.x1, larm.y1, larm.x1 + 20, larm.y1 + 20};
+            FillRect(hdc2, &rrect4, brush);
+
+            RECT rrect5 = {larm.x2, larm.y2, larm.x2 + 20, larm.y2 + 20};
+            FillRect(hdc2, &rrect5, brush);
+
+            RECT rrect6 = {larm.x3, larm.y3, larm.x3 + 20, larm.y3 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            DeleteObject(brush);
+
+            if(larm.y0 > 650 || larm.y1 > 650 || larm.y2 > 650 || larm.y3 > 650) {
+                b[larm.x0][larm.y0] = 1;
+                b[larm.x1][larm.y1] = 1;
+                b[larm.x2][larm.y2] = 1;
+                b[larm.x3][larm.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+
+            BOOLEAN flag = FALSE;
+            if(b[larm.x0][larm.y0+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[larm.x1][larm.y1+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[larm.x2][larm.y2+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[larm.x3][larm.y3+20] == 1) {
+                flag = TRUE;
+            }
+            if(flag) {
+                b[larm.x0][larm.y0] = 1;
+                b[larm.x1][larm.y1] = 1;
+                b[larm.x2][larm.y2] = 1;
+                b[larm.x3][larm.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+            if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
+            for(int i=0; i<700; i++) {
+                for(int j=0; j<700; j++) {
+                    if(b[i][j] == 1) {
+                        HBRUSH brush = CreateSolidBrush(RGB(250, 50, 250));
+                        RECT rrect6 = {i, j, i + 20, j + 20};
+                        FillRect(hdc2, &rrect6, brush);
+                        DeleteObject(brush);
+
+                        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
+                        Rectangle(hdc2, i, j, i + 20, j + 20);
+                        DeleteObject(SelectObject(hdc2, hOldPen));
+                        SelectObject(hdc2, hOldBsh);
+                    }
+                }
+            }
+        }
+        else if(choice == "rarm" && (rarm.y0 <= 650 && rarm.y1 <= 650 && rarm.y2 <= 650 && rarm.y3 <= 650)) {
+    //        rarm.y0 += 20;
+    //        rarm.y1 += 20;
+    //        rarm.y2 += 20;
+    //        rarm.y3 += 20;
+
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
+
+            RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
+            FillRect(hdc2, &rrect3, brush);
+
+            RECT rrect4 = {rarm.x1, rarm.y1, rarm.x1 + 20, rarm.y1 + 20};
+            FillRect(hdc2, &rrect4, brush);
+
+            RECT rrect5 = {rarm.x2, rarm.y2, rarm.x2 + 20, rarm.y2 + 20};
+            FillRect(hdc2, &rrect5, brush);
+
+            RECT rrect6 = {rarm.x3, rarm.y3, rarm.x3 + 20, rarm.y3 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            DeleteObject(brush);
+
+            if(rarm.y0 > 650 || rarm.y1 > 650 || rarm.y2 > 650 || rarm.y3 > 650) {
+                b[rarm.x0][rarm.y0] = 1;
+                b[rarm.x1][rarm.y1] = 1;
+                b[rarm.x2][rarm.y2] = 1;
+                b[rarm.x3][rarm.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+
+            BOOLEAN flag = FALSE;
+            if(b[rarm.x0][rarm.y0+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[rarm.x1][rarm.y1+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[rarm.x2][rarm.y2+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[rarm.x3][rarm.y3+20] == 1) {
+                flag = TRUE;
+            }
+            if(flag) {
+                b[rarm.x0][rarm.y0] = 1;
+                b[rarm.x1][rarm.y1] = 1;
+                b[rarm.x2][rarm.y2] = 1;
+                b[rarm.x3][rarm.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+            if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
+            for(int i=0; i<700; i++) {
+                for(int j=0; j<700; j++) {
+                    if(b[i][j] == 1) {
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
+                        RECT rrect6 = {i, j, i + 20, j + 20};
+                        FillRect(hdc2, &rrect6, brush);
+                        DeleteObject(brush);
+
+                        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
+                        Rectangle(hdc2, i, j, i + 20, j + 20);
+                        DeleteObject(SelectObject(hdc2, hOldPen));
+                        SelectObject(hdc2, hOldBsh);
+                    }
+                }
+            }
+        }
+        else if(choice == "lsh" && (lsh.y0 <= 650 && lsh.y1 <= 650 && lsh.y2 <= 650 && lsh.y3 <= 650)) {
+    //        lsh.y0 += 20;
+    //        lsh.y1 += 20;
+    //        lsh.y2 += 20;
+    //        lsh.y3 += 20;
+
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
+
+            RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
+            FillRect(hdc2, &rrect3, brush);
+
+            RECT rrect4 = {lsh.x1, lsh.y1, lsh.x1 + 20, lsh.y1 + 20};
+            FillRect(hdc2, &rrect4, brush);
+
+            RECT rrect5 = {lsh.x2, lsh.y2, lsh.x2 + 20, lsh.y2 + 20};
+            FillRect(hdc2, &rrect5, brush);
+
+            RECT rrect6 = {lsh.x3, lsh.y3, lsh.x3 + 20, lsh.y3 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            DeleteObject(brush);
+
+            if(lsh.y0 > 650 || lsh.y1 > 650 || lsh.y2 > 650 || lsh.y3 > 650) {
+                b[lsh.x0][lsh.y0] = 1;
+                b[lsh.x1][lsh.y1] = 1;
+                b[lsh.x2][lsh.y2] = 1;
+                b[lsh.x3][lsh.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+
+            BOOLEAN flag = FALSE;
+            if(b[lsh.x0][lsh.y0+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[lsh.x1][lsh.y1+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[lsh.x2][lsh.y2+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[lsh.x3][lsh.y3+20] == 1) {
+                flag = TRUE;
+            }
+            if(flag) {
+                b[lsh.x0][lsh.y0] = 1;
+                b[lsh.x1][lsh.y1] = 1;
+                b[lsh.x2][lsh.y2] = 1;
+                b[lsh.x3][lsh.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+            if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
+            for(int i=0; i<700; i++) {
+                for(int j=0; j<700; j++) {
+                    if(b[i][j] == 1) {
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
+                        RECT rrect6 = {i, j, i + 20, j + 20};
+                        FillRect(hdc2, &rrect6, brush);
+                        DeleteObject(brush);
+
+                        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
+                        Rectangle(hdc2, i, j, i + 20, j + 20);
+                        DeleteObject(SelectObject(hdc2, hOldPen));
+                        SelectObject(hdc2, hOldBsh);
+                    }
+                }
+            }
+        }
+        else if(choice == "rsh" && (rsh.y0 <= 650 && rsh.y1 <= 650 && rsh.y2 <= 650 && rsh.y3 <= 650)) {
+    //        rsh.y0 += 20;
+    //        rsh.y1 += 20;
+    //        rsh.y2 += 20;
+    //        rsh.y3 += 20;
+
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
+
+            RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
+            FillRect(hdc2, &rrect3, brush);
+
+            RECT rrect4 = {rsh.x1, rsh.y1, rsh.x1 + 20, rsh.y1 + 20};
+            FillRect(hdc2, &rrect4, brush);
+
+            RECT rrect5 = {rsh.x2, rsh.y2, rsh.x2 + 20, rsh.y2 + 20};
+            FillRect(hdc2, &rrect5, brush);
+
+            RECT rrect6 = {rsh.x3, rsh.y3, rsh.x3 + 20, rsh.y3 + 20};
+            FillRect(hdc2, &rrect6, brush);
+            DeleteObject(brush);
+
+            if(rsh.y0 > 650 || rsh.y1 > 650 || rsh.y2 > 650 || rsh.y3 > 650) {
+                b[rsh.x0][rsh.y0] = 1;
+                b[rsh.x1][rsh.y1] = 1;
+                b[rsh.x2][rsh.y2] = 1;
+                b[rsh.x3][rsh.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+
+            BOOLEAN flag = FALSE;
+            if(b[rsh.x0][rsh.y0+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[rsh.x1][rsh.y1+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[rsh.x2][rsh.y2+20] == 1) {
+                flag = TRUE;
+            }
+            else if(b[rsh.x3][rsh.y3+20] == 1) {
+                flag = TRUE;
+            }
+            if(flag) {
+                b[rsh.x0][rsh.y0] = 1;
+                b[rsh.x1][rsh.y1] = 1;
+                b[rsh.x2][rsh.y2] = 1;
+                b[rsh.x3][rsh.y3] = 1;
+                blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
+                prep();
+            }
+            if(level < 40 && lines >= linenext) {level++;linenext+=10;sleeptime-=15;}
+            for(int i=0; i<700; i++) {
+                for(int j=0; j<700; j++) {
+                    if(b[i][j] == 1) {
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
+                        RECT rrect6 = {i, j, i + 20, j + 20};
+                        FillRect(hdc2, &rrect6, brush);
+                        DeleteObject(brush);
+
+                        HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2124,10 +2611,10 @@ DWORD WINAPI downs(void *data) {
             }
         }
 
-        HBRUSH brus = CreateSolidBrush(RGB(5, 5, 5));
+        HBRUSH brus = CreateSolidBrush(RGB(255, 255, 255));
 
         RECT ect3 = {219, 20, 420, 690};
-        FillRect(hdc2, &ect3, brus);
+        //FillRect(hdc2, &ect3, brus);
         DeleteObject(brus);
 
         if(fist) {
@@ -2139,7 +2626,7 @@ DWORD WINAPI downs(void *data) {
         for(int i=0; i<700; i++) {
             for(int j=0; j<720; j++) {
                 if(b[i][j] == 1) {
-                    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                     RECT rrect6 = {i, j, i + 20, j + 20};
                     FillRect(hdc2, &rrect6, brush);
                     DeleteObject(brush);
@@ -2177,7 +2664,7 @@ DWORD WINAPI downs(void *data) {
             sq.y2 += 20;
             sq.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
             RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
@@ -2226,13 +2713,13 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2247,7 +2734,7 @@ DWORD WINAPI downs(void *data) {
             lne.y2 += 20;
             lne.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
             RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
@@ -2296,13 +2783,13 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2317,7 +2804,7 @@ DWORD WINAPI downs(void *data) {
             ht.y2 += 20;
             ht.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
             RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
@@ -2366,13 +2853,13 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2387,7 +2874,7 @@ DWORD WINAPI downs(void *data) {
             larm.y2 += 20;
             larm.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
             RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
@@ -2436,13 +2923,13 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2457,7 +2944,7 @@ DWORD WINAPI downs(void *data) {
             rarm.y2 += 20;
             rarm.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
             RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
@@ -2506,13 +2993,13 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2527,7 +3014,7 @@ DWORD WINAPI downs(void *data) {
             lsh.y2 += 20;
             lsh.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
             RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
@@ -2576,13 +3063,13 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2597,7 +3084,7 @@ DWORD WINAPI downs(void *data) {
             rsh.y2 += 20;
             rsh.y3 += 20;
 
-            HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+            HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
             RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
             FillRect(hdc2, &rrect3, brush);
@@ -2646,13 +3133,13 @@ DWORD WINAPI downs(void *data) {
             for(int i=0; i<700; i++) {
                 for(int j=0; j<700; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
 
                         HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                        HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                         Rectangle(hdc2, i, j, i + 20, j + 20);
                         DeleteObject(SelectObject(hdc2, hOldPen));
                         SelectObject(hdc2, hOldBsh);
@@ -2764,13 +3251,217 @@ void prep() {
     lne.x3 = 300;
     lne.y3 = 110;
     lne.dir = 0;
+
+    if(b[rarm.x0][rarm.y0+20] == 1
+        ||        
+        b[rarm.x1][rarm.y1+20] == 1
+        ||
+        b[rarm.x2][rarm.y2+20] == 1
+        ||
+        b[rarm.x3][rarm.y3+20] == 1
+        ||
+        b[larm.x0][larm.y0+20] == 1
+        ||        
+        b[larm.x1][larm.y1+20] == 1
+        ||
+        b[larm.x2][larm.y2+20] == 1
+        ||
+        b[larm.x3][larm.y3+20] == 1
+        ||
+        b[rsh.x0][rsh.y0+20] == 1
+        ||        
+        b[rsh.x1][rsh.y1+20] == 1
+        ||
+        b[rsh.x2][rsh.y2+20] == 1
+        ||
+        b[rsh.x3][rsh.y3+20] == 1
+        ||
+        b[lsh.x0][lsh.y0+20] == 1
+        ||        
+        b[lsh.x1][lsh.y1+20] == 1
+        ||
+        b[lsh.x2][lsh.y2+20] == 1
+        ||
+        b[lsh.x3][lsh.y3+20] == 1               
+        ||
+        b[sq.x0][sq.y0+20] == 1
+        ||        
+        b[sq.x1][sq.y1+20] == 1
+        ||
+        b[sq.x2][sq.y2+20] == 1
+        ||
+        b[sq.x3][sq.y3+20] == 1
+        ||
+        b[lne.x0][lne.y0+20] == 1
+        ||        
+        b[lne.x1][lne.y1+20] == 1
+        ||
+        b[lne.x2][lne.y2+20] == 1
+        ||
+        b[lne.x3][lne.y3+20] == 1
+        ||
+        b[ht.x0][ht.y0+20] == 1
+        ||        
+        b[ht.x1][ht.y1+20] == 1
+        ||
+        b[ht.x2][ht.y2+20] == 1
+        ||
+        b[ht.x3][ht.y3+20] == 1) {
+
+        GetCurrentDir( buff, FILENAME_MAX );
+        buff[strlen(buff)] = '\0';
+        strcpy(filename,buff);
+        strcat(filename,"\\WinTris.exe");
+        filename[strlen(filename)] = '\0';
+        STARTUPINFO startUpInfo = { 0 };
+        PROCESS_INFORMATION procInfo = { 0 };
+        startUpInfo.cb = sizeof( startUpInfo );
+        CreateProcess( filename, NULL, NULL, NULL, FALSE, 0, NULL, NULL, &startUpInfo, &procInfo );
+        exit(0);
+    }
+
+    if(b[rarm.x0][rarm.y0-20] == 1
+        ||        
+        b[rarm.x1][rarm.y1-20] == 1
+        ||
+        b[rarm.x2][rarm.y2-20] == 1
+        ||
+        b[rarm.x3][rarm.y3-20] == 1
+        ||
+        b[larm.x0][larm.y0-20] == 1
+        ||        
+        b[larm.x1][larm.y1-20] == 1
+        ||
+        b[larm.x2][larm.y2-20] == 1
+        ||
+        b[larm.x3][larm.y3-20] == 1
+        ||
+        b[rsh.x0][rsh.y0-20] == 1
+        ||        
+        b[rsh.x1][rsh.y1-20] == 1
+        ||
+        b[rsh.x2][rsh.y2-20] == 1
+        ||
+        b[rsh.x3][rsh.y3-20] == 1
+        ||
+        b[lsh.x0][lsh.y0-20] == 1
+        ||        
+        b[lsh.x1][lsh.y1-20] == 1
+        ||
+        b[lsh.x2][lsh.y2-20] == 1
+        ||
+        b[lsh.x3][lsh.y3-20] == 1               
+        ||
+        b[sq.x0][sq.y0-20] == 1
+        ||        
+        b[sq.x1][sq.y1-20] == 1
+        ||
+        b[sq.x2][sq.y2-20] == 1
+        ||
+        b[sq.x3][sq.y3-20] == 1
+        ||
+        b[lne.x0][lne.y0-20] == 1
+        ||        
+        b[lne.x1][lne.y1-20] == 1
+        ||
+        b[lne.x2][lne.y2-20] == 1
+        ||
+        b[lne.x3][lne.y3-20] == 1
+        ||
+        b[ht.x0][ht.y0-20] == 1
+        ||        
+        b[ht.x1][ht.y1-20] == 1
+        ||
+        b[ht.x2][ht.y2-20] == 1
+        ||
+        b[ht.x3][ht.y3-20] == 1) {
+
+        GetCurrentDir( buff, FILENAME_MAX );
+        buff[strlen(buff)] = '\0';
+        strcpy(filename,buff);
+        strcat(filename,"\\WinTris.exe");
+        filename[strlen(filename)] = '\0';
+        STARTUPINFO startUpInfo = { 0 };
+        PROCESS_INFORMATION procInfo = { 0 };
+        startUpInfo.cb = sizeof( startUpInfo );
+        CreateProcess( filename, NULL, NULL, NULL, FALSE, 0, NULL, NULL, &startUpInfo, &procInfo );
+        exit(0);
+    }
+
+    if(b[rarm.x0][rarm.y0] == 1
+        ||        
+        b[rarm.x1][rarm.y1] == 1
+        ||
+        b[rarm.x2][rarm.y2] == 1
+        ||
+        b[rarm.x3][rarm.y3] == 1
+        ||
+        b[larm.x0][larm.y0] == 1
+        ||        
+        b[larm.x1][larm.y1] == 1
+        ||
+        b[larm.x2][larm.y2] == 1
+        ||
+        b[larm.x3][larm.y3] == 1
+        ||
+        b[rsh.x0][rsh.y0] == 1
+        ||        
+        b[rsh.x1][rsh.y1] == 1
+        ||
+        b[rsh.x2][rsh.y2] == 1
+        ||
+        b[rsh.x3][rsh.y3] == 1
+        ||
+        b[lsh.x0][lsh.y0] == 1
+        ||        
+        b[lsh.x1][lsh.y1] == 1
+        ||
+        b[lsh.x2][lsh.y2] == 1
+        ||
+        b[lsh.x3][lsh.y3] == 1               
+        ||
+        b[sq.x0][sq.y0] == 1
+        ||        
+        b[sq.x1][sq.y1] == 1
+        ||
+        b[sq.x2][sq.y2] == 1
+        ||
+        b[sq.x3][sq.y3] == 1
+        ||
+        b[lne.x0][lne.y0] == 1
+        ||        
+        b[lne.x1][lne.y1] == 1
+        ||
+        b[lne.x2][lne.y2] == 1
+        ||
+        b[lne.x3][lne.y3] == 1
+        ||
+        b[ht.x0][ht.y0] == 1
+        ||        
+        b[ht.x1][ht.y1] == 1
+        ||
+        b[ht.x2][ht.y2] == 1
+        ||
+        b[ht.x3][ht.y3] == 1) {
+
+        GetCurrentDir( buff, FILENAME_MAX );
+        buff[strlen(buff)] = '\0';
+        strcpy(filename,buff);
+        strcat(filename,"\\WinTris.exe");
+        filename[strlen(filename)] = '\0';
+        STARTUPINFO startUpInfo = { 0 };
+        PROCESS_INFORMATION procInfo = { 0 };
+        startUpInfo.cb = sizeof( startUpInfo );
+        CreateProcess( filename, NULL, NULL, NULL, FALSE, 0, NULL, NULL, &startUpInfo, &procInfo );
+        exit(0);
+    }
 }
 
 void rotate() {
-    HBRUSH brush = CreateSolidBrush(RGB(5, 5, 5));
+    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
 
     RECT rrect3 = {219, 20, 420, 690};
-    FillRect(hdc2, &rrect3, brush);
+    //FillRect(hdc2, &rrect3, brush);
     DeleteObject(brush);
 
     if(choice == "sq") {
@@ -2780,7 +3471,7 @@ void rotate() {
         sq.y2 += 0;
         sq.y3 += 0;
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {sq.x0, sq.y0, sq.x0 + 20, sq.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -2867,7 +3558,7 @@ void rotate() {
             lne.y3 = lney3;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {lne.x0, lne.y0, lne.x0 + 20, lne.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -2954,7 +3645,7 @@ void rotate() {
             ht.y3 = hty3;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {ht.x0, ht.y0, ht.x0 + 20, ht.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -3041,7 +3732,7 @@ void rotate() {
             larm.y3 = larmy3;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {larm.x0, larm.y0, larm.x0 + 20, larm.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -3128,7 +3819,7 @@ void rotate() {
             rarm.y3 = rarmy3;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {rarm.x0, rarm.y0, rarm.x0 + 20, rarm.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -3215,7 +3906,7 @@ void rotate() {
             lsh.y3 = lshy3;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {lsh.x0, lsh.y0, lsh.x0 + 20, lsh.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -3302,7 +3993,7 @@ void rotate() {
             rsh.y3 = rshy3;
         }
 
-        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
 
         RECT rrect3 = {rsh.x0, rsh.y0, rsh.x0 + 20, rsh.y0 + 20};
         FillRect(hdc2, &rrect3, brush);
@@ -3335,13 +4026,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     for(int i=0; i<700; i++) {
                         for(int j=0; j<700; j++) {
                             if(b[i][j] == 1) {
-                                HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                                HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                                 RECT rrect6 = {i, j, i + 20, j + 20};
                                 FillRect(hdc2, &rrect6, brush);
                                 DeleteObject(brush);
 
                                 HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                                 Rectangle(hdc2, i, j, i + 20, j + 20);
                                 DeleteObject(SelectObject(hdc2, hOldPen));
                                 SelectObject(hdc2, hOldBsh);
@@ -3357,13 +4048,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     for(int i=0; i<700; i++) {
                         for(int j=0; j<700; j++) {
                             if(b[i][j] == 1) {
-                                HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                                HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                                 RECT rrect6 = {i, j, i + 20, j + 20};
                                 FillRect(hdc2, &rrect6, brush);
                                 DeleteObject(brush);
 
                                 HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                                 Rectangle(hdc2, i, j, i + 20, j + 20);
                                 DeleteObject(SelectObject(hdc2, hOldPen));
                                 SelectObject(hdc2, hOldBsh);
@@ -3379,13 +4070,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     for(int i=0; i<700; i++) {
                         for(int j=0; j<700; j++) {
                             if(b[i][j] == 1) {
-                                HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                                HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                                 RECT rrect6 = {i, j, i + 20, j + 20};
                                 FillRect(hdc2, &rrect6, brush);
                                 DeleteObject(brush);
 
                                 HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                                 Rectangle(hdc2, i, j, i + 20, j + 20);
                                 DeleteObject(SelectObject(hdc2, hOldPen));
                                 SelectObject(hdc2, hOldBsh);
@@ -3400,13 +4091,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     for(int i=0; i<700; i++) {
                         for(int j=0; j<700; j++) {
                             if(b[i][j] == 1) {
-                                HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                                HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                                 RECT rrect6 = {i, j, i + 20, j + 20};
                                 FillRect(hdc2, &rrect6, brush);
                                 DeleteObject(brush);
 
                                 HGDIOBJ hOldBsh = SelectObject(hdc2, GetStockObject(NULL_BRUSH));
-                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 255, 0)));
+                                HGDIOBJ hOldPen = SelectObject(hdc2, CreatePen(PS_SOLID, 1, RGB(255, 0, 255)));
                                 Rectangle(hdc2, i, j, i + 20, j + 20);
                                 DeleteObject(SelectObject(hdc2, hOldPen));
                                 SelectObject(hdc2, hOldBsh);
@@ -3422,19 +4113,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         }
         case WM_PAINT:
         {
-            oldBitmap = SelectObject(hdcMems, hBitmap);
-
-            GetObject(hBitmap, sizeof(bitmap), &bitmap);
-            BitBlt(hdc2, 0, 0, 640, 750, hdcMems, 0, 0, SRCCOPY);
-            SelectObject(hdcMems, oldBitmap); DeleteObject(oldBitmap); DeleteObject(hdcMems);
-            DeleteDC(hdcMems); DeleteObject(hBitmap);
-
             if(fist) {
-                HBRUSH brush = CreateSolidBrush(RGB(55, 0, 250));
+                HBRUSH brush = CreateSolidBrush(RGB(255, 200, 5));
                 RECT rrect = {0, 0, 640, 750};
                 FillRect(hdc2, &rrect, brush);
                 DeleteObject(brush);
 
+                thrad = CreateThread(NULL, 0, paintMe, NULL, 0, NULL);
+                
                 thread = CreateThread(NULL, 0, downs, NULL, 0, NULL);
                 srand(time(NULL));
                 prep();
@@ -3443,89 +4129,20 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             for(int i=0; i<700; i++) {
                 for(int j=0; j<720; j++) {
                     if(b[i][j] == 1) {
-                        HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
+                        HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
                         RECT rrect6 = {i, j, i + 20, j + 20};
                         FillRect(hdc2, &rrect6, brush);
                         DeleteObject(brush);
                     }
                 }
             }
-
-            if(b[rarm.x0][rarm.y0+20] == 1
-                ||        
-                b[rarm.x1][rarm.y1+20] == 1
-                ||
-                b[rarm.x2][rarm.y2+20] == 1
-                ||
-                b[rarm.x3][rarm.y3+20] == 1
-                ||
-                b[larm.x0][larm.y0+20] == 1
-                ||        
-                b[larm.x1][larm.y1+20] == 1
-                ||
-                b[larm.x2][larm.y2+20] == 1
-                ||
-                b[larm.x3][larm.y3+20] == 1
-                ||
-                b[rsh.x0][rsh.y0+20] == 1
-                ||        
-                b[rsh.x1][rsh.y1+20] == 1
-                ||
-                b[rsh.x2][rsh.y2+20] == 1
-                ||
-                b[rsh.x3][rsh.y3+20] == 1
-                ||
-                b[lsh.x0][lsh.y0+20] == 1
-                ||        
-                b[lsh.x1][lsh.y1+20] == 1
-                ||
-                b[lsh.x2][lsh.y2+20] == 1
-                ||
-                b[lsh.x3][lsh.y3+20] == 1               
-                ||
-                b[sq.x0][sq.y0+20] == 1
-                ||        
-                b[sq.x1][sq.y1+20] == 1
-                ||
-                b[sq.x2][sq.y2+20] == 1
-                ||
-                b[sq.x3][sq.y3+20] == 1
-                ||
-                b[lne.x0][lne.y0+20] == 1
-                ||        
-                b[lne.x1][lne.y1+20] == 1
-                ||
-                b[lne.x2][lne.y2+20] == 1
-                ||
-                b[lne.x3][lne.y3+20] == 1
-                ||
-                b[ht.x0][ht.y0+20] == 1
-                ||        
-                b[ht.x1][ht.y1+20] == 1
-                ||
-                b[ht.x2][ht.y2+20] == 1
-                ||
-                b[ht.x3][ht.y3+20] == 1) {
-                
-                GetCurrentDir( buff, FILENAME_MAX );
-                buff[strlen(buff)] = '\0';
-                strcpy(filename,buff);
-                strcat(filename,"\\WinTris.exe");
-                filename[strlen(filename)] = '\0';
-                STARTUPINFO startUpInfo = { 0 };
-                PROCESS_INFORMATION procInfo = { 0 };
-                startUpInfo.cb = sizeof( startUpInfo );
-                CreateProcess( filename, NULL, NULL, NULL, FALSE, 0, NULL, NULL, &startUpInfo, &procInfo );
-                exit(0);
-            }
-
         }
         break;
         case WM_CREATE:
         {
             int y = 600; int h = 48;
             int x = 443; int w = 124;
-  	    hwnd_new_game = CreateWindowEx(0, "BUTTON", "Play Again", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+  	    hwnd_new_game = CreateWindowEx(0, "BUTTON", "TRY NEW!", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
 								x, y, w, h, hwnd, (HMENU) PLAY_AGAIN_BUTTON, GetModuleHandle(NULL), NULL);
         }
         break;
