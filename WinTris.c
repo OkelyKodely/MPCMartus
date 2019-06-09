@@ -145,11 +145,27 @@ struct rarm {
   int dir;
 } rarm;
 
+DWORD WINAPI moveSound(void *data) {
+  
+    PlaySound(TEXT("selection.wav"), NULL, SND_ASYNC);
+
+    return 0;
+}
+
+DWORD WINAPI fallSound(void *data) {
+  
+    PlaySound(TEXT("fall.wav"), NULL, SND_FILENAME);
+
+    return 0;
+}
+
 BOOL goDown() {
+
+    thrad = CreateThread(NULL, 0, moveSound, NULL, 0, NULL);
   
     BOOL canGoDown = FALSE;
     
-    HBRUSH brush = CreateSolidBrush(RGB(5, 5, 255));
+    HBRUSH brush = CreateSolidBrush(RGB(2, 2, 2));
 
     RECT rrect3 = {219, 20, 420, 690};
     FillRect(hdc2, &rrect3, brush);
@@ -624,7 +640,9 @@ BOOL goDown() {
 
 void goRight() {
   
-    HBRUSH brush = CreateSolidBrush(RGB(5, 5, 255));
+    thrad = CreateThread(NULL, 0, moveSound, NULL, 0, NULL);
+
+    HBRUSH brush = CreateSolidBrush(RGB(2, 2, 2));
 
     RECT rrect3 = {219, 20, 420, 690};
     FillRect(hdc2, &rrect3, brush);
@@ -725,6 +743,8 @@ void goRight() {
         FillRect(hdc2, &rrect6, brush);
         DeleteObject(brush);
 
+        thrad = CreateThread(NULL, 0, moveSound, NULL, 0, NULL);
+
         BOOLEAN flag = FALSE;
         if(b[ht.x0][ht.y0+20] == 1) {
             flag = TRUE;
@@ -788,6 +808,8 @@ void goRight() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
+
+        thrad = CreateThread(NULL, 0, moveSound, NULL, 0, NULL);
 
         BOOLEAN flag = FALSE;
         if(b[larm.x0][larm.y0+20] == 1) {
@@ -869,6 +891,8 @@ void goRight() {
             prep();
         }
 
+        thrad = CreateThread(NULL, 0, moveSound, NULL, 0, NULL);
+
         BOOLEAN flag = FALSE;
         if(b[rarm.x0][rarm.y0+20] == 1) {
             flag = TRUE;
@@ -948,6 +972,8 @@ void goRight() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
+
+        thrad = CreateThread(NULL, 0, moveSound, NULL, 0, NULL);
 
         BOOLEAN flag = FALSE;
         if(b[lsh.x0][lsh.y0+20] == 1) {
@@ -1029,6 +1055,8 @@ void goRight() {
             prep();
         }
 
+        thrad = CreateThread(NULL, 0, moveSound, NULL, 0, NULL);
+
         BOOLEAN flag = FALSE;
         if(b[rsh.x0][rsh.y0+20] == 1) {
             flag = TRUE;
@@ -1074,7 +1102,9 @@ void goRight() {
 
 void goLeft() {
   
-    HBRUSH brush = CreateSolidBrush(RGB(5, 5, 255));
+    thrad = CreateThread(NULL, 0, moveSound, NULL, 0, NULL);
+
+    HBRUSH brush = CreateSolidBrush(RGB(2, 2, 2));
 
     RECT rrect3 = {219, 20, 420, 690};
     FillRect(hdc2, &rrect3, brush);
@@ -1238,6 +1268,8 @@ void goLeft() {
             prep();
         }
 
+        thrad = CreateThread(NULL, 0, moveSound, NULL, 0, NULL);
+
         BOOLEAN flag = FALSE;
         if(b[larm.x0][larm.y0+20] == 1) {
             flag = TRUE;
@@ -1317,6 +1349,8 @@ void goLeft() {
             blocks++;char aa[10];sprintf(aa,"Blocks: %d, Points: %d, Lines: %d",blocks,points,lines);SetWindowTextA(hwnd,aa);
             prep();
         }
+
+        thrad = CreateThread(NULL, 0, moveSound, NULL, 0, NULL);
 
         BOOLEAN flag = FALSE;
         if(b[rarm.x0][rarm.y0+20] == 1) {
@@ -1398,6 +1432,8 @@ void goLeft() {
             prep();
         }
 
+        thrad = CreateThread(NULL, 0, moveSound, NULL, 0, NULL);
+
         BOOLEAN flag = FALSE;
         if(b[lsh.x0][lsh.y0+20] == 1) {
             flag = TRUE;
@@ -1477,6 +1513,8 @@ void goLeft() {
             prep();
         }
 
+        thrad = CreateThread(NULL, 0, moveSound, NULL, 0, NULL);
+
         BOOLEAN flag = FALSE;
         if(b[rsh.x0][rsh.y0+20] == 1) {
             flag = TRUE;
@@ -1521,7 +1559,7 @@ void goLeft() {
 }
 
 void erasePreview() {
-    HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
+    HBRUSH brush = CreateSolidBrush(RGB(0, 0, 255));
     RECT rrect5 = {0, 20, 129, 220};
     FillRect(hdc2, &rrect5, brush);
     DeleteObject(brush);
@@ -1681,9 +1719,11 @@ void clearLine() {
 
 DWORD WINAPI callMe(void *data) {
   
-    while(1) {
-        PlaySound(TEXT("Tetris.wav"), NULL, SND_FILENAME);
+    while(0) {
+        PlaySound(TEXT("Tetris.wav"), NULL, SND_ASYNC);
     }
+    
+    return 0;
 }
 
 DWORD WINAPI paintMe(void *data) {
@@ -2165,7 +2205,7 @@ DWORD WINAPI downs(void *data) {
 
         hdcMems = CreateCompatibleDC(hdc2);
 
-        HBRUSH brush = CreateSolidBrush(RGB(5, 5, 255));
+        HBRUSH brush = CreateSolidBrush(RGB(2, 2, 2));
 
         RECT rrect3 = {219, 20, 420, 690};
         FillRect(hdc2, &rrect3, brush);
@@ -2211,6 +2251,7 @@ DWORD WINAPI downs(void *data) {
                 flag = TRUE;
             }
             if(flag) {
+                thrad = CreateThread(NULL, 0, fallSound, NULL, 0, NULL);
                 b[sq.x0][sq.y0] = 1;
                 b[sq.x1][sq.y1] = 1;
                 b[sq.x2][sq.y2] = 1;
@@ -2264,6 +2305,7 @@ DWORD WINAPI downs(void *data) {
                 flag = TRUE;
             }
             if(flag) {
+                thrad = CreateThread(NULL, 0, fallSound, NULL, 0, NULL);
                 b[lne.x0][lne.y0] = 1;
                 b[lne.x1][lne.y1] = 1;
                 b[lne.x2][lne.y2] = 1;
@@ -2317,6 +2359,7 @@ DWORD WINAPI downs(void *data) {
                 flag = TRUE;
             }
             if(flag) {
+                thrad = CreateThread(NULL, 0, fallSound, NULL, 0, NULL);
                 b[ht.x0][ht.y0] = 1;
                 b[ht.x1][ht.y1] = 1;
                 b[ht.x2][ht.y2] = 1;
@@ -2370,6 +2413,7 @@ DWORD WINAPI downs(void *data) {
                 flag = TRUE;
             }
             if(flag) {
+                thrad = CreateThread(NULL, 0, fallSound, NULL, 0, NULL);
                 b[larm.x0][larm.y0] = 1;
                 b[larm.x1][larm.y1] = 1;
                 b[larm.x2][larm.y2] = 1;
@@ -2439,6 +2483,7 @@ DWORD WINAPI downs(void *data) {
                 flag = TRUE;
             }
             if(flag) {
+                thrad = CreateThread(NULL, 0, fallSound, NULL, 0, NULL);
                 b[rarm.x0][rarm.y0] = 1;
                 b[rarm.x1][rarm.y1] = 1;
                 b[rarm.x2][rarm.y2] = 1;
@@ -2508,6 +2553,7 @@ DWORD WINAPI downs(void *data) {
                 flag = TRUE;
             }
             if(flag) {
+                thrad = CreateThread(NULL, 0, fallSound, NULL, 0, NULL);
                 b[lsh.x0][lsh.y0] = 1;
                 b[lsh.x1][lsh.y1] = 1;
                 b[lsh.x2][lsh.y2] = 1;
@@ -2577,6 +2623,7 @@ DWORD WINAPI downs(void *data) {
                 flag = TRUE;
             }
             if(flag) {
+                thrad = CreateThread(NULL, 0, fallSound, NULL, 0, NULL);
                 b[rsh.x0][rsh.y0] = 1;
                 b[rsh.x1][rsh.y1] = 1;
                 b[rsh.x2][rsh.y2] = 1;
@@ -2696,6 +2743,7 @@ DWORD WINAPI downs(void *data) {
                 flag = TRUE;
             }
             if(flag) {
+                thrad = CreateThread(NULL, 0, fallSound, NULL, 0, NULL);
                 b[sq.x0][sq.y0] = 1;
                 b[sq.x1][sq.y1] = 1;
                 b[sq.x2][sq.y2] = 1;
@@ -2766,6 +2814,7 @@ DWORD WINAPI downs(void *data) {
                 flag = TRUE;
             }
             if(flag) {
+                thrad = CreateThread(NULL, 0, fallSound, NULL, 0, NULL);
                 b[lne.x0][lne.y0] = 1;
                 b[lne.x1][lne.y1] = 1;
                 b[lne.x2][lne.y2] = 1;
@@ -2836,6 +2885,7 @@ DWORD WINAPI downs(void *data) {
                 flag = TRUE;
             }
             if(flag) {
+                thrad = CreateThread(NULL, 0, fallSound, NULL, 0, NULL);
                 b[ht.x0][ht.y0] = 1;
                 b[ht.x1][ht.y1] = 1;
                 b[ht.x2][ht.y2] = 1;
@@ -2906,6 +2956,7 @@ DWORD WINAPI downs(void *data) {
                 flag = TRUE;
             }
             if(flag) {
+                thrad = CreateThread(NULL, 0, fallSound, NULL, 0, NULL);
                 b[larm.x0][larm.y0] = 1;
                 b[larm.x1][larm.y1] = 1;
                 b[larm.x2][larm.y2] = 1;
@@ -2976,6 +3027,7 @@ DWORD WINAPI downs(void *data) {
                 flag = TRUE;
             }
             if(flag) {
+                thrad = CreateThread(NULL, 0, fallSound, NULL, 0, NULL);
                 b[rarm.x0][rarm.y0] = 1;
                 b[rarm.x1][rarm.y1] = 1;
                 b[rarm.x2][rarm.y2] = 1;
@@ -3046,6 +3098,7 @@ DWORD WINAPI downs(void *data) {
                 flag = TRUE;
             }
             if(flag) {
+                thrad = CreateThread(NULL, 0, fallSound, NULL, 0, NULL);
                 b[lsh.x0][lsh.y0] = 1;
                 b[lsh.x1][lsh.y1] = 1;
                 b[lsh.x2][lsh.y2] = 1;
@@ -3116,6 +3169,7 @@ DWORD WINAPI downs(void *data) {
                 flag = TRUE;
             }
             if(flag) {
+                thrad = CreateThread(NULL, 0, fallSound, NULL, 0, NULL);
                 b[rsh.x0][rsh.y0] = 1;
                 b[rsh.x1][rsh.y1] = 1;
                 b[rsh.x2][rsh.y2] = 1;
@@ -3452,7 +3506,10 @@ void prep() {
 }
 
 void rotate() {
-    HBRUSH brush = CreateSolidBrush(RGB(5, 5, 255));
+
+    thrad = CreateThread(NULL, 0, moveSound, NULL, 0, NULL);
+  
+    HBRUSH brush = CreateSolidBrush(RGB(2, 2, 2));
 
     RECT rrect3 = {219, 20, 420, 690};
     FillRect(hdc2, &rrect3, brush);
@@ -4220,7 +4277,14 @@ void printMiscLabels(int stage) {
                    "Verdana");
 
     SelectObject(hdc2, font);
-    TextOut(hdc2, 450, 480, "marTus", 7);
+    TextOut(hdc2, 450, 480, "marTus", 6);
+
+    SelectObject(hdc2, font);
+    TextOut(hdc2, 10, 480, "I made this", 11);
+
+    SelectObject(hdc2, font);
+    TextOut(hdc2, 10, 440, "by Daniel Cho", 13);
+
     DeleteObject(font);
 }
 
